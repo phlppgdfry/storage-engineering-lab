@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-27T21:30:46.083Z",
+  "upstream": "supabase/storage",
+  "number": 1616,
+  "url": "https://github.com/supabase/storage/pull/1616",
+  "state": "open",
+  "draft": true,
+  "merged": false,
+  "headRepository": "phlppgdfry/storage",
+  "headBranch": "fix/file-upload-cancellation",
+  "headCommit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+  "baseCommit": "b11f751abe0fdd6c7f56d3a858b5527f683b7a37",
+  "mergeable": true,
+  "commits": 1,
+  "files": [
+    "src/storage/backend/file.test.ts",
+    "src/storage/backend/file.ts"
+  ],
+  "localTestsPassed": 3306,
+  "githubWorkflows": [
+    {
+      "url": "https://github.com/supabase/storage/actions/runs/40587294139",
+      "name": "CI",
+      "conclusion": "action_required"
+    },
+    {
+      "url": "https://github.com/supabase/storage/actions/runs/40587294201",
+      "name": "Acceptance",
+      "conclusion": "action_required"
+    }
+  ],
+  "maintainerApproval": null,
+  "nextAction": "Upstream workflow approval/review; do not claim merge or successful upstream CI."
+}

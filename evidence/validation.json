@@ -56,5 +56,5 @@
     "insertions": 8,
     "deletions": 1
   },
-  "publication": "Prepared locally; only the requested fork has been created."
+  "publication": "Published after explicit user approval. Public lab and fork branch verified; upstream draft PR https://github.com/supabase/storage/pull/1616 is open, not merged. Upstream CI and Acceptance report action_required; local results above are not upstream CI results."
 }

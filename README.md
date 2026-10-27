@@ -4,6 +4,8 @@ A focused investigation of upload cancellation in the Supabase Storage filesyste
 
 Independent contributor research. This does not establish an issue in Supabase's hosted service or imply maintainer endorsement.
 
+**Upstream contribution:** [supabase/storage#1616](https://github.com/supabase/storage/pull/1616), open as a draft. Local validation passed; GitHub CI currently reports `action_required`. No merge or maintainer approval is claimed.
+
 ## Result
 
 At baseline `4134dbba1b94757f400d5d7c09f9382935efd726`, `FileBackend.uploadObject` accepts an `AbortSignal` but does not use it.

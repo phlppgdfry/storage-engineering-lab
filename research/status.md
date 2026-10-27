@@ -45,4 +45,13 @@ De onderzoeksrepo bevat een rapport, compacte bewijsbestanden, reproduceerbare p
 
 ## Publicatie
 
-Alleen de gevraagde fork is aangemaakt. Er is nog geen upstream-issue, PR, commentaar of bericht geplaatst. De onderzoeksrepo en bijdragecommit staan lokaal; publicatie is de laatste beslisstap uit de meegegeven workflow.
+Publicatie is expliciet goedgekeurd door de gebruiker en uitgevoerd:
+
+- Onderzoeksrepo: https://github.com/phlppgdfry/storage-engineering-lab (publiek).
+- Fork: https://github.com/phlppgdfry/storage.
+- Bijdragebranch: `phlppgdfry/storage:fix/file-upload-cancellation`, commit `3bbc9717` gepusht.
+- Draft-PR: https://github.com/supabase/storage/pull/1616.
+- Op GitHub gecontroleerd: open, draft, mergeable, één commit, alleen de twee bedoelde bestanden. Niet gemerged.
+- GitHub Actions CI en Acceptance melden `action_required`; de lokale testresultaten zijn afzonderlijk vastgelegd. Dit is geen geslaagde upstream-CI-run.
+- De GitHub-connector kon geen PR openen door een integratie-403; de bestaande CLI-login kon dat wel. Geen extra authenticatie of overdracht van tokens gebruikt.
+- AI-assistentie staat vermeld in de PR. Er zijn geen losse issues, commentaren, reviewer-verzoeken of berichten geplaatst.
