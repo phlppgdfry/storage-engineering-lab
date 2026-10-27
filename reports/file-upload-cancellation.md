@@ -1,0 +1,76 @@
+# File upload cancellation
+
+## Finding and scope
+
+`FileBackend.uploadObject` receives an optional signal but ignores it. An already-aborted call publishes a file and returns success. Aborting an active transfer leaves the source live; it can continue and publish bytes.
+
+Confirmed on `4134dbba1b94757f400d5d7c09f9382935efd726` through the actual adapter. This concerns the filesystem backend. Hosted-service behavior and endpoint-level impact are not established.
+
+## Why investigate
+
+The shared adapter accepts a signal. `Uploader.upload` passes one through; REST upload routes use the request-body signal. The S3 backend explicitly rejects already-aborted calls and cancels upload I/O. The file backend did neither.
+
+Recent upstream commits improved file publication, cleanup and HEAD cancellation. That made this a bounded, inexpensive experiment. Its relevance is an inference, not a stated maintainer priority or guarantee of acceptance.
+
+## Method
+
+1. Record a clean upstream commit and inspect the upload call chain.
+2. Search issues and open/closed PRs for file upload, abort, cancellation and AbortSignal.
+3. Inspect #854, including its file adapter at `aa1adc3d3843363d88a2160bd40ced98f014869e`. That upload pipeline also lacks signal options.
+4. Add five cases to the existing temporary-file suite, retaining its xattr mock.
+5. Run a separate experiment with actual files, native xattrs and no dependency mocks.
+6. In a disposable worktree, repeat native before/after observations three times and verify a regression-only patch fails before the production patch makes it pass.
+
+No randomized testing or benchmark was needed. No public service was tested.
+
+## Correction during self-review
+
+The initial harness used a `data` listener to detect startup. Attaching it put the source into flowing mode before asynchronous file setup attached the pipeline. The empty baseline output was a harness defect, not another Storage finding.
+
+Both reproductions now wait for `resume`, which does not itself start the source. Baseline output is the full synthetic payload `partialremaining`. The native check also records whether abort immediately destroys the source. This is critical self-review, not an independent reviewer or separate model.
+
+## Results
+
+`evidence/reproduction-summary.json` records runtime, timestamp and all six native observations.
+
+| Check | Before | After |
+|---|---|---|
+| Pre-aborted call | Resolved; file published | Rejected `Aborted`; file absent |
+| Active cancellation | Resolved; source live | Rejected `AbortedTerminate`; source destroyed |
+| Destination bytes | `partialremaining` | `old` |
+| Staged files remaining | None | None |
+| Five focused cases | 2 fail, 3 pass | 5 pass |
+
+Tests cover pre-aborted calls, active cancellation with cleanup/preservation, successful transfers/listener cleanup, late cancellation after body completion and ordinary source errors with a live signal.
+
+## Root cause and fix
+
+The signal was accepted but never passed into `pipeline(body, destination)`. The fix rejects already-aborted calls before staging, passes `{ signal }` to the pipeline and maps AbortError to `AbortedTerminate` after existing temporary-file cleanup. Error conventions match the S3 upload backend.
+
+The production diff contains eight insertions and one deletion. No dependency, public parameter type, database schema or S3 behavior changes.
+
+## Compatibility and risks
+
+Cancellation applies while the body transfers. After the pipeline completes, metadata and rename intentionally finish even if cancellation arrives. This preserves the uploader's existing completion policy; the late-cancellation test guards that boundary.
+
+Calls without a signal retain normal behavior. A live signal adds pipeline cancellation handling; listener cleanup and original source-error messages are tested.
+
+The overwrite test deliberately uses the same backend key/version. Higher layers normally create a new version. It does not prove HTTP data loss.
+
+## Validation and limits
+
+The unmodified unit suite passed: 176 files, 3,295 tests. The patched suite passed: 176 files, 3,300 tests. After rebasing onto newer upstream `b11f751a`, final commit `3bbc9717` passed all 3,306 tests in 176 files, plus lint, build and diff checks. The six additional tests came from the intervening upstream merge.
+
+The first sandboxed full run failed with `listen EPERM` while tests opened local servers. Repeating with the required permissions passed. The sandbox failures are retained locally as environment evidence, not attributed to Storage.
+
+Lint, build, focused backend/upload tests and native reproductions were executed. PostgreSQL integration tests and hosted traffic were not run. Docker was started, but no containers or migrations were launched: existing PostgreSQL owns port 5432 and this adapter fix requires no database.
+
+Searches may miss unpublished work or alternate terms. No severity, production incident, performance gain or maintainer acceptance is claimed.
+
+## Contribution
+
+Two upstream files: `file.ts` and its existing `file.test.ts`. The harness and evidence remain in this lab. Invite review of the cancellation boundary; do not bundle other suspected lifecycle gaps into the fix.
+
+## Uitleg in het Nederlands
+
+De uploadfunctie kreeg al een stopsignaal, maar gebruikte het niet bij het kopiëren van de bytes. Daardoor kon een geannuleerde upload doorgaan. We koppelen het signaal aan de bestaande stream-pipeline. Bij annulering stoppen de streams en wordt het tijdelijke bestand opgeruimd. Zodra alle bytes ontvangen zijn, mag de afronding doorgaan. Dat voorkomt dat een succesvol ontvangen upload alsnog onnodig wordt afgebroken.

@@ -1,0 +1,7 @@
+Storage Engineering Lab
+
+Independent contributor research concerning Supabase Storage.
+Patches and regression-test context derive from https://github.com/supabase/storage,
+distributed under the Apache License, Version 2.0 in its root LICENSE file.
+Original project notices remain applicable. This project is not affiliated with
+or endorsed by Supabase.

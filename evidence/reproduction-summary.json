@@ -1,0 +1,113 @@
+{
+  "baseline": "4134dbba1b94757f400d5d7c09f9382935efd726",
+  "recordedAt": "2026-10-27T21:23:50.459Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "nativeDependencyMocks": false,
+  "before": [
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "after": [
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "regression": {
+    "before": {
+      "failed": 2,
+      "passed": 3
+    },
+    "after": {
+      "failed": 0,
+      "passed": 5
+    }
+  },
+  "limitations": [
+    "Adapter-level behavior; no hosted-service impact established.",
+    "Unit tests mock extended attributes; the native probes do not.",
+    "No performance benchmark or PostgreSQL integration suite in this command."
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "recordedAt": "2026-10-27T21:27:51.835Z",
+  "repository": "https://github.com/supabase/storage",
+  "baseline": "4134dbba1b94757f400d5d7c09f9382935efd726",
+  "finalUpstream": "b11f751abe0fdd6c7f56d3a858b5527f683b7a37",
+  "contribution": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+  "branch": "fix/file-upload-cancellation",
+  "checks": [
+    {
+      "command": "npm run test:unit -- --maxWorkers=2",
+      "ref": "4134dbba",
+      "exitCode": 0,
+      "filesPassed": 176,
+      "testsPassed": 3295,
+      "evidence": "unit-baseline-summary.log"
+    },
+    {
+      "command": "npm run test:unit -- --maxWorkers=2",
+      "ref": "3bbc9717",
+      "exitCode": 0,
+      "filesPassed": 176,
+      "testsPassed": 3306,
+      "evidence": "unit-latest-summary.log"
+    },
+    {
+      "command": "npm run lint",
+      "ref": "3bbc9717",
+      "exitCode": 0,
+      "evidence": "lint-final.log"
+    },
+    {
+      "command": "npm run build",
+      "ref": "3bbc9717",
+      "exitCode": 0,
+      "evidence": "build-final.log"
+    },
+    {
+      "command": "git diff --check upstream/master...HEAD",
+      "ref": "3bbc9717",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run reproduce",
+      "exitCode": 0,
+      "evidence": "reproduction-summary.json"
+    }
+  ],
+  "notExecuted": [
+    "PostgreSQL integration suite",
+    "hosted-service traffic",
+    "Linux native reproduction",
+    "performance benchmark",
+    "independent human/model review"
+  ],
+  "productionDiff": {
+    "insertions": 8,
+    "deletions": 1
+  },
+  "publication": "Prepared locally; only the requested fork has been created."
+}

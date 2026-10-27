@@ -1,0 +1,14 @@
+npm notice run supa-storage@1.11.2 test:unit
+npm notice run vitest run --config vitest.unit.config.ts src/storage/backend/file.test.ts src/storage/backend/s3/adapter.test.ts src/storage/uploader.test.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.unit.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.5 /Users/philippegodfroy/supabase-storage
+
+
+ Test Files  3 passed (3)
+      Tests  282 passed (282)
+   Start at  22:19:28
+   Duration  1.87s (tests 53%, transform 26%, import 20%)
+

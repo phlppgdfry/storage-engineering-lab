@@ -1,0 +1,74 @@
+npm notice run supa-storage@1.11.2 test:unit
+npm notice run vitest run --config vitest.unit.config.ts src/storage/backend/file.test.ts -t FileBackend uploadObject signal
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.unit.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.5 /private/tmp/storage-baseline-4134dbba
+
+ ❯ src/storage/backend/file.test.ts (157 tests | 2 failed | 152 skipped) 111ms
+   ❯ FileBackend uploadObject signal (5)
+     × rejects an already-aborted upload without creating an object or staging file 58ms
+     × cancels an active upload, preserves the old object and removes the staged file 32ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/storage/backend/file.test.ts > FileBackend uploadObject signal > rejects an already-aborted upload without creating an object or staging file
+AssertionError: promise resolved "{ httpStatusCode: 200, size: 9, …(6) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "cacheControl": "no-cache",
++   "contentEncoding": undefined,
++   "contentLength": 9,
++   "eTag": "\"38881e0a24039dc2621e1d6f86cb71f7\"",
++   "httpStatusCode": 200,
++   "lastModified": 2026-10-27T21:22:38.922Z,
++   "mimetype": "application/octet-stream",
++   "size": 9,
+  }
+
+ ❯ src/storage/backend/file.test.ts:1360:6
+    1358|         controller.signal
+    1359|       )
+    1360|     ).rejects.toMatchObject({ code: ErrorCode.Aborted })
+       |      ^
+    1361|
+    1362|     await expect(fsp.readdir(ctx.tmpDir)).resolves.toEqual([])
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/storage/backend/file.test.ts > FileBackend uploadObject signal > cancels an active upload, preserves the old object and removes the staged file
+AssertionError: expected { ok: true } to match object { ok: false, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "error": {
+-     "code": "AbortedTerminate",
+-   },
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ src/storage/backend/file.test.ts:1384:27
+    1382|     body.push(null)
+    1383|
+    1384|     expect(await outcome).toMatchObject({
+       |                           ^
+    1385|       ok: false,
+    1386|       error: { code: ErrorCode.AbortedTerminate },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed | 152 skipped (157)
+   Start at  22:22:38
+   Duration  570ms (transform 60%, tests 24%, import 15%, worker 1%)
+

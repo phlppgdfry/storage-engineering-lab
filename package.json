@@ -1,0 +1,9 @@
+{
+  "name": "storage-engineering-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "reproduce": "node experiments/reproduce.mjs"
+  },
+  "engines": { "node": ">=24" }
+}

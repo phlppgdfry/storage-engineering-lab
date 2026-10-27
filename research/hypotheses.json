@@ -1,0 +1,66 @@
+[
+  {
+    "id": "H001",
+    "title": "File upload does not honor its AbortSignal",
+    "status": "CONFIRMED_ADAPTER_DEFECT",
+    "verification": "Actual native FileBackend reproducer repeated three times before and after the fix; two regression failures before, five passing cases after.",
+    "paths": ["src/storage/backend/file.ts:uploadObject", "src/storage/uploader.ts:upload"],
+    "evidence": "Method accepts signal but pipeline and staging do not use it; S3 upload explicitly handles cancellation.",
+    "experiment": "Call the actual FileBackend with an already-aborted signal, then cancel an in-flight body; check promise outcome, source lifecycle, published bytes and staging cleanup.",
+    "confirm": "Aborted transfers are reported successful or continue waiting for a body despite cancellation.",
+    "refute": "Existing layers cancel the actual operation and the contract intentionally excludes adapter cancellation.",
+    "impact": "Cancelled adapter calls continue and report success. Endpoint and production impact remain unverified.",
+    "overlap": ["https://github.com/supabase/storage/pull/854", "https://github.com/supabase/storage/pull/1615"],
+    "priority": 1,
+    "verificationCost": "Low: existing temporary-file unit setup; no external services.",
+    "stopCondition": "Do not submit if intentional or already covered by active upstream implementation."
+  },
+  {
+    "id": "H002",
+    "title": "File downloads ignore caller cancellation",
+    "status": "SUSPECTED",
+    "paths": ["src/storage/backend/adapter.ts:getObject", "src/storage/backend/file.ts:getObject"],
+    "evidence": "Shared signature accepts a signal; file implementation stops at headers.",
+    "experiment": "Cancel a pending local read or MD5 calculation; inspect file streams and consumer behavior.",
+    "impact": "Possible unnecessary disk I/O for cancelled local downloads; HTTP streaming may already destroy the body.",
+    "overlap": ["https://github.com/supabase/storage/pull/854", "https://github.com/supabase/storage/pull/1615"],
+    "priority": 2,
+    "verificationCost": "Low to medium.",
+    "stopCondition": "Reject claims based only on a missing positional parameter; prove a real lifecycle failure."
+  },
+  {
+    "id": "H003",
+    "title": "File copy may publish bytes before metadata succeeds",
+    "status": "SUSPECTED",
+    "paths": ["src/storage/backend/file.ts:copyObject", "src/storage/object.ts:copyObject"],
+    "evidence": "copyFile precedes metadata persistence. However, ObjectStorage uses a fresh version, so direct backend overwrite is not proof of production corruption.",
+    "experiment": "Inject a metadata failure and trace the real version publication and cleanup path.",
+    "impact": "Unknown; avoid claiming published-object corruption without testing higher layers.",
+    "overlap": ["https://github.com/supabase/storage/pull/1520"],
+    "priority": 3,
+    "verificationCost": "Medium.",
+    "stopCondition": "Drop if version indirection and existing cleanup make this a harmless temporary state."
+  },
+  {
+    "id": "H004",
+    "title": "S3 and TUS lock protocol gaps from earlier advice",
+    "status": "OVERLAPPING_WORK",
+    "paths": ["src/storage/protocols/tus/s3-locker.ts", "src/storage/protocols/s3/s3-handler.ts"],
+    "evidence": "Open targeted fixes already cover stale leases, overlapping renewals, metadata header collisions and conditional HEAD.",
+    "overlap": ["https://github.com/supabase/storage/pull/1546", "https://github.com/supabase/storage/pull/1545", "https://github.com/supabase/storage/pull/1462", "https://github.com/supabase/storage/pull/1608"],
+    "priority": 4,
+    "stopCondition": "No competing implementation; only revisit with a demonstrably missing independent case."
+  },
+  {
+    "id": "H005",
+    "title": "Benchmark large-bucket listing before selecting a bottleneck",
+    "status": "DEFERRED",
+    "paths": ["src/http/routes/object/listObjectsV2.ts", "src/storage/database"],
+    "evidence": "No local performance baseline or proven bottleneck yet.",
+    "experiment": "Only after functional setup, define representative data and repeated measurements.",
+    "impact": "Unknown.",
+    "priority": 5,
+    "verificationCost": "High relative to H001.",
+    "stopCondition": "Do not build a benchmark platform without a concrete question and resource budget."
+  }
+]

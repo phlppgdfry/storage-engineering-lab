@@ -1,0 +1,64 @@
+{
+  "checkedAt": "2026-10-27T21:27:20.542Z",
+  "scope": "Bounded GitHub searches; no claim of exhaustive novelty.",
+  "searches": [
+    {
+      "query": "repo:supabase/storage \"upload\" \"AbortSignal\"",
+      "results": []
+    },
+    {
+      "query": "repo:supabase/storage \"file\" \"upload\" \"cancellation\"",
+      "results": [
+        {
+          "title": "Improved adapter interface and explicit signal cancellation",
+          "url": "https://github.com/supabase/storage/pull/854"
+        },
+        {
+          "title": "fix(s3): validate upload length headers",
+          "url": "https://github.com/supabase/storage/pull/1587"
+        },
+        {
+          "title": "fix(streams): clean up traced upload sources on cancellation",
+          "url": "https://github.com/supabase/storage/pull/1470"
+        },
+        {
+          "title": "fix(tus): keep the database lease until the upload finishes",
+          "url": "https://github.com/supabase/storage/pull/1516"
+        },
+        {
+          "title": "feat: add on-demand signature generation",
+          "url": "https://github.com/supabase/storage/pull/1108"
+        },
+        {
+          "title": "chore(deps): bump @tus/server from 2.4.2 to 2.4.5",
+          "url": "https://github.com/supabase/storage/pull/1410"
+        },
+        {
+          "title": "fix(tus): fail closed on incomplete uploads without discarding safe retries",
+          "url": "https://github.com/supabase/storage/pull/1294"
+        },
+        {
+          "title": "feat: upgrade tus to latest + S3 Locker",
+          "url": "https://github.com/supabase/storage/pull/740"
+        }
+      ]
+    }
+  ],
+  "inspectedRelated": [
+    {
+      "url": "https://github.com/supabase/storage/pull/854",
+      "head": "aa1adc3d3843363d88a2160bd40ced98f014869e",
+      "observation": "Fetched file adapter source has no signal on upload pipeline."
+    },
+    {
+      "url": "https://github.com/supabase/storage/pull/1615",
+      "observation": "HEAD/deletion cancellation; upload not changed."
+    }
+  ],
+  "changedDuringResearch": {
+    "url": "https://github.com/supabase/storage/pull/1462",
+    "state": "merged",
+    "commit": "b11f751a",
+    "observation": "Was open in initial snapshot; merged during investigation."
+  }
+}
