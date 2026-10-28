@@ -1,0 +1,77 @@
+services:
+  tenant_db:
+    extends:
+      file: ${STORAGE_SOURCE_DIR:?set STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: tenant_db
+    image: pgvector/pgvector:pg17
+    ports: !override []
+    shm_size: 256mb
+    mem_limit: 768m
+  multitenant_db:
+    extends:
+      file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: multitenant_db
+    image: postgres:17
+    ports: !override []
+    mem_limit: 512m
+  pg_bouncer:
+    extends:
+      file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: pg_bouncer
+    ports: !override []
+    mem_limit: 128m
+  multitenant_pgbouncer:
+    extends:
+      file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: multitenant_pgbouncer
+    ports: !override []
+    mem_limit: 128m
+  rustfs:
+    extends:
+      file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: rustfs
+    ports: !override []
+    mem_limit: 768m
+  rustfs_setup:
+    extends:
+      file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: rustfs_setup
+  imgproxy:
+    extends:
+      file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: imgproxy
+    ports: !override []
+    volumes: !override
+      - storage-data:/workspace/storage/data
+    mem_limit: 256m
+  rest-catalog:
+    extends:
+      file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
+      service: rest-catalog
+    container_name: storage-lab-validation-iceberg
+    ports: !override []
+    mem_limit: 1g
+  runner:
+    image: storage-lab-linux:3bbc9717
+    working_dir: /workspace/storage
+    cpus: 4
+    mem_limit: 3g
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@tenant_db:5432/postgres
+      DATABASE_POOL_URL: postgresql://postgres:postgres@pg_bouncer:6432/postgres
+      DATABASE_MULTITENANT_URL: postgresql://postgres:postgres@multitenant_db:5432/postgres
+      DATABASE_MULTITENANT_POOL_URL: postgresql://postgres:postgres@multitenant_pgbouncer:6432/postgres
+      STORAGE_S3_ENDPOINT: http://rustfs:9000
+      STORAGE_S3_PRIVATE_ASSET_ENDPOINT: http://rustfs:9000
+      IMGPROXY_URL: http://imgproxy:8080
+      ICEBERG_CATALOG_URL: http://rest-catalog:8181/v1
+      VECTOR_DATABASE_URL: postgresql://postgres:postgres@tenant_db:5432/postgres
+    volumes:
+      - ${STORAGE_LAB_DIR:?set STORAGE_LAB_DIR}:/lab:ro
+      - ${STORAGE_EVIDENCE_DIR:?set STORAGE_EVIDENCE_DIR}:/evidence
+      - storage-data:/workspace/storage/data
+configs:
+  init.sql:
+    content: CREATE SCHEMA IF NOT EXISTS _supavisor;
+volumes:
+  storage-data:

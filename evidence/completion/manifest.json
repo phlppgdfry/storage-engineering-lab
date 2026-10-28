@@ -1,0 +1,121 @@
+{
+  "recordedAt": "2026-10-28T03:01:41.437522+00:00",
+  "sourceCommit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+  "steps": {
+    "independentReview": {
+      "executed": true,
+      "correctnessVerdict": "READY within stated scope",
+      "kind": "separate agent session, not a claim of another model or human review",
+      "report": "reports/independent-review.md",
+      "broadRun": {
+        "passed": 3308,
+        "failed": 2,
+        "failures": "unchanged ECS timing cases"
+      },
+      "isolatedEcsRerun": {
+        "passed": 8,
+        "failed": 0
+      }
+    },
+    "integration": {
+      "executed": true,
+      "exitCode": 0,
+      "filesPassed": 57,
+      "testsPassed": 1379,
+      "httpFileChecksPassed": 5,
+      "database": "PostgreSQL 17",
+      "evidence": "evidence/completion/integration.json"
+    },
+    "linux": {
+      "executed": true,
+      "platform": "Linux arm64, Debian12",
+      "unitFilesPassed": 176,
+      "unitTestsPassed": 3304,
+      "unitTestsSkipped": 2,
+      "nonrootFileTestsPassed": 157,
+      "lintExitCode": 0,
+      "buildExitCode": 0,
+      "evidence": "evidence/completion/linux.json"
+    },
+    "performance": {
+      "executed": true,
+      "measuredGroups": 130,
+      "datasets": 3,
+      "sourceBytesPerCancelledOperation": {
+        "original": 4194304,
+        "fixed": 131072
+      },
+      "successfulUploadAttribution": "INSUFFICIENT EVIDENCE",
+      "performanceGateCleared": false,
+      "report": "reports/performance.md"
+    },
+    "maintainerPriorities": {
+      "executed": true,
+      "recentUpdatedPrSample": 100,
+      "selectedDiscussions": 7,
+      "sampling": "bounded and purposive, not acceptance probability or official roadmap",
+      "report": "research/maintainer-priorities.md"
+    }
+  },
+  "upstream": {
+    "pr": "https://github.com/supabase/storage/pull/1616",
+    "draft": true,
+    "merged": false,
+    "CI": "action_required",
+    "acceptance": "action_required"
+  },
+  "limits": [
+    "No hosted-service impact established.",
+    "No normal-upload speedup or no-regression claim.",
+    "Only PostgreSQL17 standard integration and Linuxarm64, not entire upstream matrix.",
+    "No human maintainer approval claimed."
+  ],
+  "cleanup": "Own integration containers, private network and test volumes removed; existing host database untouched; local Linux image retained.",
+  "artifacts": [
+    {
+      "path": "evidence/completion/http-file.json",
+      "sha256": "7d15ca18aa889dd89b37041cedf760e4d826cd168d72485497201dda69e70bcf",
+      "bytes": 606
+    },
+    {
+      "path": "evidence/completion/image-identities.txt",
+      "sha256": "1344369874dfb3354de2210c3b46e79ac5f825fa5a61d7e6ec83d5a4e49f488f",
+      "bytes": 749
+    },
+    {
+      "path": "evidence/completion/integration.json",
+      "sha256": "b42754458eedc1ddb63a094db935459a2d90efeab064a06ac84ef04b15cf8c7a",
+      "bytes": 872
+    },
+    {
+      "path": "evidence/completion/linux.json",
+      "sha256": "f51833b116023f53d1c3e8521d4ec11383ac7639a9f6b63932c86951fe3eab5b",
+      "bytes": 3111
+    },
+    {
+      "path": "evidence/completion/performance-exploratory-summary.json",
+      "sha256": "650b2eed784659e9459ba41a6ac3a04c017f352311bb2dc479e80fd5382c1597",
+      "bytes": 14513
+    },
+    {
+      "path": "evidence/completion/performance-exploratory.json.gz",
+      "sha256": "492335b36a4a2fc4681857381456a424e9ef9037b8da1c14212459c3afc47440",
+      "bytes": 27381
+    },
+    {
+      "path": "evidence/completion/performance-steady.json.gz",
+      "sha256": "222fb570a69051162ae553956d246936cd3c32acdd113a515031e4ce12e6eb52",
+      "bytes": 36752
+    },
+    {
+      "path": "evidence/completion/performance-timed-summary.json",
+      "sha256": "49be4378261fe84a50eaef827647b810cd5be38327c7c09270925bb6efca59e3",
+      "bytes": 14705
+    },
+    {
+      "path": "evidence/completion/performance-timed.json.gz",
+      "sha256": "0b64aac077418018e586f8358171fd3b5ad26aad258e60ff5afcff79d6295a87",
+      "bytes": 506723
+    }
+  ]
+}

@@ -45,16 +45,22 @@
       "evidence": "reproduction-summary.json"
     }
   ],
-  "notExecuted": [
+  "productionDiff": {
+    "insertions": 8,
+    "deletions": 1
+  },
+  "publication": "Published after explicit user approval. Public lab and fork branch verified; upstream draft PR https://github.com/supabase/storage/pull/1616 is open, not merged. Upstream CI and Acceptance report action_required; local results above are not upstream CI results.",
+  "notExecutedAtInitialPublication": [
     "PostgreSQL integration suite",
     "hosted-service traffic",
     "Linux native reproduction",
     "performance benchmark",
     "independent human/model review"
   ],
-  "productionDiff": {
-    "insertions": 8,
-    "deletions": 1
-  },
-  "publication": "Published after explicit user approval. Public lab and fork branch verified; upstream draft PR https://github.com/supabase/storage/pull/1616 is open, not merged. Upstream CI and Acceptance report action_required; local results above are not upstream CI results."
+  "completion": {
+    "recordedAt": "2026-10-28T03:01:41.437522+00:00",
+    "manifest": "completion/manifest.json",
+    "performanceAttribution": "INSUFFICIENT EVIDENCE",
+    "upstreamCI": "action_required"
+  }
 }

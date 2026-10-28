@@ -1,15 +1,21 @@
-`FileBackend.uploadObject` accepts an `AbortSignal` but never uses it. An already-aborted call still writes and returns success, and aborting an active transfer does not stop its source. Pass the signal to the existing staging pipeline, reject pre-aborted calls and use the same abort error conventions as the S3 upload backend.
+`FileBackend.uploadObject` accepts an `AbortSignal` but never uses it. An already-aborted call still writes and returns success, and aborting an active transfer does not stop its source. Pass the signal to the existing staging pipeline, reject pre-aborted calls and use the existing S3 upload abort error conventions.
 
-Cancellation after the body finishes still allows metadata/rename to complete, preserving the uploader's completion policy. The change is limited to the file backend and its existing tests.
+Cancellation after the body finishes still allows metadata/rename to complete. As in the S3 adapter, a source-thrown `AbortError` is normalized to `AbortedTerminate`, even without a supplied signal; the original error is retained. Only the file backend and its existing test file change.
 
 ## Validation
 
-- Five focused cases cover cancellation before/during transfer, successful transfers, source failure, cleanup and cancellation after body completion. Two fail on the original code.
-- A [native reproducer](https://github.com/phlppgdfry/storage-engineering-lab/blob/6c8d6360b2127a2dc7b8a7bcb7bbcf24e7879be8/experiments/file-upload-cancellation.ts) uses real filesystem metadata and no mocks; [original and fixed outcomes](https://github.com/phlppgdfry/storage-engineering-lab/blob/6c8d6360b2127a2dc7b8a7bcb7bbcf24e7879be8/evidence/reproduction-summary.json) were confirmed three times each.
-- Full unit suite: **3,306 tests passed across 176 files** on `3bbc9717`, based on upstream `b11f751a`.
-- `npm run lint`, `npm run build` and `git diff --check upstream/master...HEAD`: passed.
-- PostgreSQL integration tests were not run; no database or HTTP protocol changes are included.
+- Five focused cases; the two cancellation cases fail on the original implementation. Native before/after experiments use real xattrs and no adapter mocks.
+- macOS unit suite: **3,306 passed**. Linux arm64: **3,304 passed / 2 root-permission skips**; all **157 file tests pass as non-root**, including those permission cases. Lint/build pass.
+- PostgreSQL 17 standard integration suite: **1,379 passed across 57 files**. Five extra real HTTP + PostgreSQL + native-file checks pass, including disconnect after a partial staging write.
+- A [separate agent review](https://github.com/phlppgdfry/storage-engineering-lab/blob/main/reports/independent-review.md) found no blocking correctness issue and ran independent native experiments. Its broad run had two unchanged ECS timing failures; the isolated ECS suite then passed 8/8. This is not a claim of human or different-model review.
+- [Commands, environment and evidence](https://github.com/phlppgdfry/storage-engineering-lab/blob/main/reports/completion-2026-10-28.md) are recorded against `3bbc9717`.
 
-Related work checked: #1615 adds file HEAD/deletion cancellation; the file upload pipeline at the fetched head of #854 does not apply a signal. No specific existing issue is claimed as fixed.
+## Performance limitation — remains draft
 
-This demonstrates an adapter contract defect; it does not establish hosted-service data loss or a security vulnerability. Prepared with AI assistance; the reported tests and native experiments were executed locally.
+The cancellation workload consistently produces 128 KiB of source bytes per operation instead of 4 MiB. This is not a physical-I/O or production-speed claim.
+
+**Successful-upload performance equivalence is not established.** One timed workload showed a median paired slowdown of 16.70%; follow-up identical-code controls also varied substantially, so neither a regression nor its absence can be reliably attributed to the patch. All observations, including unfavorable ones, are retained in the [performance report and independent method review](https://github.com/phlppgdfry/storage-engineering-lab/blob/main/reports/performance.md). No speculative optimization was added to hide the uncertainty.
+
+Related work checked: #1615 covers file HEAD/deletion cancellation; the upload pipeline at the inspected head of #854 does not apply a signal. No specific existing issue is claimed as fixed.
+
+This establishes an adapter contract defect, not hosted-service data loss or a security vulnerability. AI assistance was used; reported experiments and tests were executed locally. Upstream CI approval and maintainer review remain separate.

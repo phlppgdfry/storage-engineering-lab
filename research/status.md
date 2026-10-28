@@ -33,15 +33,27 @@ Gestart op 2026-10-27. Deze pagina wordt bijgewerkt na daadwerkelijke uitvoering
 - Definitieve volledige suite op die commit: **176 bestanden, 3.306 tests geslaagd**. Het verschil met de eerdere 3.300 komt door nieuwe upstream-tests.
 - Definitieve lint, build en `git diff --check upstream/master...HEAD` slagen. Storage-working-tree schoon.
 - Productiewijziging: 8 insertions, 1 deletion. Vijf tests in het bestaande testbestand; totaal twee gewijzigde upstream-bestanden.
-- Geen database-integratietests of hosted-service-tests uitgevoerd. Geen performanceclaim.
+- Bij de eerste publicatie waren database-integratietests nog niet uitgevoerd. De latere afronding staat hieronder. Geen hosted-service-test of algemene performanceclaim.
 
 ## Review en vervolg
 
-Kritische zelfreview staat in `research/self-review.md`; een fout in de eerste testharness is gecorrigeerd en opnieuw gevalideerd. Er heeft geen onafhankelijke menselijke of modelreview plaatsgevonden. Upstreamreview is de volgende externe kwaliteitsstap.
+Kritische zelfreview staat in `research/self-review.md`; een fout in de eerste testharness is gecorrigeerd en opnieuw gevalideerd. Bij de eerste publicatie was er nog geen onafhankelijke review. Later is een aparte agentsessie uitgevoerd, zoals hieronder vastgelegd. Een menselijke maintainerreview is nog niet geclaimd.
 
 H002 en H003 blijven hypotheses. H004 overlapt met bestaand werk. H005 is uitgesteld. We hebben geen vijf bevestigde bugs gevonden en doen die claim ook niet.
 
 De onderzoeksrepo bevat een rapport, compacte bewijsbestanden, reproduceerbare patches en een voorbereide PR-beschrijving. Ruwe volledige logs en zoekresultaten staan onder genegeerd `evidence/local/`.
+
+## Vijf gevraagde afrondingsstappen — 28 oktober
+
+De gebruiker koos expliciet de vijf ontbrekende afrondingsstappen, niet H001–H005. Zie `reports/completion-2026-10-28.md` voor bewijs en beperkingen.
+
+1. Aparte agentreview met eigen bronanalyse en native experimenten: geen blokkerend correctnessprobleem, verdict READY binnen die scope. Dit was geen ander model of menselijke reviewer. Brede run: 3.308 pass en twee bestaande ECS-timingfailures; geïsoleerde ECS-suite daarna 8/8 pass.
+2. Echte PostgreSQL 17-migraties en seed: pass. Volledige standaardintegratie: 57 bestanden, 1.379 tests pass. Vijf extra HTTP-controles met echte DB en native bestanden pass, waaronder een disconnect na gedeeltelijk schrijven.
+3. Linux arm64: 176 unitbestanden, 3.304 pass / twee root-permissieskips, lint/build pass. Complete file-backendtests als niet-root: 157/157 pass. Native reproductie driemaal vóór/na en regressies red/green bevestigd.
+4. Performanceonderzoek: 130 meetgroepen in drie bewaarde datasets. Cancellationbronbytes consistent 4 MiB naar 128 KiB per operatie. Normale uploads: INSUFFICIENT EVIDENCE voor attributie of afwezigheid van regressie; de oorspronkelijke vertraging en onstabiele shamcontrole blijven zichtbaar. Geen performance-goedkeuring geclaimd.
+5. Maintainerprioriteiten: honderd recent bijgewerkte PR's en zeven geselecteerde discussies, menselijke feedback onderscheiden van bots. Geen officiële roadmap of acceptatiekans afgeleid.
+
+De productiecommit blijft `3bbc9717`. Alleen lab-hulpmiddelen, bewijs en rapportage zijn toegevoegd. De tijdelijke integratiestack en eigen testvolumes zijn opgeruimd; de lokale Linux-image blijft beschikbaar. De PR blijft draft en upstream CI meldt nog `action_required`.
 
 ## Publicatie
 

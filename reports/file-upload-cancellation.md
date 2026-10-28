@@ -53,7 +53,7 @@ The production diff contains eight insertions and one deletion. No dependency, p
 
 Cancellation applies while the body transfers. After the pipeline completes, metadata and rename intentionally finish even if cancellation arrives. This preserves the uploader's existing completion policy; the late-cancellation test guards that boundary.
 
-Calls without a signal retain normal behavior. A live signal adds pipeline cancellation handling; listener cleanup and original source-error messages are tested.
+Successful calls without a signal retain their behavior. A live signal adds pipeline cancellation handling; listener cleanup and ordinary source-error messages are tested. An independently tested compatibility nuance: a source that itself throws an AbortError, even without a signal, is now classified as AbortedTerminate instead of InternalError. The original error is retained; this matches existing S3 normalization.
 
 The overwrite test deliberately uses the same backend key/version. Higher layers normally create a new version. It does not prove HTTP data loss.
 
@@ -63,7 +63,7 @@ The unmodified unit suite passed: 176 files, 3,295 tests. The patched suite pass
 
 The first sandboxed full run failed with `listen EPERM` while tests opened local servers. Repeating with the required permissions passed. The sandbox failures are retained locally as environment evidence, not attributed to Storage.
 
-Lint, build, focused backend/upload tests and native reproductions were executed. PostgreSQL integration tests and hosted traffic were not run. Docker was started, but no containers or migrations were launched: existing PostgreSQL owns port 5432 and this adapter fix requires no database.
+At initial publication, lint, build, focused backend/upload tests and native reproductions were executed, but no database integration or containers were run. This was later supplemented by the [five completion activities](completion-2026-10-28.md): a separate agent review, Linux validation and 1,379 passing PostgreSQL integration tests plus real HTTP checks, using an isolated network with no published ports. Hosted traffic remains untested. [Performance attribution remains inconclusive](performance.md); no general speed or no-regression claim is made.
 
 Searches may miss unpublished work or alternate terms. No severity, production incident, performance gain or maintainer acceptance is claimed.
 

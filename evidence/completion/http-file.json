@@ -1,0 +1,14 @@
+{
+  "recordedAt": "2026-10-28T02:51:10.835Z",
+  "commit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+  "database": "real isolated PostgreSQL 17",
+  "backend": "native Linux FileBackend",
+  "checks": [
+    "real PostgreSQL bucket creation",
+    "real HTTP upload/download; native bytes, xattrs and ETag",
+    "range response bytes and metadata",
+    "conditional retrieval",
+    "disconnect after actual partial disk write: staging cleaned, old object still readable"
+  ],
+  "limitation": "End-to-end regression assurance; not proof that an HTTP disconnect bypassed source-error handling on the parent."
+}

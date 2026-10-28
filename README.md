@@ -6,6 +6,8 @@ Independent contributor research. This does not establish an issue in Supabase's
 
 **Upstream contribution:** [supabase/storage#1616](https://github.com/supabase/storage/pull/1616), open as a draft. Local validation passed; GitHub CI currently reports `action_required`. No merge or maintainer approval is claimed.
 
+**Additional validation:** [all five completion activities](reports/completion-2026-10-28.md) were executed: separate agent review, PostgreSQL integration, Linux validation, performance experiments and maintainer-priority analysis. **Successful-upload performance equivalence remains unproven**; the retained measurements and identical-code controls do not support causal attribution. The draft does not claim a cleared performance gate.
+
 ## Result
 
 At baseline `4134dbba1b94757f400d5d7c09f9382935efd726`, `FileBackend.uploadObject` accepts an `AbortSignal` but does not use it.
@@ -48,6 +50,7 @@ The reproducer itself requires no cloud account, Docker, production traffic or d
 - [Native probe](experiments/file-upload-cancellation.ts), [production patch](experiments/fix.patch), [regression patch](experiments/regression.patch).
 - [Architecture](research/architecture.md), [hypotheses](research/hypotheses.json), [decisions](research/decision-log.md), [status](research/status.md).
 - [Prepared upstream PR](contributions/pr-description.md).
+- [Independent review](reports/independent-review.md), [Linux/integration validation](reports/linux-and-integration.md), [performance results](reports/performance.md) and [maintainer priorities](research/maintainer-priorities.md).
 
 ## Scope
 
@@ -55,6 +58,6 @@ Upstream: [supabase/storage](https://github.com/supabase/storage). Fork: [phlppg
 
 Related refactor [#854](https://github.com/supabase/storage/pull/854) was inspected at its fetched head; its file-upload pipeline does not apply the signal. Recent [#1615](https://github.com/supabase/storage/pull/1615) concerns HEAD and deletion. Bounded searches do not prove uniqueness.
 
-No performance improvement, production severity or maintainer acceptance is claimed. Critical self-review is documented; independent maintainer review remains separate. Security findings follow upstream's [policy](https://github.com/supabase/storage/blob/master/SECURITY.md).
+No general performance improvement, production severity or maintainer acceptance is claimed. A separate agent review and critical self-review are documented; independent human maintainer review remains separate. Security findings follow upstream's [policy](https://github.com/supabase/storage/blob/master/SECURITY.md).
 
 Apache-2.0; patches derive from Supabase Storage. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

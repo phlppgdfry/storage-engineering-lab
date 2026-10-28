@@ -16,3 +16,5 @@ This is a separate review pass by the implementing assistant, not independent hu
 | Upstream may change while working | Refreshed upstream, inspected the new commit, rebased and validated the final branch. |
 
 The patch is suitable for requesting upstream review if final checks pass. It is not a security report or a claim of production data loss. PostgreSQL integration and independent maintainer review remain unperformed.
+
+Historical note: the paragraph above describes the initial self-review. Subsequent PostgreSQL integration, Linux tests, a separate agent review and performance-method review are recorded in `reports/completion-2026-10-28.md`. Human maintainer review and a successful-upload performance-equivalence result remain unclaimed.

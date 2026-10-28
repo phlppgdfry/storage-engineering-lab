@@ -1,0 +1,503 @@
+{
+  "sourceRecordedAt": "2026-10-28T02:43:12.556Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "linux",
+    "arch": "arm64",
+    "kernel": "7.0.14-linuxkit",
+    "containerCpuLimit": 4,
+    "containerMemoryGiB": 3,
+    "etagAlgorithm": "md5"
+  },
+  "aggregation": "Median/min/max of run-level metrics, not pooled request percentiles.",
+  "workloads": [
+    {
+      "id": "64KiB-c8-no-signal",
+      "variants": [
+        {
+          "variant": "original",
+          "repetitions": 5,
+          "measuredOperations": 9652,
+          "operationsPerSecond": {
+            "median": 860.7549264229168,
+            "min": 660.3477821145426,
+            "max": 1539.9384414548208
+          },
+          "p50Ms": {
+            "median": 6.359332999999879,
+            "min": 4.613667000000078,
+            "max": 9.063458999999966
+          },
+          "p95Ms": {
+            "median": 20.918333000000075,
+            "min": 8.359249999999975,
+            "max": 26.985333000000082
+          },
+          "p99Ms": {
+            "median": 48.82970800000021,
+            "min": 15.648500000000013,
+            "max": 94.20166700000004
+          },
+          "cpuMsPerOperation": {
+            "median": 1.984644259818731,
+            "min": 1.1950599481529487,
+            "max": 2.0791763848396503
+          },
+          "sourceBytesPerOperation": {
+            "median": 65536,
+            "min": 65536,
+            "max": 65536
+          },
+          "sampledPeakRssMiB": {
+            "median": 93.921875,
+            "min": 92.51953125,
+            "max": 112.359375
+          },
+          "cancellationP95Ms": null
+        },
+        {
+          "variant": "fixed",
+          "repetitions": 5,
+          "measuredOperations": 12985,
+          "operationsPerSecond": {
+            "median": 1421.3690117983767,
+            "min": 376.20004230933773,
+            "max": 1640.6017470383563
+          },
+          "p50Ms": {
+            "median": 4.442333999999846,
+            "min": 4.269375000000082,
+            "max": 19.382249999999885
+          },
+          "p95Ms": {
+            "median": 8.954249999999774,
+            "min": 7.8367920000000595,
+            "max": 40.25283399999989
+          },
+          "p99Ms": {
+            "median": 12.182667000000038,
+            "min": 11.062750000000051,
+            "max": 49.285833000000366
+          },
+          "cpuMsPerOperation": {
+            "median": 1.2770500484339684,
+            "min": 1.1611819841752893,
+            "max": 3.592688157894737
+          },
+          "sourceBytesPerOperation": {
+            "median": 65536,
+            "min": 65536,
+            "max": 65536
+          },
+          "sampledPeakRssMiB": {
+            "median": 96.29296875,
+            "min": 89.53125,
+            "max": 111.41796875
+          },
+          "cancellationP95Ms": null
+        }
+      ],
+      "pairedThroughputChangesPercent": [
+        44.70441161203213,
+        6.5368395822651415,
+        108.39172482670172,
+        109.1082457000566,
+        -56.294174943298735
+      ],
+      "everyFixedRunSlower": false,
+      "note": "Local observations; repeatability does not alone establish attribution."
+    },
+    {
+      "id": "64KiB-c8-live-signal",
+      "variants": [
+        {
+          "variant": "original",
+          "repetitions": 5,
+          "measuredOperations": 11455,
+          "operationsPerSecond": {
+            "median": 1255.1874889572214,
+            "min": 405.6925239478635,
+            "max": 1523.0881865076672
+          },
+          "p50Ms": {
+            "median": 4.656083999999964,
+            "min": 4.478125000000034,
+            "max": 16.88341700000001
+          },
+          "p95Ms": {
+            "median": 12.261999999999944,
+            "min": 8.757250000000113,
+            "max": 38.81258300000002
+          },
+          "p99Ms": {
+            "median": 34.50970899999993,
+            "min": 12.954459000000043,
+            "max": 61.43733299999997
+          },
+          "cpuMsPerOperation": {
+            "median": 1.4191575048732943,
+            "min": 1.1909086144775631,
+            "max": 3.1395036674816628
+          },
+          "sourceBytesPerOperation": {
+            "median": 65536,
+            "min": 65536,
+            "max": 65536
+          },
+          "sampledPeakRssMiB": {
+            "median": 94.83984375,
+            "min": 89.16015625,
+            "max": 97.6328125
+          },
+          "cancellationP95Ms": null
+        },
+        {
+          "variant": "fixed",
+          "repetitions": 5,
+          "measuredOperations": 11020,
+          "operationsPerSecond": {
+            "median": 1073.7229177196944,
+            "min": 327.1226091617082,
+            "max": 1651.1857248297501
+          },
+          "p50Ms": {
+            "median": 4.629832999999962,
+            "min": 4.123583000000053,
+            "max": 22.01766699999962
+          },
+          "p95Ms": {
+            "median": 15.069124999999985,
+            "min": 8.025041999999985,
+            "max": 43.23354199999994
+          },
+          "p99Ms": {
+            "median": 63.8137499999998,
+            "min": 12.351208000000042,
+            "max": 89.99500000000012
+          },
+          "cpuMsPerOperation": {
+            "median": 1.6114888372093024,
+            "min": 1.1386408706166868,
+            "max": 3.968004559270517
+          },
+          "sourceBytesPerOperation": {
+            "median": 65536,
+            "min": 65536,
+            "max": 65536
+          },
+          "sampledPeakRssMiB": {
+            "median": 96.66015625,
+            "min": 91.1328125,
+            "max": 97.390625
+          },
+          "cancellationP95Ms": null
+        }
+      ],
+      "pairedThroughputChangesPercent": [
+        -3.8023254693527853,
+        -14.457168577124946,
+        31.455412528352934,
+        -18.99698562460316,
+        -19.36686286983501
+      ],
+      "everyFixedRunSlower": false,
+      "note": "Local observations; repeatability does not alone establish attribution."
+    },
+    {
+      "id": "4MiB-c1-live-signal",
+      "variants": [
+        {
+          "variant": "original",
+          "repetitions": 5,
+          "measuredOperations": 335,
+          "operationsPerSecond": {
+            "median": 41.70889880940453,
+            "min": 13.73330549710023,
+            "max": 49.662391930922894
+          },
+          "p50Ms": {
+            "median": 18.657459000000017,
+            "min": 17.23195899999996,
+            "max": 68.39474999999993
+          },
+          "p95Ms": {
+            "median": 65.54116699999997,
+            "min": 26.53104200000007,
+            "max": 128.19383300000004
+          },
+          "p99Ms": {
+            "median": 121.77820799999995,
+            "min": 34.52425000000005,
+            "max": 201.87366599999996
+          },
+          "cpuMsPerOperation": {
+            "median": 29.790273809523814,
+            "min": 26.42489473684211,
+            "max": 74.69914285714286
+          },
+          "sourceBytesPerOperation": {
+            "median": 4194304,
+            "min": 4194304,
+            "max": 4194304
+          },
+          "sampledPeakRssMiB": {
+            "median": 89.1484375,
+            "min": 88.34375,
+            "max": 92.9453125
+          },
+          "cancellationP95Ms": null
+        },
+        {
+          "variant": "fixed",
+          "repetitions": 5,
+          "measuredOperations": 281,
+          "operationsPerSecond": {
+            "median": 33.06572985307657,
+            "min": 9.924008965540239,
+            "max": 41.36717943922116
+          },
+          "p50Ms": {
+            "median": 20.965333999999984,
+            "min": 18.557749999999942,
+            "max": 89.7863339999999
+          },
+          "p95Ms": {
+            "median": 80.10050000000001,
+            "min": 44.21804199999997,
+            "max": 158.67370899999992
+          },
+          "p99Ms": {
+            "median": 114.07191599999987,
+            "min": 60.874374999999986,
+            "max": 175.75750000000005
+          },
+          "cpuMsPerOperation": {
+            "median": 39.24308823529412,
+            "min": 32.75974698795181,
+            "max": 93.56814999999999
+          },
+          "sourceBytesPerOperation": {
+            "median": 4194304,
+            "min": 4194304,
+            "max": 4194304
+          },
+          "sampledPeakRssMiB": {
+            "median": 91.5390625,
+            "min": 88.2578125,
+            "max": 91.89453125
+          },
+          "cancellationP95Ms": null
+        }
+      ],
+      "pairedThroughputChangesPercent": [
+        -20.722601658279928,
+        -16.703207737637417,
+        -12.857275235970778,
+        -28.433436077392095,
+        -8.162050599688142
+      ],
+      "everyFixedRunSlower": true,
+      "note": "Local observations; repeatability does not alone establish attribution."
+    },
+    {
+      "id": "4MiB-c8-live-signal",
+      "variants": [
+        {
+          "variant": "original",
+          "repetitions": 5,
+          "measuredOperations": 728,
+          "operationsPerSecond": {
+            "median": 74.4258862903966,
+            "min": 29.316002676314685,
+            "max": 91.45193700653974
+          },
+          "p50Ms": {
+            "median": 88.91945800000008,
+            "min": 75.45445900000004,
+            "max": 254.64600000000019
+          },
+          "p95Ms": {
+            "median": 176.1095839999998,
+            "min": 130.43829099999994,
+            "max": 379.5702920000001
+          },
+          "p99Ms": {
+            "median": 235.37083299999995,
+            "min": 185.702084,
+            "max": 382.49312499999996
+          },
+          "cpuMsPerOperation": {
+            "median": 24.61663125,
+            "min": 20.60801041666667,
+            "max": 61.72575
+          },
+          "sourceBytesPerOperation": {
+            "median": 4194304,
+            "min": 4194304,
+            "max": 4194304
+          },
+          "sampledPeakRssMiB": {
+            "median": 114.3359375,
+            "min": 113.80859375,
+            "max": 121.63671875
+          },
+          "cancellationP95Ms": null
+        },
+        {
+          "variant": "fixed",
+          "repetitions": 5,
+          "measuredOperations": 616,
+          "operationsPerSecond": {
+            "median": 66.77579789490103,
+            "min": 31.254270496228404,
+            "max": 84.15329160866506
+          },
+          "p50Ms": {
+            "median": 95.89779199999998,
+            "min": 81.42887499999983,
+            "max": 242.27937500000007
+          },
+          "p95Ms": {
+            "median": 282.42608399999995,
+            "min": 124.97158400000012,
+            "max": 362.83458300000007
+          },
+          "p99Ms": {
+            "median": 289.18779199999994,
+            "min": 180.180834,
+            "max": 370.97800000000007
+          },
+          "cpuMsPerOperation": {
+            "median": 23.254198529411763,
+            "min": 19.76344375,
+            "max": 46.855515624999995
+          },
+          "sourceBytesPerOperation": {
+            "median": 4194304,
+            "min": 4194304,
+            "max": 4194304
+          },
+          "sampledPeakRssMiB": {
+            "median": 117.3046875,
+            "min": 115.09765625,
+            "max": 119.203125
+          },
+          "cancellationP95Ms": null
+        }
+      ],
+      "pairedThroughputChangesPercent": [
+        11.543355957531398,
+        -4.635472740896185,
+        6.992355812947659,
+        -57.82117327440807,
+        6.611637477710097
+      ],
+      "everyFixedRunSlower": false,
+      "note": "Local observations; repeatability does not alone establish attribution."
+    },
+    {
+      "id": "4MiB-c8-cancelled",
+      "variants": [
+        {
+          "variant": "original",
+          "repetitions": 5,
+          "measuredOperations": 594,
+          "operationsPerSecond": {
+            "median": 47.61845904922491,
+            "min": 35.244097979297266,
+            "max": 70.18476174596795
+          },
+          "p50Ms": {
+            "median": 97.22499999999991,
+            "min": 73.18799999999987,
+            "max": 221.38637500000004
+          },
+          "p95Ms": {
+            "median": 303.14804200000026,
+            "min": 278.4462500000001,
+            "max": 2085.710543
+          },
+          "p99Ms": {
+            "median": 307.73620900000014,
+            "min": 291.020167,
+            "max": 2089.287668
+          },
+          "cpuMsPerOperation": {
+            "median": 24.628536764705885,
+            "min": 17.687132867132867,
+            "max": 39.62368
+          },
+          "sourceBytesPerOperation": {
+            "median": 4194304,
+            "min": 4194304,
+            "max": 4194304
+          },
+          "sampledPeakRssMiB": {
+            "median": 116.44140625,
+            "min": 116.0625,
+            "max": 117.37890625
+          },
+          "cancellationP95Ms": {
+            "median": 298.18899999999985,
+            "min": 277.23262599999987,
+            "max": 2084.8204590000005
+          }
+        },
+        {
+          "variant": "fixed",
+          "repetitions": 5,
+          "measuredOperations": 16853,
+          "operationsPerSecond": {
+            "median": 1673.9133342803868,
+            "min": 640.164408259784,
+            "max": 2565.729983355547
+          },
+          "p50Ms": {
+            "median": 2.781500000000051,
+            "min": 2.4806670000000395,
+            "max": 10.110667000000035
+          },
+          "p95Ms": {
+            "median": 9.66258300000004,
+            "min": 5.315832999999998,
+            "max": 26.85708300000033
+          },
+          "p99Ms": {
+            "median": 18.510291999999936,
+            "min": 13.154457999999977,
+            "max": 53.901416000000154
+          },
+          "cpuMsPerOperation": {
+            "median": 0.8620492727812408,
+            "min": 0.6160607476635515,
+            "max": 1.7526409657320874
+          },
+          "sourceBytesPerOperation": {
+            "median": 131072,
+            "min": 131072,
+            "max": 131072
+          },
+          "sampledPeakRssMiB": {
+            "median": 151.1484375,
+            "min": 108.4921875,
+            "max": 202.3125
+          },
+          "cancellationP95Ms": {
+            "median": 3.9894579999999564,
+            "min": 2.2581249999998363,
+            "max": 13.844084000000066
+          }
+        }
+      ],
+      "pairedThroughputChangesPercent": [
+        1624.540480062196,
+        3415.261450501795,
+        3976.2420410707955,
+        5231.353886478773,
+        1716.373364515735
+      ],
+      "everyFixedRunSlower": false,
+      "note": "Different outcomes: rejected cancellation versus completed transfer. Do not market throughput ratio as general speedup."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+node_modules
+.git
+.env
+.env.test
+.env.acceptance
+data
+dist
+coverage
+.cache

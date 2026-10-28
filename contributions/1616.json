@@ -30,5 +30,8 @@
     }
   ],
   "maintainerApproval": null,
-  "nextAction": "Upstream workflow approval/review; do not claim merge or successful upstream CI."
+  "nextAction": "Upstream workflow approval/review; do not claim merge or successful upstream CI.",
+  "completionEvidence": "evidence/completion/manifest.json",
+  "performanceGate": "INSUFFICIENT EVIDENCE; keep draft, no no-regression claim",
+  "lastLocalValidationAt": "2026-10-28T03:01:41.437522+00:00"
 }

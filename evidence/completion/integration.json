@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-10-28T02:50:06.334Z",
+  "commit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+  "database": "PostgreSQL 17",
+  "isolation": "dedicated Compose project, private network, no published ports",
+  "results": [
+    {
+      "label": "migrate",
+      "command": "npm run migration:run",
+      "exitCode": 0,
+      "error": null,
+      "summary": []
+    },
+    {
+      "label": "seed",
+      "command": "npm run test:dummy-data",
+      "exitCode": 0,
+      "error": null,
+      "summary": []
+    },
+    {
+      "label": "suite",
+      "command": "npm run test:integration",
+      "exitCode": 0,
+      "error": null,
+      "summary": [
+        "     ✓ Concurrency Tests (4)",
+        " Test Files  57 passed (57)",
+        "      Tests  1379 passed (1379)",
+        "   Duration  271.75s (tests 87%, import 8%, transform 4%, setup 1%)"
+      ]
+    }
+  ]
+}

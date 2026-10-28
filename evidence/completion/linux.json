@@ -1,0 +1,129 @@
+{
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "linux",
+    "arch": "arm64",
+    "kernel": "7.0.14-linuxkit",
+    "os": "PRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"12\"\nVERSION=\"12 (bookworm)\"\nVERSION_CODENAME=bookworm\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+  },
+  "commit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+  "before": [
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "after": [
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "native + regression red/green",
+      "outcome": "passed"
+    },
+    {
+      "name": "full unit",
+      "outcome": "passed",
+      "tests": 3304,
+      "skipped": 2
+    },
+    {
+      "name": "lint",
+      "outcome": "passed"
+    },
+    {
+      "name": "build",
+      "outcome": "passed"
+    }
+  ],
+  "recordedAt": "2026-10-28T02:33:00.259Z",
+  "additionalRuns": [
+    {
+      "command": "npm run test:unit -- src/storage/backend/file.test.ts",
+      "user": "node (non-root)",
+      "testsPassed": 157,
+      "testsSkipped": 0,
+      "exitCode": 0,
+      "reason": "Exercise the two permission cases intentionally skipped as root."
+    }
+  ]
+}
