@@ -1,0 +1,44 @@
+✔ fixture endpoint guard requires every exact endpoint and refuses remote or missing values (4.153208ms)
+✔ container validation refuses this unmanaged host before touching source or services (0.2195ms)
+✔ explicit local Docker context wins over a remote DOCKER_HOST and freezes local commands (640.514917ms)
+✔ explicit remote Docker context is rejected without any daemon command or image cleanup (354.798ms)
+✔ remote DOCKER_HOST is rejected without any daemon command or image cleanup (269.311625ms)
+✔ local DOCKER_HOST wins over a remote default context when DOCKER_CONTEXT is unset (364.276708ms)
+✔ an evidence write failure in an output callback rejects under control rather than crashing (1077.100959ms)
+✔ native probe removes its own temporary data when source import fails (115.447042ms)
+✔ all retained datasets validate their real arithmetic and hashes without claiming performance approval (304.800792ms)
+✔ retained summaries equal recalculated observations (77.426958ms)
+✔ corrupt gzip, malformed JSON and unsupported schema fail (22.044417ms)
+✔ missing pair and duplicate rows cannot silently produce a summary (18.435083ms)
+✔ wrong counts, nonfinite/null metrics, modified percentiles and hashes fail (83.291ms)
+✔ steady controls reject altered warm-up flags, treatment identity and missing blocks (2.807708ms)
+✔ tampered summary cannot pass numeric/structural comparison (63.938584ms)
+✔ manifest detects tampering, size mismatch, duplicates and traversal before reading (1.178042ms)
+✔ Markdown parser checks links/references but ignores fenced and inline code examples (0.417ms)
+✔ check CLI help is dependency-free and unknown input is actionable JSON with nonzero status (143.576917ms)
+✔ canonical registry preserves historical states and recommends only eligible work deterministically (0.81125ms)
+✔ registry rejects unsupported statuses/schema, lost provenance, nonexistent references and unsafe paths (0.847292ms)
+✔ summarize CLI rejects incomplete evidence with no reassuring output and preserves valid output (260.262292ms)
+✔ fixture environment strips ambient credentials, hooks, endpoints and proxy configuration (2.185375ms)
+✔ owned cleanup removes only its freshly created workspace and leaves evidence (6.0345ms)
+✔ tampered owner token refuses cleanup and retains the workspace (5.919542ms)
+✔ a workspace replaced with a symlink refuses cleanup without touching its target (6.063708ms)
+✔ a symlink ownership marker is rejected even if its JSON happens to match (5.782583ms)
+✔ runCommand captures a real allowed nonzero outcome and writes evidence (106.072375ms)
+✔ runCommand rejects disallowed exit status with redacted error evidence (155.404125ms)
+✔ runCommand spawn failure rejects and removes its signal listener (33.199042ms)
+✔ runCommand timeout and explicit abort settle, label the cause and remove listeners (2207.598166ms)
+✔ runCommand redacts credentials split across output chunks before returning or logging (192.226333ms)
+✔ runCommand rejects evidence-file collisions without crashing its caller (45.933625ms)
+✔ runCommand timeout also terminates a TERM-resistant descendant after the direct child exits (2704.384458ms)
+✔ redact handles complete fixture URLs and recognized token forms (0.123125ms)
+✔ machine fixture capture preserves valid configuration while its evidence stays redacted (46.736375ms)
+✔ owned temporary roots stay short even under a nested long TMPDIR (45.516125ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5666.661958

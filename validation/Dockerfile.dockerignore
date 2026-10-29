@@ -1,8 +1,9 @@
-node_modules
 .git
-.env
-.env.test
-.env.acceptance
+node_modules
+.env*
+!.env.sample
+!.env.test.sample
+!.env.acceptance.sample
 data
 dist
 coverage

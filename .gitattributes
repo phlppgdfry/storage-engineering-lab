@@ -1,3 +1,6 @@
 # Unified patches require a space on empty context lines; keep evidence output intact.
 experiments/*.patch -whitespace
 evidence/*.log -whitespace
+# Preserve literal nested command output, including patch context whitespace.
+evidence/**/*.log -whitespace
+evidence/**/*.txt -whitespace

@@ -1,0 +1,339 @@
+{
+  "scope": "Pinned upstream lock graph, not lab dependencies; known public advisories, exploitability not assessed. Full raw response retained locally.",
+  "lockSha256": "c39f27d1ebf8af9e0f24273889c487a4532144beb8129f321b462acabeb842ab",
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 11,
+      "high": 13,
+      "critical": 0,
+      "total": 24
+    },
+    "dependencies": {
+      "prod": 853,
+      "dev": 161,
+      "optional": 91,
+      "peer": 35,
+      "peerOptional": 0,
+      "total": 1021
+    }
+  },
+  "affectedPackages": [
+    {
+      "name": "@fastify/busboy",
+      "severity": "high",
+      "range": "<=3.2.1",
+      "direct": false,
+      "nodes": [
+        "node_modules/@fastify/busboy"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-gxm5-99cw-xjw9",
+        "https://github.com/advisories/GHSA-x8mw-p69m-v3mx",
+        "https://github.com/advisories/GHSA-xjh9-v7x6-24jw"
+      ]
+    },
+    {
+      "name": "@grpc/grpc-js",
+      "severity": "high",
+      "range": "1.14.0 - 1.14.4",
+      "direct": false,
+      "nodes": [
+        "node_modules/@grpc/grpc-js"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-f596-whhp-79r4",
+        "https://github.com/advisories/GHSA-m9gg-hp2v-232j"
+      ]
+    },
+    {
+      "name": "@opentelemetry/auto-instrumentations-node",
+      "severity": "moderate",
+      "range": "<=0.78.0",
+      "direct": true,
+      "nodes": [
+        "node_modules/@opentelemetry/auto-instrumentations-node"
+      ],
+      "advisories": []
+    },
+    {
+      "name": "@opentelemetry/instrumentation-cassandra-driver",
+      "severity": "moderate",
+      "range": "<0.66.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-cassandra-driver"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/instrumentation-knex",
+      "severity": "moderate",
+      "range": "<0.65.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-knex"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/instrumentation-mongoose",
+      "severity": "moderate",
+      "range": "<0.67.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-mongoose"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/instrumentation-mysql",
+      "severity": "moderate",
+      "range": "<0.67.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-mysql"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/instrumentation-mysql2",
+      "severity": "moderate",
+      "range": "<0.67.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-mysql2"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/instrumentation-oracledb",
+      "severity": "moderate",
+      "range": "<0.46.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-oracledb"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/instrumentation-pg",
+      "severity": "moderate",
+      "range": "<0.73.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/auto-instrumentations-node/node_modules/@opentelemetry/instrumentation-pg"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/instrumentation-tedious",
+      "severity": "moderate",
+      "range": "<0.40.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-tedious"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-qqmp-wf37-98f9"
+      ]
+    },
+    {
+      "name": "@opentelemetry/propagator-jaeger",
+      "severity": "high",
+      "range": "<2.9.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@platformatic/telemetry/node_modules/@opentelemetry/propagator-jaeger"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-45rx-2jwx-cxfr"
+      ]
+    },
+    {
+      "name": "@opentelemetry/sdk-node",
+      "severity": "high",
+      "range": "0.200.0-dev.0 - 0.219.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@platformatic/telemetry/node_modules/@opentelemetry/sdk-node"
+      ],
+      "advisories": []
+    },
+    {
+      "name": "@platformatic/basic",
+      "severity": "high",
+      "range": "3.0.0-alpha.1 - 3.4.0 || 3.5.0 - 3.71.1-alpha.0 || 4.0.0-alpha.1 - 4.0.0-new-config.2",
+      "direct": false,
+      "nodes": [
+        "node_modules/@platformatic/basic"
+      ],
+      "advisories": []
+    },
+    {
+      "name": "@platformatic/node",
+      "severity": "high",
+      "range": "3.0.0-alpha.1 - 3.4.0 || 3.5.0 - 3.71.1-alpha.0 || 4.0.0-alpha.1 - 4.0.0-new-config.2",
+      "direct": true,
+      "nodes": [
+        "node_modules/@platformatic/node"
+      ],
+      "advisories": []
+    },
+    {
+      "name": "@platformatic/runtime",
+      "severity": "high",
+      "range": "3.0.0-alpha.1 - 3.4.0 || 3.5.0 - 3.71.1-alpha.0 || 4.0.0-alpha.1 - 4.0.0-new-config.2",
+      "direct": true,
+      "nodes": [
+        "node_modules/@platformatic/runtime"
+      ],
+      "advisories": []
+    },
+    {
+      "name": "@platformatic/telemetry",
+      "severity": "high",
+      "range": "3.0.0-alpha.1 - 3.4.0 || 3.5.0 - 3.71.1-alpha.0 || >=4.0.0-new-config.0",
+      "direct": false,
+      "nodes": [
+        "node_modules/@platformatic/telemetry"
+      ],
+      "advisories": []
+    },
+    {
+      "name": "brace-expansion",
+      "severity": "high",
+      "range": "2.0.0 - 2.1.6 || 4.0.0 - 5.0.11",
+      "direct": false,
+      "nodes": [
+        "node_modules/@fastify/otel/node_modules/brace-expansion",
+        "node_modules/brace-expansion",
+        "node_modules/glob/node_modules/brace-expansion"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+        "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+        "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+        "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+        "https://github.com/advisories/GHSA-rgw5-rvv9-x895"
+      ]
+    },
+    {
+      "name": "fast-copy",
+      "severity": "moderate",
+      "range": "4.0.0 - 4.0.4",
+      "direct": false,
+      "nodes": [
+        "node_modules/fast-copy"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-jggr-w7fw-pc2j"
+      ]
+    },
+    {
+      "name": "fast-uri",
+      "severity": "moderate",
+      "range": "4.0.0 - 4.2.2",
+      "direct": false,
+      "nodes": [
+        "node_modules/@platformatic/telemetry/node_modules/fast-uri",
+        "node_modules/fast-json-stringify/node_modules/fast-uri"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-333x-w4r6-6crp",
+        "https://github.com/advisories/GHSA-w74x-v6f9-j3xg",
+        "https://github.com/advisories/GHSA-wjr9-j795-jxcr",
+        "https://github.com/advisories/GHSA-xhq7-xmqj-769h"
+      ]
+    },
+    {
+      "name": "ip-address",
+      "severity": "high",
+      "range": "<=10.7.3",
+      "direct": false,
+      "nodes": [
+        "node_modules/ip-address"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-22jq-vg5j-6vgg",
+        "https://github.com/advisories/GHSA-2vr4-cq9g-pvrc",
+        "https://github.com/advisories/GHSA-4xrf-jv44-h6hh",
+        "https://github.com/advisories/GHSA-h3mg-xc3c-68pw",
+        "https://github.com/advisories/GHSA-j6r3-76f7-8jcv",
+        "https://github.com/advisories/GHSA-mwp4-54f8-5fhr",
+        "https://github.com/advisories/GHSA-rpw4-54j3-4h4q",
+        "https://github.com/advisories/GHSA-rxp7-6hxx-x8q5"
+      ]
+    },
+    {
+      "name": "platformatic",
+      "severity": "high",
+      "range": "3.0.0-alpha.1 - 3.4.0 || 3.5.0 - 3.71.1-alpha.0 || 4.0.0-new-config.0 - 4.0.0-new-config.2",
+      "direct": true,
+      "nodes": [
+        "node_modules/platformatic"
+      ],
+      "advisories": []
+    },
+    {
+      "name": "undici",
+      "severity": "high",
+      "range": "7.0.0 - 7.30.0 || 8.0.0 - 8.12.1",
+      "direct": true,
+      "nodes": [
+        "node_modules/@kubernetes/client-node/node_modules/undici",
+        "node_modules/undici"
+      ],
+      "advisories": [
+        "https://github.com/advisories/GHSA-2gqq-gqf2-x968",
+        "https://github.com/advisories/GHSA-2jfj-6hjv-fm6j",
+        "https://github.com/advisories/GHSA-2m5v-pch6-74hx",
+        "https://github.com/advisories/GHSA-3wwx-pv8p-q78v",
+        "https://github.com/advisories/GHSA-3xpg-4rpp-hhhm",
+        "https://github.com/advisories/GHSA-4cwx-7wf7-3272",
+        "https://github.com/advisories/GHSA-4qv8-2p9j-2685",
+        "https://github.com/advisories/GHSA-4w7w-5xrc-9h26",
+        "https://github.com/advisories/GHSA-55wc-3pg8-jfw6",
+        "https://github.com/advisories/GHSA-8436-99hf-9mmv",
+        "https://github.com/advisories/GHSA-8xcm-r25x-g524",
+        "https://github.com/advisories/GHSA-9fm3-97px-rjf6",
+        "https://github.com/advisories/GHSA-f72v-6w45-q472",
+        "https://github.com/advisories/GHSA-jr45-8vmc-qm54",
+        "https://github.com/advisories/GHSA-m8rv-5g2x-5cg5",
+        "https://github.com/advisories/GHSA-pmjh-fq2x-6v4x",
+        "https://github.com/advisories/GHSA-qrxm-fqhp-jwvm",
+        "https://github.com/advisories/GHSA-r53p-7pc4-xj5r",
+        "https://github.com/advisories/GHSA-rfgv-xxqx-mfg5",
+        "https://github.com/advisories/GHSA-rx4f-c7p8-82vq",
+        "https://github.com/advisories/GHSA-v3r7-h72x-cjcm",
+        "https://github.com/advisories/GHSA-w293-vg96-wgc3",
+        "https://github.com/advisories/GHSA-xjj6-f33q-929c"
+      ]
+    },
+    {
+      "name": "wattpm",
+      "severity": "high",
+      "range": "3.0.0-alpha.1 - 3.4.0 || 3.5.0 - 3.71.1-alpha.0 || 4.0.0-alpha.1 - 4.0.0-new-config.2",
+      "direct": true,
+      "nodes": [
+        "node_modules/wattpm"
+      ],
+      "advisories": []
+    }
+  ]
+}

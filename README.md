@@ -1,63 +1,51 @@
 # Storage Engineering Lab
 
-A focused investigation of upload cancellation in the Supabase Storage filesystem backend, with a native reproducer, a small proposed fix and regression tests.
+**Investigating File Upload Cancellation in Supabase Storage.** A native reproduction, a small proposed fix and inspectable evidence for one filesystem-upload cancellation contract.
 
-Independent contributor research. This does not establish an issue in Supabase's hosted service or imply maintainer endorsement.
+Independent contributor research with AI assistance. [Upstream PR #1616](https://github.com/supabase/storage/pull/1616) was **open and draft** when checked on 2026-10-29. Maintainer acceptance and upstream CI approval remain separate gates. The reproducibility update is published for review in [lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1), with passing fast GitHub checks. [Execution record](reports/next-level.md).
 
-**Upstream contribution:** [supabase/storage#1616](https://github.com/supabase/storage/pull/1616), open as a draft. Local validation passed; GitHub CI currently reports `action_required`. No merge or maintainer approval is claimed.
+## Problem → solution → evidence
 
-**Additional validation:** [all five completion activities](reports/completion-2026-10-28.md) were executed: separate agent review, PostgreSQL integration, Linux validation, performance experiments and maintainer-priority analysis. **Successful-upload performance equivalence remains unproven**; the retained measurements and identical-code controls do not support causal attribution. The draft does not claim a cleared performance gate.
+`FileBackend.uploadObject` accepted an `AbortSignal` without applying it to the byte-transfer pipeline. The proposed fix checks pre-aborted signals and passes the signal into the existing pipeline.
 
-## Result
-
-At baseline `4134dbba1b94757f400d5d7c09f9382935efd726`, `FileBackend.uploadObject` accepts an `AbortSignal` but does not use it.
-
-| Experiment | Baseline | Proposed fix |
+| Experiment | Original | Proposed fix |
 |---|---|---|
-| Already-aborted signal | Upload succeeds and publishes bytes | Rejects `Aborted`; no file created |
-| Abort active transfer | Source remains live; upload succeeds | Source destroyed; rejects `AbortedTerminate` |
-| Existing destination during cancellation | Replaced by continued transfer | Original bytes preserved |
-| Staging cleanup | No leftover staging file | No leftover staging file |
+| Already-aborted signal | Publishes the upload | Rejects before creating an object |
+| Abort during transfer | Source stays live; upload succeeds | Destroys source and rejects |
+| Existing adapter destination | Continued transfer replaces bytes | Previous bytes preserved; staging cleaned |
 
-The native experiment uses real files, real extended attributes and the actual adapter. Both outcomes were reproduced three times. The regression suite has two failures before the fix and five passes after it.
-
-The overwrite case tests an adapter invariant. Higher-level operations normally allocate a new version; this is **not evidence of user-object corruption through an HTTP endpoint**.
+Five regression/control tests give **2 failures before / 5 passes after**. Native probes use real files and extended attributes. The overwrite assertion tests the adapter; higher layers normally allocate a new version. Hosted-service impact is not established. Cancellation after all body bytes arrive can still finish publication.
 
 ## Reproduce
 
-Requirements: Node 24+, Git, installed upstream dependencies and a filesystem with extended-attribute support. Tested on macOS arm64; Linux is unverified.
-
-For a fresh sibling checkout:
+With Node **24.x**, a prepared pinned Storage checkout and native xattr support:
 
 ```sh
-git clone https://github.com/phlppgdfry/storage.git ../supabase-storage
-cd ../supabase-storage
-npx --yes npm@11.12.1 ci --no-audit --no-fund
-cd ../storage-engineering-lab
-npm run reproduce
+npm run doctor -- --checkout ../supabase-storage
+npm run reproduce -- --checkout ../supabase-storage
 ```
 
-Or use `npm run reproduce -- /absolute/path/to/supabase-storage`.
+[Real terminal demo](evidence/prelaunch/demo-terminal.txt) · [Complete setup and pinned installation](docs/reproduction.md) · [Troubleshooting](docs/troubleshooting.md)
 
-The command creates a disposable worktree at the pinned baseline, reuses dependencies, runs native checks three times, applies regression tests, verifies exactly two failures, applies the fix and verifies native results plus five passing tests. It removes its own worktree and leaves the contributor's checkout untouched. Detailed evidence goes to `evidence/local/`.
+For dependency-free offline inspection, run `npm run check` and `npm test`. Managed Linux/PostgreSQL commands are in the setup guide. The runner creates owned disposable resources and retains evidence locally.
 
-The reproducer itself requires no cloud account, Docker, production traffic or dependency downloads. In a restricted agent sandbox, the TypeScript runner may need permission for its local IPC socket.
+## Validated results
 
-## Evidence
+- **36 lab tests** passed; **130 retained measurement groups** checked for consistency.
+- Existing Supabase Linux suite: **3,304 passed, 2 root-permission skips**; lint/build passed.
+- PostgreSQL 17 integration: **1,379 passed across 57 files**, plus **five real HTTP checks**.
+- A fresh local export passed check, tests, doctor and the actual native reproduction.
 
-- [Case study](reports/file-upload-cancellation.md), [reproduction summary](evidence/reproduction-summary.json).
-- [Failing tests](evidence/upload-cancellation-red.log), [passing tests](evidence/upload-cancellation-green.log).
-- [Native probe](experiments/file-upload-cancellation.ts), [production patch](experiments/fix.patch), [regression patch](experiments/regression.patch).
-- [Architecture](research/architecture.md), [hypotheses](research/hypotheses.json), [decisions](research/decision-log.md), [status](research/status.md).
-- [Prepared upstream PR](contributions/pr-description.md).
-- [Independent review](reports/independent-review.md), [Linux/integration validation](reports/linux-and-integration.md), [performance results](reports/performance.md) and [maintainer priorities](research/maintainer-priorities.md).
+These are scoped executions, not a complete platform matrix. [Exact commands, evidence and failed attempts](reports/quality-gates.md) · [Separate-agent review](reports/prelaunch-final-review.md)
 
-## Scope
+**Performance remains inconclusive:** all five timed 4 MiB/concurrency-1 pairs were slower with the fix (median paired observation −16.70%), while identical-code controls varied substantially. No causal regression magnitude, equivalence or speedup is established. [Performance assessment](reports/performance-final.md)
 
-Upstream: [supabase/storage](https://github.com/supabase/storage). Fork: [phlppgdfry/storage](https://github.com/phlppgdfry/storage).
+The pinned upstream dependencies have known advisories. Use disposable synthetic local fixtures; this is not a production deployment. [Security](SECURITY.md) · [Audit](reports/audit.md)
 
-Related refactor [#854](https://github.com/supabase/storage/pull/854) was inspected at its fetched head; its file-upload pipeline does not apply the signal. Recent [#1615](https://github.com/supabase/storage/pull/1615) concerns HEAD and deletion. Bounded searches do not prove uniqueness.
+## Inspect the work
 
-No general performance improvement, production severity or maintainer acceptance is claimed. A separate agent review and critical self-review are documented; independent human maintainer review remains separate. Security findings follow upstream's [policy](https://github.com/supabase/storage/blob/master/SECURITY.md).
+[Case study](reports/file-upload-cancellation.md) · [Production patch](experiments/fix.patch) · [Regression tests](experiments/regression.patch) · [Architecture](docs/architecture.md) · [Engineering impact](reports/engineering-impact.md) · [Release readiness](reports/release-readiness.md)
 
-Apache-2.0; patches derive from Supabase Storage. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+[Roadmap](docs/roadmap.md) · [Research registry](research/hypotheses.json) · [Contributing](CONTRIBUTING.md). The project focuses on one reproducible cancellation investigation. Autonomous research execution is a future proposal; the current registry uses fixed priorities.
+
+Apache-2.0; derived patches preserve Supabase attribution. [LICENSE](LICENSE) · [NOTICE](NOTICE)

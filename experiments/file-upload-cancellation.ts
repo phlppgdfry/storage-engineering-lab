@@ -10,10 +10,13 @@ const root = await mkdtemp(path.join(tmpdir(), 'storage-cancellation-probe-'))
 process.env.STORAGE_FILE_BACKEND_PATH = root
 process.env.STORAGE_FILE_ETAG_ALGORITHM = 'mtime'
 
+let cleanupBackend: (() => void) | undefined
+try {
 const { getConfig } = await import(pathToFileURL(path.join(checkout, 'src/config.ts')).href)
 getConfig({ reload: true })
 const { FileBackend } = await import(pathToFileURL(path.join(checkout, 'src/storage/backend/file.ts')).href)
 const backend = new FileBackend()
+cleanupBackend = () => backend.close()
 
 async function settle(promise: Promise<unknown>) {
   try {
@@ -24,7 +27,6 @@ async function settle(promise: Promise<unknown>) {
   }
 }
 
-try {
   const cancelled = new AbortController()
   cancelled.abort()
   const preAborted = await settle(backend.uploadObject(
@@ -32,7 +34,7 @@ try {
     'text/plain', 'no-cache', cancelled.signal
   ))
   const preAbortedPublished = await readFile(path.join(root, 'bucket/pre-aborted'), 'utf8')
-    .then(() => true, () => false)
+    .then(() => true, error => { if (error.code === 'ENOENT') return false; throw error })
 
   await backend.uploadObject('bucket', 'active', undefined, Readable.from('old'), 'text/plain', 'no-cache')
   const controller = new AbortController()
@@ -56,6 +58,5 @@ try {
     active: { ...active, sourceDestroyedOnAbort, finalContents, stagingFiles }
   }))
 } finally {
-  backend.close()
-  await rm(root, { recursive: true, force: true })
+  try { cleanupBackend?.() } finally { await rm(root, { recursive: true, force: true }) }
 }

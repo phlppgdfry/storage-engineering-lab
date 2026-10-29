@@ -1,9 +1,17 @@
+import { assertDisposable, containerEnv } from '../scripts/container.mjs'
+import { assertVariant } from '../scripts/runtime.mjs'
+import { FILE_HASHES } from '../scripts/config.mjs'
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
+const environment = assertDisposable()
+const safeEnv = containerEnv()
+for (const key of Object.keys(process.env)) delete process.env[key]
+Object.assign(process.env, safeEnv)
 const root = '/workspace/storage'
+assertVariant(root, { fixed: FILE_HASHES.fixed })
 const dir = '/evidence/performance-steady'
 mkdirSync(dir, { recursive: true })
 const specs = {
@@ -23,6 +31,7 @@ function setVariant(value) {
   const r = spawnSync('git', ['apply', ...(value === 'original' ? ['-R'] : []), '/lab/experiments/fix.patch'], { cwd: root, encoding: 'utf8' })
   assert.equal(r.status, 0, r.stderr)
   state = value
+  assertVariant(root, { [value]: FILE_HASHES[value] })
 }
 try {
   for (let repeat = 0; repeat < order.length; repeat++) {
@@ -44,6 +53,6 @@ writeFileSync(`${dir}/results.json`, JSON.stringify({ recordedAt: new Date().toI
   design: { boundedWorkingSet: 'one constant 4MiB destination atomically overwritten; no retained-file growth',
     order, warmup: '500ms windows, at least2s, last3windows CV <=15%, max6s; instability is reported',
     measurementMs: 2500, controls: 'A/S same original code and live signal; C/D no-signal original/fixed',
-    environment: 'same Linux image and4CPU/3GiB limits; native xattrs and md5; no fsync/cache flush',
+    environment: { ...environment, etag: 'native xattrs and md5; no fsync/cache flush' },
     limitation: 'diagnostic microbenchmark, not an HTTP or durability benchmark' }, results }, null, 2) + '\n')
 console.log('STEADY DONE')
