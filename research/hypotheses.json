@@ -1,66 +1,225 @@
-[
-  {
-    "id": "H001",
-    "title": "File upload does not honor its AbortSignal",
-    "status": "CONFIRMED_ADAPTER_DEFECT",
-    "verification": "Actual native FileBackend reproducer repeated three times before and after the fix; two regression failures before, five passing cases after.",
-    "paths": ["src/storage/backend/file.ts:uploadObject", "src/storage/uploader.ts:upload"],
-    "evidence": "Method accepts signal but pipeline and staging do not use it; S3 upload explicitly handles cancellation.",
-    "experiment": "Call the actual FileBackend with an already-aborted signal, then cancel an in-flight body; check promise outcome, source lifecycle, published bytes and staging cleanup.",
-    "confirm": "Aborted transfers are reported successful or continue waiting for a body despite cancellation.",
-    "refute": "Existing layers cancel the actual operation and the contract intentionally excludes adapter cancellation.",
-    "impact": "Cancelled adapter calls continue and report success. Endpoint and production impact remain unverified.",
-    "overlap": ["https://github.com/supabase/storage/pull/854", "https://github.com/supabase/storage/pull/1615"],
-    "priority": 1,
-    "verificationCost": "Low: existing temporary-file unit setup; no external services.",
-    "stopCondition": "Do not submit if intentional or already covered by active upstream implementation."
-  },
-  {
-    "id": "H002",
-    "title": "File downloads ignore caller cancellation",
-    "status": "SUSPECTED",
-    "paths": ["src/storage/backend/adapter.ts:getObject", "src/storage/backend/file.ts:getObject"],
-    "evidence": "Shared signature accepts a signal; file implementation stops at headers.",
-    "experiment": "Cancel a pending local read or MD5 calculation; inspect file streams and consumer behavior.",
-    "impact": "Possible unnecessary disk I/O for cancelled local downloads; HTTP streaming may already destroy the body.",
-    "overlap": ["https://github.com/supabase/storage/pull/854", "https://github.com/supabase/storage/pull/1615"],
-    "priority": 2,
-    "verificationCost": "Low to medium.",
-    "stopCondition": "Reject claims based only on a missing positional parameter; prove a real lifecycle failure."
-  },
-  {
-    "id": "H003",
-    "title": "File copy may publish bytes before metadata succeeds",
-    "status": "SUSPECTED",
-    "paths": ["src/storage/backend/file.ts:copyObject", "src/storage/object.ts:copyObject"],
-    "evidence": "copyFile precedes metadata persistence. However, ObjectStorage uses a fresh version, so direct backend overwrite is not proof of production corruption.",
-    "experiment": "Inject a metadata failure and trace the real version publication and cleanup path.",
-    "impact": "Unknown; avoid claiming published-object corruption without testing higher layers.",
-    "overlap": ["https://github.com/supabase/storage/pull/1520"],
-    "priority": 3,
-    "verificationCost": "Medium.",
-    "stopCondition": "Drop if version indirection and existing cleanup make this a harmless temporary state."
-  },
-  {
-    "id": "H004",
-    "title": "S3 and TUS lock protocol gaps from earlier advice",
-    "status": "OVERLAPPING_WORK",
-    "paths": ["src/storage/protocols/tus/s3-locker.ts", "src/storage/protocols/s3/s3-handler.ts"],
-    "evidence": "Open targeted fixes already cover stale leases, overlapping renewals, metadata header collisions and conditional HEAD.",
-    "overlap": ["https://github.com/supabase/storage/pull/1546", "https://github.com/supabase/storage/pull/1545", "https://github.com/supabase/storage/pull/1462", "https://github.com/supabase/storage/pull/1608"],
-    "priority": 4,
-    "stopCondition": "No competing implementation; only revisit with a demonstrably missing independent case."
-  },
-  {
-    "id": "H005",
-    "title": "Benchmark large-bucket listing before selecting a bottleneck",
-    "status": "DEFERRED",
-    "paths": ["src/http/routes/object/listObjectsV2.ts", "src/storage/database"],
-    "evidence": "No local performance baseline or proven bottleneck yet.",
-    "experiment": "Only after functional setup, define representative data and repeated measurements.",
-    "impact": "Unknown.",
-    "priority": 5,
-    "verificationCost": "High relative to H001.",
-    "stopCondition": "Do not build a benchmark platform without a concrete question and resource budget."
-  }
-]
+{
+  "schemaVersion": 1,
+  "statuses": [
+    "PROPOSED",
+    "INVESTIGATING",
+    "REPRODUCED",
+    "REFUTED",
+    "ALREADY ADDRESSED",
+    "VERIFIED",
+    "UPSTREAM SUBMITTED",
+    "CLOSED"
+  ],
+  "selectionPolicy": "Priority ascending, then ID; active proposed/investigating/reproduced work only. No adaptive scoring.",
+  "hypotheses": [
+    {
+      "id": "H001",
+      "title": "File upload does not honor its AbortSignal",
+      "status": "UPSTREAM SUBMITTED",
+      "verification": "Actual native FileBackend reproducer repeated three times before and after the fix; two regression failures before, five passing cases after.",
+      "paths": [
+        "src/storage/backend/file.ts:uploadObject",
+        "src/storage/uploader.ts:upload"
+      ],
+      "evidence": [
+        {
+          "path": "reports/file-upload-cancellation.md",
+          "kind": "experiment"
+        },
+        {
+          "path": "evidence/reproduction-summary.json",
+          "kind": "experiment"
+        },
+        {
+          "path": "reports/prelaunch-baseline.md",
+          "kind": "upstream-status"
+        }
+      ],
+      "experiment": "Call the actual FileBackend with an already-aborted signal, then cancel an in-flight body; check promise outcome, source lifecycle, published bytes and staging cleanup.",
+      "confirm": "Aborted transfers are reported successful or continue waiting for a body despite cancellation.",
+      "refute": "Existing layers cancel the actual operation and the contract intentionally excludes adapter cancellation.",
+      "impact": "Cancelled adapter calls continue and report success. Endpoint and production impact remain unverified.",
+      "overlap": [
+        "https://github.com/supabase/storage/pull/854",
+        "https://github.com/supabase/storage/pull/1615"
+      ],
+      "priority": 1,
+      "verificationCost": "Low: existing temporary-file unit setup; no external services.",
+      "stopCondition": "Do not submit if intentional or already covered by active upstream implementation.",
+      "legacyStatus": "CONFIRMED_ADAPTER_DEFECT",
+      "legacyEvidence": "Method accepts signal but pipeline and staging do not use it; S3 upload explicitly handles cancellation.",
+      "disposition": "active",
+      "source": {
+        "repository": "https://github.com/phlppgdfry/storage",
+        "commit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+        "paths": [
+          "src/storage/backend/file.ts",
+          "src/storage/uploader.ts"
+        ]
+      },
+      "nextAction": "Keep the draft scoped; await actual upstream workflow approval and human feedback. Recheck current PR status before any approved update. Successful-upload equivalence remains unproven.",
+      "upstream": {
+        "url": "https://github.com/supabase/storage/pull/1616",
+        "state": "open",
+        "draft": true,
+        "merged": false,
+        "observedAt": "2026-10-28",
+        "observationEvidence": "reports/prelaunch-baseline.md"
+      }
+    },
+    {
+      "id": "H002",
+      "title": "File downloads ignore caller cancellation",
+      "status": "PROPOSED",
+      "paths": [
+        "src/storage/backend/adapter.ts:getObject",
+        "src/storage/backend/file.ts:getObject"
+      ],
+      "evidence": [
+        {
+          "path": "research/architecture.md",
+          "kind": "source-review"
+        },
+        {
+          "path": "research/status.md",
+          "kind": "decision"
+        }
+      ],
+      "experiment": "Cancel a pending local read or MD5 calculation; inspect file streams and consumer behavior.",
+      "impact": "Possible unnecessary disk I/O for cancelled local downloads; HTTP streaming may already destroy the body.",
+      "overlap": [
+        "https://github.com/supabase/storage/pull/854",
+        "https://github.com/supabase/storage/pull/1615"
+      ],
+      "priority": 2,
+      "verificationCost": "Low to medium.",
+      "stopCondition": "Reject claims based only on a missing positional parameter; prove a real lifecycle failure.",
+      "legacyStatus": "SUSPECTED",
+      "legacyEvidence": "Shared signature accepts a signal; file implementation stops at headers.",
+      "disposition": "active",
+      "source": {
+        "repository": "https://github.com/supabase/storage",
+        "commit": "4134dbba1b94757f400d5d7c09f9382935efd726",
+        "paths": [
+          "src/storage/backend/adapter.ts",
+          "src/storage/backend/file.ts"
+        ]
+      },
+      "nextAction": "Before proposing a fix, define one native read-cancellation oracle and trace whether higher layers already destroy the body. No defect has been reproduced."
+    },
+    {
+      "id": "H003",
+      "title": "File copy may publish bytes before metadata succeeds",
+      "status": "PROPOSED",
+      "paths": [
+        "src/storage/backend/file.ts:copyObject",
+        "src/storage/object.ts:copyObject"
+      ],
+      "evidence": [
+        {
+          "path": "research/architecture.md",
+          "kind": "source-review"
+        },
+        {
+          "path": "research/status.md",
+          "kind": "decision"
+        }
+      ],
+      "experiment": "Inject a metadata failure and trace the real version publication and cleanup path.",
+      "impact": "Unknown; avoid claiming published-object corruption without testing higher layers.",
+      "overlap": [
+        "https://github.com/supabase/storage/pull/1520"
+      ],
+      "priority": 3,
+      "verificationCost": "Medium.",
+      "stopCondition": "Drop if version indirection and existing cleanup make this a harmless temporary state.",
+      "legacyStatus": "SUSPECTED",
+      "legacyEvidence": "copyFile precedes metadata persistence. However, ObjectStorage uses a fresh version, so direct backend overwrite is not proof of production corruption.",
+      "disposition": "active",
+      "source": {
+        "repository": "https://github.com/supabase/storage",
+        "commit": "4134dbba1b94757f400d5d7c09f9382935efd726",
+        "paths": [
+          "src/storage/backend/file.ts",
+          "src/storage/object.ts"
+        ]
+      },
+      "nextAction": "Before proposing a fix, inject a metadata failure and trace fresh-version publication and cleanup through the real higher layer. Do not infer corruption from adapter overwrite alone."
+    },
+    {
+      "id": "H004",
+      "title": "S3 and TUS lock protocol gaps from earlier advice",
+      "status": "PROPOSED",
+      "paths": [
+        "src/storage/protocols/tus/s3-locker.ts",
+        "src/storage/protocols/s3/s3-handler.ts"
+      ],
+      "evidence": [
+        {
+          "path": "research/decision-log.md",
+          "kind": "decision"
+        },
+        {
+          "path": "evidence/upstream-overlap.json",
+          "kind": "source-review"
+        }
+      ],
+      "overlap": [
+        "https://github.com/supabase/storage/pull/1546",
+        "https://github.com/supabase/storage/pull/1545",
+        "https://github.com/supabase/storage/pull/1462",
+        "https://github.com/supabase/storage/pull/1608"
+      ],
+      "priority": 4,
+      "stopCondition": "No competing implementation; only revisit with a demonstrably missing independent case.",
+      "legacyStatus": "OVERLAPPING_WORK",
+      "legacyEvidence": "Open targeted fixes already cover stale leases, overlapping renewals, metadata header collisions and conditional HEAD.",
+      "disposition": "overlap-hold",
+      "source": {
+        "repository": "https://github.com/supabase/storage",
+        "commit": "4134dbba1b94757f400d5d7c09f9382935efd726",
+        "paths": [
+          "src/storage/protocols/tus/s3-locker.ts",
+          "src/storage/protocols/s3/s3-handler.ts"
+        ]
+      },
+      "nextAction": "Hold competing implementation. Recheck the cited upstream work before investigating a demonstrably missing independent case; historical overlap does not establish every issue is settled."
+    },
+    {
+      "id": "H005",
+      "title": "Benchmark large-bucket listing before selecting a bottleneck",
+      "status": "PROPOSED",
+      "paths": [
+        "src/http/routes/object/listObjectsV2.ts",
+        "src/storage/database"
+      ],
+      "evidence": [
+        {
+          "path": "research/status.md",
+          "kind": "decision"
+        },
+        {
+          "path": "research/decision-log.md",
+          "kind": "decision"
+        }
+      ],
+      "experiment": "Only after functional setup, define representative data and repeated measurements.",
+      "impact": "Unknown.",
+      "priority": 5,
+      "verificationCost": "High relative to H001.",
+      "stopCondition": "Do not build a benchmark platform without a concrete question and resource budget.",
+      "legacyStatus": "DEFERRED",
+      "legacyEvidence": "No local performance baseline or proven bottleneck yet.",
+      "disposition": "deferred",
+      "source": {
+        "repository": "https://github.com/supabase/storage",
+        "commit": "4134dbba1b94757f400d5d7c09f9382935efd726",
+        "paths": [
+          "src/http/routes/object/listObjectsV2.ts",
+          "src/storage/database"
+        ]
+      },
+      "nextAction": "Defer until a concrete listing question, representative dataset, resource budget and measurement decision rule exist."
+    }
+  ]
+}

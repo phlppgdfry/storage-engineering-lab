@@ -1,0 +1,26 @@
+[
+  {
+    "artifact": "evidence/local/validate-linux-q4dqto/summary.json",
+    "status": "FAIL",
+    "error": "07-runner: exit 1. Evidence: <lab>/evidence/local/validate-linux-q4dqto/07-runner.log\n Network storage-lab-9984d58dfd80e405_default Creating \n Volume storage-lab-9984d58dfd80e405_storage-data Creating \n Volume storage-lab-9984d58dfd80e405_storage-data Creating \n Network storage-lab-9984d58dfd80e405_default Creating \n Volume storage-lab-9984d58dfd80e405_storage-data Created \n Volume storage-lab-9984d58dfd80e405_storage-data Created \n Network storage-lab-9984d58dfd80e405_default Created \n Network storage-lab-9984d58dfd80e405_default Created \n Container storage-lab-9984d58dfd80e405-runner-run-588d998fd4aa Creating \n Container storage-lab-9984d58dfd80e405-runner-run-588d998fd4aa Created \nfile:///lab/scripts/container.mjs:24\n  for (const key of Object.keys(ENDPOINTS)) if (parent[key] !== undefined && parent[key] !== ENDPOINTS[key]) throw new Error(`Unexpected ${key}; use the managed isolated runner.`)\n                                                                                                                   ^\n\nError: Unexpected DATABASE_URL; use the managed isolated runner.\n    at containerEnv (file:///lab/scripts/container.mjs:24:116)\n    at file:///lab/validation/linux.mjs:9:13\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.21.0\n\n",
+    "cleanup": "own containers/network/volumes/image tag and temporary source removed; evidence retained"
+  },
+  {
+    "artifact": "evidence/local/validate-linux-ESoYIA/summary.json",
+    "status": "FAIL",
+    "error": "07-runner: exit 1. Evidence: <lab>/evidence/local/validate-linux-ESoYIA/07-runner.log\n Volume storage-lab-de6bf04711d355fd_storage-data Creating \n Network storage-lab-de6bf04711d355fd_default Creating \n Volume storage-lab-de6bf04711d355fd_storage-data Creating \n Network storage-lab-de6bf04711d355fd_default Creating \n Volume storage-lab-de6bf04711d355fd_storage-data Created \n Volume storage-lab-de6bf04711d355fd_storage-data Created \n Network storage-lab-de6bf04711d355fd_default Created \n Network storage-lab-de6bf04711d355fd_default Created \n Container storage-lab-de6bf04711d355fd-runner-run-3fabf225d983 Creating \n Container storage-lab-de6bf04711d355fd-runner-run-3fabf225d983 Created \n[RUN] restore-original\n[RUN] native-before-0\n[RUN] native-before-1\n[RUN] native-before-2\n[RUN] red\n[RUN] apply-fix\n[RUN] native-after-0\n[RUN] native-after-1\n[RUN] native-after-2\n[RUN] green\n[RUN] unit\n[RUN] lint\n\n",
+    "cleanup": "own containers/network/volumes/image tag and temporary source removed; evidence retained"
+  },
+  {
+    "artifact": "evidence/local/reproduce-UDkgga/summary.json",
+    "status": "FAIL",
+    "error": "native-before-1: exit 1. Evidence: <lab>/evidence/local/reproduce-UDkgga/native-before-1.log\nnode:net:2306\n      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);\n                    ^\n\nError: listen EPERM: operation not permitted /var/folders/0t/_2j7v2495074t2z4ghq8jx3h0000gn/T/tsx-501/77478.pipe\n    at Server.setupListenHandle [as _listen2] (node:net:2306:21)\n    at listenInCluster (node:net:2437:12)\n    at Server.listen (node:net:2579:5)\n    at file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32174\n    at new Promise (<anonymous>)\n    at createIpcServer (file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32152)\n    at async file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:55:542 {\n  code: 'EPERM',\n  errno: -1,\n  syscall: 'listen',\n  address: '/var/folders/0t/_2j7v2495074t2z4ghq8jx3h0000gn/T/tsx-501/77478.pipe',\n  port: -1\n}\n\nNode.js v24.21.0\n",
+    "cleanup": "own temporary worktree removed"
+  },
+  {
+    "artifact": "evidence/local/fresh-export-BWK3T2/summary.json",
+    "status": "FAIL",
+    "error": "native: exit 1. Evidence: <lab>/evidence/local/fresh-export-BWK3T2/native.log\n[RUN] native-before-1\nREPRODUCE FAIL: native-before-1: exit 1. Evidence: <long-temporary-path>\nnode:net:2306\n      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);\n                    ^\n\nError: listen EINVAL: invalid argument <long-temporary-path>\n    at Server.setupListenHandle [as _listen2] (node:net:2306:21)\n    at listenInCluster (node:net:2437:12)\n    at Server.listen (node:net:2579:5)\n    at file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32174\n    at new Promise (<anonymous>)\n    at createIpcServer (file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32152)\n    at async file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:55:542 {\n  code: 'EINVAL',\n  errno: -22,\n  syscall: 'listen',\n  address: '<long-temporary-path>',\n  port: -1\n}\n\nNode.js v24.21.0\n\nEvidence retained: <long-temporary-path>\nSee docs/troubleshooting.md.\n",
+    "cleanup": "own export removed; evidence retained"
+  }
+]

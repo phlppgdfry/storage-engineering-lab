@@ -31,3 +31,11 @@ During investigation upstream advanced to `b11f751a`, merging case-insensitive m
 ## D008 — Avoid unnecessary infrastructure
 
 Keep detailed full-suite and raw search logs under ignored `evidence/local/`; publish focused evidence and a compact upstream-overlap record. No Docker containers, migrations, performance CI, custom benchmark platform or profile-marketing edits are needed for this first contribution.
+
+## Local prelaunch candidate, 2026-10-28
+
+The registry now uses a schema and explicit evidence/source/next-action fields while preserving legacy statuses/evidence. H001 is UPSTREAM SUBMITTED, not accepted or merged. Other items remain hypotheses, with overlap/defer dispositions separate from technical resolution. Offline validation checks references and prevents statuses from silently replacing evidence.
+
+The fixed baseline for next-experiment choice is priority ascending then ID, excluding submitted/terminal/held/deferred work. It currently recommends H002 only to define and test a native read-cancellation oracle; no second defect is claimed. New evidence or changed upstream state can update priorities with a recorded reason. No adaptive system was implemented: no measured benefit over this simple baseline exists, and allowing an agent to rewrite evaluation criteria would undermine credibility.
+
+The quality upgrade stays separate from the upstream production patch. Targeted regression/failure-injection tests address demonstrated orchestration risks. A broad property/stateful/differential/mutation framework was rejected for this narrow finding without a documented coverage gap; red/green verification against the actual original implementation remains the functional oracle. No UI or autonomous publication was justified. See current audit/quality/readiness reports for actual executions and limitations.

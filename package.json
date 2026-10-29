@@ -3,7 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "reproduce": "node experiments/reproduce.mjs"
+    "check": "node scripts/check.mjs",
+    "test": "node --test test/*.test.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "reproduce": "node experiments/reproduce.mjs",
+    "validate": "node scripts/validate.mjs"
   },
-  "engines": { "node": ">=24" }
+  "engines": { "node": "24.x" }
 }

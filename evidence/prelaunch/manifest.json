@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "scope": "Curated prelaunch execution records. Paths sanitized; historical completion data unchanged. Integrity is not independent execution attestation.",
+  "artifacts": [
+    {
+      "path": "evidence/prelaunch/dependency-audit.json",
+      "bytes": 10489,
+      "sha256": "d34bbb989c9f44219d8541c5585111c85893d28f41058e2d343ad3787394995f"
+    },
+    {
+      "path": "evidence/prelaunch/fast-tests.log",
+      "bytes": 3610,
+      "sha256": "5311feed9d808e018149b6af1a2c1e459c00226c883ad868cf90c940da56b3e8"
+    },
+    {
+      "path": "evidence/prelaunch/fresh-export.json",
+      "bytes": 4389,
+      "sha256": "042ab74e89affb3ff5aa00d8b78936d2db91b0e7f67f77efa64e4177a2ed3b27"
+    },
+    {
+      "path": "evidence/prelaunch/http.json",
+      "bytes": 870,
+      "sha256": "9b597ab2cfcd1d461ab5f630dae2247749a230339c820dda4e9ca6cbb9c39cdb"
+    },
+    {
+      "path": "evidence/prelaunch/integration-runner.json",
+      "bytes": 578,
+      "sha256": "091e4d0c3c8a57f13aadf5ef9859e4d048e77a15fc5065afb5ca6ac310c622dc"
+    },
+    {
+      "path": "evidence/prelaunch/integration.json",
+      "bytes": 985,
+      "sha256": "7558b12789d1f81f8568d48a4488de91c7572a43201863e9475777a997cc9ec6"
+    },
+    {
+      "path": "evidence/prelaunch/linux-runner.json",
+      "bytes": 560,
+      "sha256": "0685bf741f71c5be902219650dbbdec2161b949b891cfd8db48c22c0ae6ab7a5"
+    },
+    {
+      "path": "evidence/prelaunch/linux.json",
+      "bytes": 2779,
+      "sha256": "e0d192022b7e380c91a54c38fe2a22c675125cd978724260d0a0b18cb5998768"
+    },
+    {
+      "path": "evidence/prelaunch/native.json",
+      "bytes": 3141,
+      "sha256": "5998cf88accb05b03e30d7c29720fe74f5f77c4c548c2e1928d0e28a2e79429b"
+    },
+    {
+      "path": "evidence/prelaunch/offline-check.json",
+      "bytes": 696,
+      "sha256": "964cc154352e45bcdcdc243eaba3696a34a98ab9fc97ba65192ed4b9fb483822"
+    },
+    {
+      "path": "evidence/prelaunch/regression-green.log",
+      "bytes": 666,
+      "sha256": "2b7ed06c41a956779bb771e1f588d8b14fb95c7b6a6759c76da71088814408e2"
+    },
+    {
+      "path": "evidence/prelaunch/regression-red.log",
+      "bytes": 13837,
+      "sha256": "482bf9bffbaf62303484636111bfee3a3c3643692fbf5bd6d412a1c45160e83d"
+    },
+    {
+      "path": "evidence/prelaunch/retained-failures.json",
+      "bytes": 5071,
+      "sha256": "466de6130fd7f54ad06c7138f27011515f3105befe206c8e29cd49269c2207b8"
+    },
+    {
+      "path": "evidence/prelaunch/secret-scan.json",
+      "bytes": 381,
+      "sha256": "f1cbd31561bb3f8042a1dd03c23f6e6b7619f739ddf21a664c8ee846f9e56939"
+    }
+  ]
+}

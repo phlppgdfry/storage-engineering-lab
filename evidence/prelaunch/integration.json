@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "recordedAt": "2026-10-28T21:34:55.970Z",
+  "environment": {
+    "commit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+    "tree": "c33756a072ec09e39e5a7e2210b199aa5590853e",
+    "files": 816,
+    "node": "v24.21.0",
+    "platform": "linux",
+    "arch": "arm64",
+    "kernel": "7.0.14-linuxkit",
+    "cpuMax": "400000 100000",
+    "memoryMax": "3221225472"
+  },
+  "results": [
+    {
+      "label": "migrate",
+      "command": "npm run migration:run",
+      "exitCode": 0,
+      "summary": []
+    },
+    {
+      "label": "seed",
+      "command": "npm run test:dummy-data",
+      "exitCode": 0,
+      "summary": []
+    },
+    {
+      "label": "suite",
+      "command": "npm run test:integration",
+      "exitCode": 0,
+      "summary": [
+        "     \u2713 Concurrency Tests (4)",
+        " Test Files  57 passed (57)",
+        "      Tests  1379 passed (1379)",
+        "   Duration  303.89s (tests 84%, import 10%, transform 5%, setup 1%)"
+      ]
+    }
+  ]
+}
