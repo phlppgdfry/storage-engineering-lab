@@ -1,6 +1,6 @@
 # Launch preparation
 
-**PREPARED, NOT PUBLISHED.** These are local drafts. No release, npm package, public post, PR edit or maintainer contact is part of this candidate. The research repository and draft contribution already exist; this RC has not been published.
+**Lab branch published for review in [PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1); fast GitHub checks passed.** The social/channel texts below remain unpublished drafts. No release, npm publication, upstream PR edit or maintainer contact was performed. [Current execution record](../reports/next-level.md).
 
 Before any future publication, reconcile every claim with [quality gates](../reports/quality-gates.md), resolve required blockers and obtain explicit approval for the concrete destination/content. Recheck PR status immediately before posting. The [prelaunch baseline](../reports/prelaunch-baseline.md) records #1616 as open, draft, not merged, with no returned reviews/comments and CI requiring approval. That is a dated observation, not a continuing status guarantee.
 

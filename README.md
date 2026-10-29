@@ -2,7 +2,7 @@
 
 **Investigating File Upload Cancellation in Supabase Storage.** A native reproduction, a small proposed fix and inspectable evidence for one filesystem-upload cancellation contract.
 
-Independent contributor research with AI assistance. [Upstream PR #1616](https://github.com/supabase/storage/pull/1616) was **open and draft** when checked on 2026-10-29. Maintainer acceptance and upstream CI approval remain separate gates. The reproducibility update is prepared on `prelaunch/reproducibility-rc`; publication and CI are tracked in the [milestone log](reports/next-level.md).
+Independent contributor research with AI assistance. [Upstream PR #1616](https://github.com/supabase/storage/pull/1616) was **open and draft** when checked on 2026-10-29. Maintainer acceptance and upstream CI approval remain separate gates. The reproducibility update is published for review in [lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1), with passing fast GitHub checks. [Execution record](reports/next-level.md).
 
 ## Problem → solution → evidence
 

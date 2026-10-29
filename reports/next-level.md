@@ -6,7 +6,7 @@ Started 2026-10-29. Initial lab branch `prelaunch/reproducibility-rc`, HEAD `731
 
 | Outcome | Success criterion | Current evidence |
 |---|---|---|
-| A: publish | Own-repository reviewable PR, actual hosted fast checks observed | User authorization restored from complete local handoff; publication pending at this entry |
+| A: publish | Own-repository reviewable PR, actual hosted fast checks observed | User authorization restored from complete local handoff; [PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1), hosted push and PR workflows PASS |
 | B: upstream quality | Live feedback, diff, conflict and workflow review; focused next action | [Current review below](#upstream-review) |
 | C: next discovery | Current source/overlap checked, executable oracle repeated and classified | H002 remains unconfirmed; investigation follows publication |
 | D: research loop | One bounded local cycle, immutable evaluation, simple baselines and failure tests | Separate experimental stage; no self-improvement claim |
@@ -34,4 +34,8 @@ Recommended upstream action: keep the current focused draft, await actual mainta
 
 Existing handoff explicitly authorizes this lab upgrade branch, own-repository PR and CI, including the genuine demo. It excludes unsolicited social posts, upstream changes/status transitions and releases. No history rewrite or force push. New research-agent experiments will remain local and separate until scoped review; they do not gate this useful publication.
 
-Next exact command: `npm run check`, then review staged paths, commit and push the authorized RC branch; create its own-repository PR and inspect hosted runs.
+Published commit `11da683d8d4fa3132a5c1d26efaddff2b68304ea` on the authorized branch; [own-repository PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1) opened, not merged. Actual GitHub [push CI](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/40810417938) and [PR CI](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/40810433134) both completed SUCCESS. Inspected job steps confirm checkout, Node setup, offline check and tests succeeded. These are fast lab checks, not upstream CI or a rerun of Linux/PostgreSQL.
+
+The staged whitespace check initially flagged literal nested test-log EOF and patch-context spaces in the transcript; retained output unchanged and extended the existing evidence whitespace attributes. This was a presentation check, not a functional failure.
+
+Next exact command: `git switch -c research/bounded-cycle` after publication record commit; implement isolated H002 and the small local-only prototype there. No automatic merge or upstream action.
