@@ -1,0 +1,25 @@
+{
+  "experiment": "cleanup",
+  "scenario": "ignore-signal",
+  "policy": "adaptive",
+  "allowedCommand": "node research/cycle/fixture.mjs <catalog scenario> <catalog probe> <owned directory>",
+  "timeoutMs": 5000,
+  "maxOutputBytes": 16777216,
+  "maxPayloadBytes": 131072,
+  "repeats": 2,
+  "control": "correct",
+  "stopConditions": [
+    "timeout",
+    "interrupt",
+    "missing evidence",
+    "one experiment complete"
+  ],
+  "sourceSha": "4f98bb5861a2df5b0e68cac9a5184bd0f8d744ca",
+  "codeHashes": {
+    "research/cycle/fixture.mjs": "3868152906e6f7a6f70f38ffef029e5f9dd15fa692c7e4834f2b79128e286b26",
+    "research/cycle/policy.mjs": "7c8dfa1399393cbd2c63e383aa05832050237612879ff528830a9681368008a6",
+    "research/cycle/memory.mjs": "fa23930d4ec34e5fb09c3d2a1c2b4e054741df378e06b68e531d789815822747",
+    "scripts/research-cycle.mjs": "16d0d83d0324193cf470ad4b64b2583df325158892ca71b50eba728129b69abe"
+  },
+  "status": "RUNNING"
+}

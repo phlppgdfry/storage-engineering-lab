@@ -1,0 +1,34 @@
+{
+  "classification": "REFUTED_FOR_FIXTURE",
+  "result": {
+    "observations": [
+      {
+        "pass": true,
+        "rejected": false,
+        "bytes": 131072,
+        "stageRemains": false
+      },
+      {
+        "pass": true,
+        "rejected": false,
+        "bytes": 131072,
+        "stageRemains": false
+      }
+    ],
+    "control": {
+      "pass": true,
+      "rejected": true,
+      "bytes": 65536,
+      "stageRemains": false
+    }
+  },
+  "elapsedMs": 45.407999999999994,
+  "node": "v24.21.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "exitStatus": "0",
+  "limitations": [
+    "Synthetic fixture only; no Supabase discovery or independent review"
+  ],
+  "cleanup": "PASS"
+}

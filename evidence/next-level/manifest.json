@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local-only experimental next milestone; copied actual observations, historical evidence unchanged. Integrity does not prove independent execution.",
+  "artifacts": [
+    {
+      "path": "evidence/next-level/check.json",
+      "bytes": 881,
+      "sha256": "d3a66219d967218305d5cbaccecbb68028afed243d8a121a71841c79a6c1f1a6"
+    },
+    {
+      "path": "evidence/next-level/cycle-59Gt7V-definition.json",
+      "bytes": 934,
+      "sha256": "51bfbb67f1f560fd94df31821a58a7b1d9044c5ba39e0c9c9aa4066124063b8a"
+    },
+    {
+      "path": "evidence/next-level/cycle-59Gt7V-result.json",
+      "bytes": 685,
+      "sha256": "b75dfa476c6dcfea3b5204061d97cb4366df19ff786cd6e89ce884eb7413b93a"
+    },
+    {
+      "path": "evidence/next-level/cycle-PQXwZw-definition.json",
+      "bytes": 936,
+      "sha256": "3ab552168f51d9b22eddf0b82b65fddc7fbbdb0040bdfb45bebe372b63035ddf"
+    },
+    {
+      "path": "evidence/next-level/cycle-PQXwZw-result.json",
+      "bytes": 692,
+      "sha256": "c904b65749c49276dbe47a904ef0560e44ed77c662997a8089c3e98511e2ec82"
+    },
+    {
+      "path": "evidence/next-level/download.json",
+      "bytes": 3175,
+      "sha256": "2e806a96add6d9b359272fbdfdcbbf038997febec02750e7be885791a5793e77"
+    },
+    {
+      "path": "evidence/next-level/evaluation.json",
+      "bytes": 27059,
+      "sha256": "2383d15fb4c51fe42692180eaccd256cdadc9ce38019123a4ee5544fc8846495"
+    },
+    {
+      "path": "evidence/next-level/tests.log",
+      "bytes": 4272,
+      "sha256": "be9b64859f4ff80159998f44c93d0aae67f14026101c2aa34e81cdb18916543a"
+    }
+  ]
+}

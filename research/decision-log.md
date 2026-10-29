@@ -39,3 +39,11 @@ The registry now uses a schema and explicit evidence/source/next-action fields w
 The fixed baseline for next-experiment choice is priority ascending then ID, excluding submitted/terminal/held/deferred work. It currently recommends H002 only to define and test a native read-cancellation oracle; no second defect is claimed. New evidence or changed upstream state can update priorities with a recorded reason. No adaptive system was implemented: no measured benefit over this simple baseline exists, and allowing an agent to rewrite evaluation criteria would undermine credibility.
 
 The quality upgrade stays separate from the upstream production patch. Targeted regression/failure-injection tests address demonstrated orchestration risks. A broad property/stateful/differential/mutation framework was rejected for this narrow finding without a documented coverage gap; red/green verification against the actual original implementation remains the functional oracle. No UI or autonomous publication was justified. See current audit/quality/readiness reports for actual executions and limitations.
+
+## D009 — Publish proven work before local autonomy
+
+Published the already-authorized RC and genuine demo on an own-repository review PR; observed hosted checks rather than inferring success. Kept new H002 experiments and research-cycle work on a separate local branch. No upstream enlargement or outreach without technical reason and authorization. [Milestone evidence](../reports/next-level.md).
+
+## D010 — Reject unsupported adaptive benefit
+
+Implemented a bounded fixed-catalog prototype using Node primitives, JSONL and existing process/ownership helpers, with no new dependency. Froze the evaluation before running it. Fixed, adaptive and random all detect 4/6 known synthetic cases under the declared budget; keep fixed default and preserve the negative result. This is no evidence of real-world self-improvement. [Decision, alternatives and risks](cycle/ADR.md).

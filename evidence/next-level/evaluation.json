@@ -1,0 +1,1186 @@
+{
+  "sourceSha": "4f98bb5861a2df5b0e68cac9a5184bd0f8d744ca",
+  "codeHashes": {
+    "research/cycle/fixture.mjs": "3868152906e6f7a6f70f38ffef029e5f9dd15fa692c7e4834f2b79128e286b26",
+    "research/cycle/policy.mjs": "7c8dfa1399393cbd2c63e383aa05832050237612879ff528830a9681368008a6",
+    "scripts/evaluate-cycle.mjs": "70c881991359b870c27692d899e349917ba448319763f68c55501b20bedd85b3"
+  },
+  "recordedAt": "2026-10-29T03:14:38.720Z",
+  "corpusHash": "fed1527e56a70e73c80522f7688fd3e3d1c41f5ee5687dfc58c1a2e02a1eda17",
+  "node": "v24.21.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "matrix": [
+    {
+      "split": "training",
+      "index": 0,
+      "scenario": "ignore-signal",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        },
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 5.859083999999999
+    },
+    {
+      "split": "training",
+      "index": 0,
+      "scenario": "ignore-signal",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.980249999999998
+    },
+    {
+      "split": "training",
+      "index": 0,
+      "scenario": "ignore-signal",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.8441250000000053
+    },
+    {
+      "split": "training",
+      "index": 1,
+      "scenario": "cleanup-leak",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 2.0977919999999983
+    },
+    {
+      "split": "training",
+      "index": 1,
+      "scenario": "cleanup-leak",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        },
+        {
+          "pass": false,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 2.232166999999997
+    },
+    {
+      "split": "training",
+      "index": 1,
+      "scenario": "cleanup-leak",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": true
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 2.1645420000000044
+    },
+    {
+      "split": "training",
+      "index": 2,
+      "scenario": "correct",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.6868750000000006
+    },
+    {
+      "split": "training",
+      "index": 2,
+      "scenario": "correct",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.7076250000000002
+    },
+    {
+      "split": "training",
+      "index": 2,
+      "scenario": "correct",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.3108330000000024
+    },
+    {
+      "split": "evaluation",
+      "index": 0,
+      "scenario": "correct",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.4987080000000006
+    },
+    {
+      "split": "evaluation",
+      "index": 0,
+      "scenario": "correct",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.6156669999999949
+    },
+    {
+      "split": "evaluation",
+      "index": 0,
+      "scenario": "correct",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.3946249999999978
+    },
+    {
+      "split": "evaluation",
+      "index": 1,
+      "scenario": "ignore-signal",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        },
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 1.5407089999999997
+    },
+    {
+      "split": "evaluation",
+      "index": 1,
+      "scenario": "ignore-signal",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.2939159999999958
+    },
+    {
+      "split": "evaluation",
+      "index": 1,
+      "scenario": "ignore-signal",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.2566249999999997
+    },
+    {
+      "split": "evaluation",
+      "index": 2,
+      "scenario": "cleanup-leak",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 2.7072920000000025
+    },
+    {
+      "split": "evaluation",
+      "index": 2,
+      "scenario": "cleanup-leak",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        },
+        {
+          "pass": false,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 1.697583999999999
+    },
+    {
+      "split": "evaluation",
+      "index": 2,
+      "scenario": "cleanup-leak",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": true
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.5897500000000022
+    },
+    {
+      "split": "evaluation",
+      "index": 3,
+      "scenario": "swallow-error",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 2.155332999999999
+    },
+    {
+      "split": "evaluation",
+      "index": 3,
+      "scenario": "swallow-error",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.5713749999999962
+    },
+    {
+      "split": "evaluation",
+      "index": 3,
+      "scenario": "swallow-error",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 1.3896250000000094
+    },
+    {
+      "split": "evaluation",
+      "index": 4,
+      "scenario": "correct",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.450624999999988
+    },
+    {
+      "split": "evaluation",
+      "index": 4,
+      "scenario": "correct",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.805374999999998
+    },
+    {
+      "split": "evaluation",
+      "index": 4,
+      "scenario": "correct",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.1932500000000061
+    },
+    {
+      "split": "evaluation",
+      "index": 5,
+      "scenario": "ignore-signal",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        },
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 1.465042000000011
+    },
+    {
+      "split": "evaluation",
+      "index": 5,
+      "scenario": "ignore-signal",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": false,
+          "bytes": 131072,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 2.1693750000000023
+    },
+    {
+      "split": "evaluation",
+      "index": 5,
+      "scenario": "ignore-signal",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.8514160000000004
+    },
+    {
+      "split": "evaluation",
+      "index": 6,
+      "scenario": "cleanup-leak",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.978708999999995
+    },
+    {
+      "split": "evaluation",
+      "index": 6,
+      "scenario": "cleanup-leak",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        },
+        {
+          "pass": false,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 1.563874999999996
+    },
+    {
+      "split": "evaluation",
+      "index": 6,
+      "scenario": "cleanup-leak",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": true
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 0,
+          "stageRemains": true
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 2.264124999999993
+    },
+    {
+      "split": "evaluation",
+      "index": 7,
+      "scenario": "swallow-error",
+      "experiment": "abort",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.3822919999999925
+    },
+    {
+      "split": "evaluation",
+      "index": 7,
+      "scenario": "swallow-error",
+      "experiment": "cleanup",
+      "observations": [
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        },
+        {
+          "pass": true,
+          "rejected": true,
+          "bytes": 65536,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 65536,
+        "stageRemains": false
+      },
+      "classification": "REFUTED_FOR_FIXTURE",
+      "elapsedMs": 1.2918339999999944
+    },
+    {
+      "split": "evaluation",
+      "index": 7,
+      "scenario": "swallow-error",
+      "experiment": "error",
+      "observations": [
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 0,
+          "stageRemains": false
+        },
+        {
+          "pass": false,
+          "rejected": false,
+          "bytes": 0,
+          "stageRemains": false
+        }
+      ],
+      "control": {
+        "pass": true,
+        "rejected": true,
+        "bytes": 0,
+        "stageRemains": false
+      },
+      "classification": "CONFIRMED_SYNTHETIC",
+      "elapsedMs": 1.1835000000000093
+    }
+  ],
+  "results": [
+    {
+      "policy": "fixed",
+      "seed": 11,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "fixed",
+      "seed": 29,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "fixed",
+      "seed": 47,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "fixed",
+      "seed": 83,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "fixed",
+      "seed": 101,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "adaptive",
+      "seed": 11,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "adaptive",
+      "seed": 29,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "adaptive",
+      "seed": 47,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "adaptive",
+      "seed": 83,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "adaptive",
+      "seed": 101,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "random",
+      "seed": 11,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    },
+    {
+      "policy": "random",
+      "seed": 29,
+      "ranking": [
+        "abort",
+        "error",
+        "cleanup"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.193585000000006,
+      "unreliable": 0
+    },
+    {
+      "policy": "random",
+      "seed": 47,
+      "ranking": [
+        "error",
+        "abort",
+        "cleanup"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 22.764001000000015,
+      "unreliable": 0
+    },
+    {
+      "policy": "random",
+      "seed": 83,
+      "ranking": [
+        "abort",
+        "error",
+        "cleanup"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.193585000000006,
+      "unreliable": 0
+    },
+    {
+      "policy": "random",
+      "seed": 101,
+      "ranking": [
+        "abort",
+        "cleanup",
+        "error"
+      ],
+      "confirmedFixtures": 4,
+      "totalDefectiveFixtures": 6,
+      "falsePositives": 0,
+      "attempts": 14,
+      "meanDetectionIndex": 1.5,
+      "replayedProbeCostMs": 23.724419999999967,
+      "unreliable": 0
+    }
+  ],
+  "adaptiveImproved": false,
+  "decision": "Keep fixed planner; adaptive superiority NOT DEMONSTRATED",
+  "elapsedMs": 72.116833,
+  "methodology": "Each matrix cell actually executed twice plus a correct control. Policies replay the same frozen observations for fair experiment budgets. Probe costs are descriptive shared observations, not independent scheduler timings.",
+  "cleanup": "PASS"
+}

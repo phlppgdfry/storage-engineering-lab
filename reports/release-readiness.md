@@ -29,3 +29,7 @@ The defensible differentiator is a small Supabase cancellation investigation wit
 5. Use only the prepared factual launch/demo material after content/destination approval. Do not publish raw ignored logs wholesale or deploy these fixtures as production infrastructure.
 
 Publication approval is an explicit user boundary. No new external write is required to inspect this candidate locally.
+
+## 2026-10-29 disposition
+
+Authorized lab update is published in own-repository PR #1 with actual fast CI passes; PR is open, not merged. The current local research extension is experimental and **not published**. Its separate [gate matrix](next-level.md) documents 43 passing lab tests, native download observations, equal synthetic planner scores and unresolved HTTP/performance/containment boundaries. No upstream source change, status transition, maintainer outreach, release or Storage Doctor change was performed.

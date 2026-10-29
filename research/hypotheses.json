@@ -70,7 +70,7 @@
     {
       "id": "H002",
       "title": "File downloads ignore caller cancellation",
-      "status": "PROPOSED",
+      "status": "REPRODUCED",
       "paths": [
         "src/storage/backend/adapter.ts:getObject",
         "src/storage/backend/file.ts:getObject"
@@ -83,9 +83,17 @@
         {
           "path": "research/status.md",
           "kind": "decision"
+        },
+        {
+          "path": "evidence/next-level/download.json",
+          "kind": "experiment"
+        },
+        {
+          "path": "reports/next-level.md",
+          "kind": "source-review"
         }
       ],
-      "experiment": "Cancel a pending local read or MD5 calculation; inspect file streams and consumer behavior.",
+      "experiment": "Native current-upstream getObject with full/range streams and a signal during consumption; MD5 signal abort at native open without forcing flow. Compare explicit body.destroy control. See scripts/download-probe.mjs.",
       "impact": "Possible unnecessary disk I/O for cancelled local downloads; HTTP streaming may already destroy the body.",
       "overlap": [
         "https://github.com/supabase/storage/pull/854",
@@ -99,13 +107,14 @@
       "disposition": "active",
       "source": {
         "repository": "https://github.com/supabase/storage",
-        "commit": "4134dbba1b94757f400d5d7c09f9382935efd726",
+        "commit": "dcbb8eb78fd389a51ba0e6477fde0c02f6466986",
         "paths": [
           "src/storage/backend/adapter.ts",
           "src/storage/backend/file.ts"
         ]
       },
-      "nextAction": "Before proposing a fix, define one native read-cancellation oracle and trace whether higher layers already destroy the body. No defect has been reproduced."
+      "nextAction": "P1: reproduce an actual local HTTP disconnect during pending MD5 with the real renderer/request response signal; require abort before hash completion and compare bytes-read-at-abort versus final bytes. Confirm the contract and overlap before proposing a separate fix. Native signal gap is reproduced; HTTP/resource leak remains unconfirmed.",
+      "verification": "Three native runs at current upstream dcbb8eb7: signal does not stop full/range consumption or pending MD5 read. Explicit consumer destroy closes streams. No FD leak or HTTP disconnect defect established."
     },
     {
       "id": "H003",

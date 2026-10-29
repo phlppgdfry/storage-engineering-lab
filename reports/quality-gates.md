@@ -41,3 +41,9 @@ Independent review additionally drove tests/fixes for marker symlinks, split-out
 - **Coverage:** Non-root Linux 157/157, prior macOS 3306, previous independent broad 3,308 passes/two ECS timing failures and isolated 8/8 retry remain historical, not fresh RC results. No complete PostgreSQL/version/platform matrix is claimed.
 
 Curated records and their integrity hashes are in the [prelaunch manifest](../evidence/prelaunch/manifest.json). Full new raw logs remain under ignored `evidence/local/`; historical [completion artifacts](../evidence/completion/manifest.json) are unchanged. Curating paths/records is not an independent attestation of execution. [Readiness](release-readiness.md) owns the scoped decision.
+
+## 2026-10-29 publication and separate local extension
+
+The published RC fast GitHub workflows passed on commits `11da683` and `4f98bb5`; [execution record](next-level.md) links actual runs. The native terminal demo independently reran expected red2/green5 with actual files/xattrs and cleanup.
+
+The separate local `research/bounded-cycle` extension passes **43/43** tests: [actual log](../evidence/next-level/tests.log). [Offline result](../evidence/next-level/check.json) validates all 130 retained groups and the updated H002 registry. The file count is the exact snapshot at execution, before copying these last curated records. No expensive Linux/PostgreSQL rerun or remote CI for the experimental extension is claimed. Its native H002 observations, negative adaptive evaluation and reliability limits are in [the milestone report](next-level.md).

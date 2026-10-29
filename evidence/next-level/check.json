@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "scope": "Offline evidence consistency and lab syntax; not a benchmark rerun or performance approval.",
+  "filesChecked": 131,
+  "measuredGroups": 130,
+  "registry": {
+    "hypotheses": 5,
+    "recommendation": {
+      "id": "H002",
+      "nextAction": "P1: reproduce an actual local HTTP disconnect during pending MD5 with the real renderer/request response signal; require abort before hash completion and compare bytes-read-at-abort versus final bytes. Confirm the contract and overlap before proposing a separate fix. Native signal gap is reproduced; HTTP/resource leak remains unconfirmed.",
+      "method": "Priority ascending, then ID; excludes held, deferred, submitted and terminal work. Recommendation is not a confirmed finding."
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "B/6/fixed: warm-up rule not met; retained as inconclusive evidence"
+  ]
+}

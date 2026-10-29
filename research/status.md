@@ -67,3 +67,9 @@ Publicatie is expliciet goedgekeurd door de gebruiker en uitgevoerd:
 - GitHub Actions CI en Acceptance melden `action_required`; de lokale testresultaten zijn afzonderlijk vastgelegd. Dit is geen geslaagde upstream-CI-run.
 - De GitHub-connector kon geen PR openen door een integratie-403; de bestaande CLI-login kon dat wel. Geen extra authenticatie of overdracht van tokens gebruikt.
 - AI-assistentie staat vermeld in de PR. Er zijn geen losse issues, commentaren, reviewer-verzoeken of berichten geplaatst.
+
+## Volgende mijlpaal — 29 oktober 2026
+
+De bestaande lab-upgrade is gepubliceerd op `prelaunch/reproducibility-rc` in [eigen PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1), niet gemerged. Push- en PR-fast-CI zijn daadwerkelijk geslaagd, ook op documentatiecommit `4f98bb5`. De echte terminaldemo herhaalde native gedrag en red2/green5. Upstream #1616 blijft open/draft/mergeable zonder feedback; CI/Acceptance `action_required`.
+
+Nieuw werk staat afzonderlijk lokaal op `research/bounded-cycle`: native downloadannulering driemaal gereproduceerd op huidige upstream `dcbb8eb7`, zonder FD-lek of bewezen HTTP-impact; experimentele een-cyclus-runner met vaste catalogus en hashgeheugen; vaste/adaptieve/random evaluatie elk 4/6 synthetische defectgevallen, dus geen gemeten adaptief voordeel. 43 labtests slagen. [Uitvoering, resultaten en vervolgoracle](../reports/next-level.md). Historische resultaten blijven historisch; Storage Doctor onaangeroerd.

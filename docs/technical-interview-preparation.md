@@ -23,3 +23,11 @@ Use the code and evidence to explain decisions. This is a case study, not proof 
 **What remains unproven?** Human acceptance/merge, hosted production impact, normal-upload performance equivalence, the full database/runtime/architecture matrix and operating this change under production load. This artifact alone does not establish people leadership, production incident command, large-system design ownership or a particular seniority level. Current RC checks must be read from [quality gates](../reports/quality-gates.md), separately from earlier results.
 
 **What would you do next?** Close concrete safety/provenance and first-user workflow gates, retain inconclusive performance evidence, and respond to actual maintainer feedback if it arrives. Reuse existing tools for broader S3/load/fault/property testing rather than expanding this patch into a platform. See [roadmap](roadmap.md) and [comparison](tooling-comparison.md).
+
+## Focused learning plan from the remaining gaps
+
+1. Trace and test a real pre-header HTTP disconnect through request signals, renderer and file MD5; deliver a repeatable abort-before-completion oracle with cleanup controls. Current native evidence does not establish endpoint behavior.
+2. Explain PostgreSQL transaction/version publication and trigger-aborted writes at current upstream #1600; construct one isolated failure/rollback trace before proposing database changes. Existing integration passes do not prove database design expertise.
+3. Design a normal-upload equivalence study on a stable host: predeclare a practical margin (for example 5% only if justified), randomize paired order, demonstrate stable identical-code controls first, preserve raw observations and report INCONCLUSIVE if precision is inadequate.
+4. Practice S3 multipart/TUS lease and distributed-failure reasoning using existing upstream regressions. This project has not demonstrated operating those protocols at production scale.
+5. Obtain actual human review and respond to specific comments. Agent checks are useful evidence but do not demonstrate maintainer endorsement or professional incident leadership.

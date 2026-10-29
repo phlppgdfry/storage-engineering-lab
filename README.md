@@ -46,6 +46,6 @@ The pinned upstream dependencies have known advisories. Use disposable synthetic
 
 [Case study](reports/file-upload-cancellation.md) · [Production patch](experiments/fix.patch) · [Regression tests](experiments/regression.patch) · [Architecture](docs/architecture.md) · [Engineering impact](reports/engineering-impact.md) · [Release readiness](reports/release-readiness.md)
 
-[Roadmap](docs/roadmap.md) · [Research registry](research/hypotheses.json) · [Contributing](CONTRIBUTING.md). The project focuses on one reproducible cancellation investigation. Autonomous research execution is a future proposal; the current registry uses fixed priorities.
+[Roadmap](docs/roadmap.md) · [Research registry](research/hypotheses.json) · [Contributing](CONTRIBUTING.md). The project focuses on one reproducible cancellation investigation. The published investigation uses fixed priorities. A [local experimental extension](reports/next-level.md) tests bounded synthetic research cycles; adaptive selection has shown no advantage over fixed/random baselines.
 
 Apache-2.0; derived patches preserve Supabase attribution. [LICENSE](LICENSE) · [NOTICE](NOTICE)

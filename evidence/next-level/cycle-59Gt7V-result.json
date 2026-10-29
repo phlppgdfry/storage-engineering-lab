@@ -1,0 +1,34 @@
+{
+  "classification": "CONFIRMED_SYNTHETIC",
+  "result": {
+    "observations": [
+      {
+        "pass": false,
+        "rejected": false,
+        "bytes": 131072,
+        "stageRemains": false
+      },
+      {
+        "pass": false,
+        "rejected": false,
+        "bytes": 131072,
+        "stageRemains": false
+      }
+    ],
+    "control": {
+      "pass": true,
+      "rejected": true,
+      "bytes": 65536,
+      "stageRemains": false
+    }
+  },
+  "elapsedMs": 43.948333,
+  "node": "v24.21.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "exitStatus": "0",
+  "limitations": [
+    "Synthetic fixture only; no Supabase discovery or independent review"
+  ],
+  "cleanup": "PASS"
+}
