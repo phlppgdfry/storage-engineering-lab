@@ -1,0 +1,39 @@
+{
+  "branch": "showcase/presentation-rc",
+  "base": "4f98bb5861a2df5b0e68cac9a5184bd0f8d744ca",
+  "commit": "c9006dcd4df099a25b33de26e6281335b5d3db36",
+  "status": "LOCAL ONLY",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "scripts/check.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "test/container.test.mjs",
+        "test/evidence.test.mjs",
+        "test/runtime.test.mjs"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    "README.md",
+    "docs/reproduction.md",
+    "docs/technical-interview-preparation.md",
+    "evidence/showcase/manifest.json",
+    "evidence/showcase/public-demo.txt",
+    "evidence/showcase/public-quickstart.json",
+    "evidence/showcase/publication-scan.json",
+    "reports/file-upload-cancellation.md",
+    "reports/quality-gates.md",
+    "reports/release-readiness.md",
+    "reports/showcase-review.md"
+  ],
+  "presentationOnlyFollowupCheck": "PASS"
+}

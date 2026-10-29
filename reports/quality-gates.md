@@ -1,4 +1,6 @@
-# Current release-candidate quality gates
+# Quality gates and dated execution evidence
+
+**Latest checked 2026-10-29:** public PR#1 fast CI and fresh public-clone quickstart PASS; local prototype tests44/44 PASS; HTTP original/intervention controls and intentional SIGINT cleanup PASS. The old tables below describe their recorded executions, not current reruns. [Current review](showcase-review.md) contains interpretation and remaining gates.
 
 Date: 2026-10-28. Local branch `prelaunch/reproducibility-rc`, based on lab `731896020e5e159a85bdf3c51413faa4955d9d6e`. Production patch remains `3bbc971796fe9907a030c4fc70a07d440930d7b2`. Publication updates and newly executed checks are tracked in [the milestone log](next-level.md). The table below records the 2026-10-28 candidate executions. Historical evidence is preserved separately.
 
@@ -16,7 +18,7 @@ Date: 2026-10-28. Local branch `prelaunch/reproducibility-rc`, based on lab `731
 | Targeted current/history secret scan | No high-confidence matches | [Scan](../evidence/prelaunch/secret-scan.json); GitHub/OpenAI token/private-key patterns, public files and four locally available lab commits, gzip included. Not exhaustive certification; sample JWTs/fixture credentials intentional. |
 | `git diff --check`; upstream working-tree check | PASS; upstream remains clean at3bbc9717 | No upstream patch modifications, pushes, PR edits, contacts or releases. No unrelated host database/container was stopped. |
 
-The Linux image uses Node 24.21.0/npm 11.12.1 on Linux arm64 with observed `cpu.max=400000 100000`, `memory.max=3221225472`. This is a quota, not exclusive CPUs. Dependencies are fetched from the pinned lock without online lifecycle execution, then rebuilt with network disabled. Base/service image digests are pinned; apt versions are not snapshot-pinned and bit-for-bit image identity is not promised. Native macOS also uses Node24.21.0. Other architectures/platforms/runtime versions remain unverified.
+The Linux image uses Node 24.21.0/npm 11.12.1 on Linux arm64 with observed `cpu.max=400000 100000`, `memory.max=3221225472`. This is a quota, not exclusive CPUs. Dependencies are fetched from the pinned lock without online lifecycle execution, then rebuilt with network disabled. Base/service image digests are pinned; apt versions are not snapshot-pinned and bit-for-bit image identity is not promised. Native macOS also uses Node 24.21.0. Other architectures/platforms/runtime versions remain unverified.
 
 The integration HTTP test disconnects after observing at least 64 KiB in a real staging file, requires cleanup, then retrieves the previous payload. It is regression assurance; no parent-version HTTP red run establishes that this exact endpoint scenario failed previously. The standard integration suite includes mocks in some cases; it is not a complete cloud-service conformance run.
 
@@ -31,7 +33,7 @@ The integration HTTP test disconnects after observing at least 64 KiB in a real 
 
 Independent review additionally drove tests/fixes for marker symlinks, split-output credential redaction, evidence collisions, TERM-resistant grandchildren, mid-run evidence-write errors and premature daemon cleanup after remote refusal. Original failing cases and resolved observations are described in [final review](prelaunch-final-review.md).
 
-## Separate remaining gates
+## Remaining gates as recorded2026-10-28 (publication status superseded above)
 
 - **Performance: INSUFFICIENT EVIDENCE.** [Final assessment](performance-final.md) independently verifies all 130 retained groups and preserves the unfavorable4MiB/c1 observation. No new broad benchmark was run on the same noisy environment. Functional correctness does not clear equivalence/no-regression.
 - **Upstream:** PR 1616 remains open/draft/unmerged; head 3bbc9717/base b11f751a, no returned comments/reviews. CI/Acceptance require maintainer approval. Local tests do not satisfy this external gate.
@@ -47,3 +49,7 @@ Curated records and their integrity hashes are in the [prelaunch manifest](../ev
 The published RC fast GitHub workflows passed on commits `11da683` and `4f98bb5`; [execution record](next-level.md) links actual runs. The native terminal demo independently reran expected red2/green5 with actual files/xattrs and cleanup.
 
 The separate local `research/bounded-cycle` extension passes **43/43** tests: [actual log](../evidence/next-level/tests.log). [Offline result](../evidence/next-level/check.json) validates all 130 retained groups and the updated H002 registry. The file count is the exact snapshot at execution, before copying these last curated records. No expensive Linux/PostgreSQL rerun or remote CI for the experimental extension is claimed. Its native H002 observations, negative adaptive evaluation and reliability limits are in [the milestone report](next-level.md).
+
+## Showcase review executions
+
+[44-test log](../evidence/showcase/tests.log), [public quickstart](../evidence/showcase/public-quickstart.json), [original HTTP](../evidence/showcase/http-original.json), [diagnostic HTTP](../evidence/showcase/http-intervention.json), [interruption](../evidence/showcase/interruption.json), [planner matrix](../evidence/showcase/evaluation.json), [manifest](../evidence/showcase/manifest.json). The interrupted run is intentionally FAIL/exit1 with cleanupPASS, not a successful functional experiment. All six probe rankings have the same effectiveness score; this corpus cannot distinguish planner benefit.

@@ -1,51 +1,65 @@
 # Storage Engineering Lab
 
-**Investigating File Upload Cancellation in Supabase Storage.** A native reproduction, a small proposed fix and inspectable evidence for one filesystem-upload cancellation contract.
+**Follow an upload cancellation signal to the filesystem—and prove where it stops working.** This independent, AI-assisted investigation provides a native before/after reproduction, a small proposed Supabase Storage fix and inspectable regression evidence.
 
-Independent contributor research with AI assistance. [Upstream PR #1616](https://github.com/supabase/storage/pull/1616) was **open and draft** when checked on 2026-10-29. Maintainer acceptance and upstream CI approval remain separate gates. The reproducibility update is published for review in [lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1), with passing fast GitHub checks. [Execution record](reports/next-level.md).
+[Case study](reports/file-upload-cancellation.md) · [Real terminal demonstration](evidence/prelaunch/demo-terminal.txt) · [Upstream PR #1616](https://github.com/supabase/storage/pull/1616)
 
-## Problem → solution → evidence
+## Problem and root cause
 
-`FileBackend.uploadObject` accepted an `AbortSignal` without applying it to the byte-transfer pipeline. The proposed fix checks pre-aborted signals and passes the signal into the existing pipeline.
+`FileBackend.uploadObject` accepted an `AbortSignal` but omitted it from the pipeline that transfers the request body into a staging file. A cancelled adapter call could continue reading, publish bytes and report success.
 
-| Experiment | Original | Proposed fix |
+```mermaid
+flowchart LR
+  R[Upload route / request body signal] --> U[Uploader.upload]
+  U --> F[FileBackend.uploadObject]
+  F --> P[Body → staging pipeline]
+  S[AbortSignal] -->|proposed fix| P
+  P --> M[Metadata → rename / publish]
+  P -->|transfer failure| C[Remove staging file]
+```
+
+The proposed fix rejects pre-aborted calls, passes `{ signal }` into the existing pipeline and normalizes abort errors after cleanup. It changes **8 lines added / 1 removed** in production code; five tests live in the existing upstream test file. [Patch](experiments/fix.patch) · [Tests](experiments/regression.patch)
+
+| Check | Original | Proposed fix |
 |---|---|---|
-| Already-aborted signal | Publishes the upload | Rejects before creating an object |
-| Abort during transfer | Source stays live; upload succeeds | Destroys source and rejects |
-| Existing adapter destination | Continued transfer replaces bytes | Previous bytes preserved; staging cleaned |
-
-Five regression/control tests give **2 failures before / 5 passes after**. Native probes use real files and extended attributes. The overwrite assertion tests the adapter; higher layers normally allocate a new version. Hosted-service impact is not established. Cancellation after all body bytes arrive can still finish publication.
+| Already-aborted call | Publishes and succeeds | Rejects before staging |
+| Abort during transfer | Source stays live; upload succeeds | Source destroyed; upload rejects |
+| Existing adapter destination | Continued transfer replaces bytes | Old bytes preserved; staging removed |
+| Abort after body completion | Publication may finish | Publication may finish |
+| Five regression/control cases | **2 fail / 3 pass** | **5 pass** |
 
 ## Reproduce
 
-With Node **24.x**, a prepared pinned Storage checkout and native xattr support:
+Node **24.x** is required. The published review branch has no lab dependencies:
+
+```sh
+git clone --branch prelaunch/reproducibility-rc https://github.com/phlppgdfry/storage-engineering-lab.git
+cd storage-engineering-lab
+npm run check
+npm test
+```
+
+For the actual native reproduction, first prepare the pinned Storage checkout and native xattr dependency using the [complete setup](docs/reproduction.md), then run:
 
 ```sh
 npm run doctor -- --checkout ../supabase-storage
-npm run reproduce -- --checkout ../supabase-storage
+node scripts/demo.mjs ../supabase-storage
 ```
 
-[Real terminal demo](evidence/prelaunch/demo-terminal.txt) · [Complete setup and pinned installation](docs/reproduction.md) · [Troubleshooting](docs/troubleshooting.md)
+The demo executes real files/xattrs and exact regression red/green checks; full logs remain local. [Captured output](evidence/prelaunch/demo-terminal.txt) · [Troubleshooting](docs/troubleshooting.md). It creates and cleans up its own detached worktree.
 
-For dependency-free offline inspection, run `npm run check` and `npm test`. Managed Linux/PostgreSQL commands are in the setup guide. The runner creates owned disposable resources and retains evidence locally.
+## Evidence and limitations
 
-## Validated results
+The published candidate records **36 lab tests**, **130 retained measurement groups**, **3,304 Linux unit passes / 2 root-permission skips**, and **1,379 PostgreSQL tests plus five HTTP checks**. These are dated, scoped executions; the [quality gates](reports/quality-gates.md) distinguish them from new local runs and link commands, environment and evidence.
 
-- **36 lab tests** passed; **130 retained measurement groups** checked for consistency.
-- Existing Supabase Linux suite: **3,304 passed, 2 root-permission skips**; lint/build passed.
-- PostgreSQL 17 integration: **1,379 passed across 57 files**, plus **five real HTTP checks**.
-- A fresh local export passed check, tests, doctor and the actual native reproduction.
+**Normal-upload performance remains inconclusive.** All five timed 4 MiB/concurrency-1 pairs were slower with the fix (median paired throughput observation −16.70%); identical-code controls were unstable. Neither equivalence, a causal slowdown magnitude nor a speedup is established. [Full assessment](reports/performance-final.md).
 
-These are scoped executions, not a complete platform matrix. [Exact commands, evidence and failed attempts](reports/quality-gates.md) · [Separate-agent review](reports/prelaunch-final-review.md)
+This proves an adapter cancellation gap. It does not establish hosted-service impact or HTTP data loss. Higher layers normally allocate fresh versions; the overwrite test deliberately reuses an adapter destination. Cancellation after all body bytes arrive may finish publication. Source-thrown `AbortError` normalization also changes without a supplied signal. Known pinned dependency advisories restrict fixtures to disposable local research. [Security](SECURITY.md) · [Audit](reports/audit.md).
 
-**Performance remains inconclusive:** all five timed 4 MiB/concurrency-1 pairs were slower with the fix (median paired observation −16.70%), while identical-code controls varied substantially. No causal regression magnitude, equivalence or speedup is established. [Performance assessment](reports/performance-final.md)
+## Upstream and project status
 
-The pinned upstream dependencies have known advisories. Use disposable synthetic local fixtures; this is not a production deployment. [Security](SECURITY.md) · [Audit](reports/audit.md)
+Checked **2026-10-29**: [Supabase PR #1616](https://github.com/supabase/storage/pull/1616) is **open, draft and unmerged**, with no returned reviews/comments; upstream CI/Acceptance require approval. No maintainer endorsement is claimed. [Lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1) is open and mergeable with successful fast GitHub checks.
 
-## Inspect the work
+This working branch also contains **unpublished experimental research**: download/HTTP cancellation and a bounded synthetic research cycle. Its evaluation does not demonstrate adaptive superiority. [Current research and review](reports/showcase-review.md) · [Registry](research/hypotheses.json) · [Architecture](docs/architecture.md) · [Interview walkthrough](docs/technical-interview-preparation.md).
 
-[Case study](reports/file-upload-cancellation.md) · [Production patch](experiments/fix.patch) · [Regression tests](experiments/regression.patch) · [Architecture](docs/architecture.md) · [Engineering impact](reports/engineering-impact.md) · [Release readiness](reports/release-readiness.md)
-
-[Roadmap](docs/roadmap.md) · [Research registry](research/hypotheses.json) · [Contributing](CONTRIBUTING.md). The project focuses on one reproducible cancellation investigation. The published investigation uses fixed priorities. A [local experimental extension](reports/next-level.md) tests bounded synthetic research cycles; adaptive selection has shown no advantage over fixed/random baselines.
-
-Apache-2.0; derived patches preserve Supabase attribution. [LICENSE](LICENSE) · [NOTICE](NOTICE)
+[Contributing](CONTRIBUTING.md) · [Release readiness](reports/release-readiness.md) · Apache-2.0; derived patches retain Supabase attribution: [LICENSE](LICENSE), [NOTICE](NOTICE).

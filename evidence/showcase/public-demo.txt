@@ -1,0 +1,86 @@
+Investigating File Upload Cancellation in Supabase Storage
+$ node experiments/reproduce.mjs --repeats 1 --json
+Executed 2026-10-29T07:44:29.621Z; v24.22.2/darwin/arm64
+Baseline 4134dbba1b94757f400d5d7c09f9382935efd726; fixed adapter SHA256 13aeee850cc7263a87b0fd2431a429e2360d7cd135b98ccf8ce5f1d422cfb710
+
+Native BEFORE (actual files and xattrs):
+{
+  "preAborted": {
+    "outcome": "resolved",
+    "code": null,
+    "published": true
+  },
+  "active": {
+    "outcome": "resolved",
+    "code": null,
+    "sourceDestroyedOnAbort": false,
+    "finalContents": "partialremaining",
+    "stagingFiles": []
+  }
+}
+
+Regression RED — excerpts from actual output:
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  src/storage/backend/file.test.ts > FileBackend uploadObject signal > rejects an already-aborted upload without creating an object or staging file
+AssertionError: promise resolved "{ httpStatusCode: 200, size: 9, …(6) }" instead of rejecting
+ FAIL  src/storage/backend/file.test.ts > FileBackend uploadObject signal > cancels an active upload, preserves the old object and removes the staged file
+AssertionError: expected { ok: true } to match object { ok: false, …(1) }
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed | 152 skipped (157)
+
+Production change applied during this run:
+diff --git a/src/storage/backend/file.ts b/src/storage/backend/file.ts
+index c500dd12..8e858e01 100644
+--- a/src/storage/backend/file.ts
++++ b/src/storage/backend/file.ts
+@@ -205,11 +205,15 @@ export class FileBackend implements StorageBackendAdapter {
+     contentLength?: number,
+     contentEncoding?: string
+   ): Promise<ObjectMetadata> {
++    if (signal?.aborted) {
++      throw ERRORS.Aborted('Upload was aborted')
++    }
++
+     const file = this.resolveSecurePath(withOptionalVersion(`${bucketName}/${key}`, version))
+     const stagedFile = path.join(path.dirname(file), `.${randomUUID()}.tmp`)
+     try {
+       await ensureFile(stagedFile)
+-      await pipeline(body, fs.createWriteStream(stagedFile))
++      await pipeline(body, fs.createWriteStream(stagedFile), { signal })
+ 
+       await this.setFileMetadata(stagedFile, {
+         contentType: contentType || 'application/octet-stream',
+@@ -226,6 +230,9 @@ export class FileBackend implements StorageBackendAdapter {
+       }
+     } catch (err: unknown) {
+       await fsp.unlink(stagedFile).catch(() => {})
++      if (err instanceof Error && err.name === 'AbortError') {
++        throw ERRORS.AbortedTerminate('Upload was aborted', err)
++      }
+       if (err instanceof StorageBackendError) {
+         throw err
+       }
+
+Native AFTER:
+{
+  "preAborted": {
+    "outcome": "rejected",
+    "code": "Aborted",
+    "published": false
+  },
+  "active": {
+    "outcome": "rejected",
+    "code": "AbortedTerminate",
+    "sourceDestroyedOnAbort": true,
+    "finalContents": "old",
+    "stagingFiles": []
+  }
+}
+
+Regression GREEN — excerpts from actual output:
+ Test Files  1 passed (1)
+      Tests  5 passed | 152 skipped (157)
+
+PASS; cleanup: own temporary worktree removed
+Full logs: evidence/local/reproduce-51Pd1G/ (private; inspect before sharing)
+Scope: adapter cancellation; normal-upload performance remains inconclusive. PR #1616 is a draft as checked 2026-10-29.

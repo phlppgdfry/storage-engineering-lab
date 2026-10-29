@@ -1,4 +1,12 @@
-# Local release-candidate decision
+# Current merge and publication disposition
+
+Checked 2026-10-29: published lab PR#1 is mergeable with successful fast CI; its real public quickstart passes. Recommendation: **READY WITH DOCUMENTATION LIMITATIONS** for the existing reproducibility scope. Local showcase/status corrections are prepared; review and explicitly approve their scoped push, observe CI on that head, then approve merging. No push or merge was performed in this session.
+
+The separate research extension remains local and experimental:44 tests pass; real HTTP evidence confirms continued pre-header MD5 work but no descriptor leak; two prototype correctness/safety bugs are corrected; its balanced evaluation is NONDISCRIMINATING, so adaptive benefit remains unestablished. [Full current review and exact actions](showcase-review.md). Upstream#1616 remains draft with CI/Acceptance approval outstanding; normal-upload performance remains inconclusive.
+
+## Historical prelaunch assessment (retained)
+
+### Local release-candidate decision
 
 **CONDITIONAL GO for publishing this focused research/reproduction upgrade under the recorded user authorization for the lab branch and reviewable PR.** No known critical correctness issue remains in the reviewed local scope, the core reproduction and managed validation pass, and limitations are disclosed. This is **not** a production deployment, performance certification, upstream merge recommendation or claim of acceptance. See [the milestone log](next-level.md) for current publication and hosted CI status.
 
@@ -10,7 +18,7 @@
 | Supabase maintainer | PASS WITH LIMITATIONS | Same small two-file patch, exact regression red/green, real xattrs, Linux suite/build and PostgreSQL/HTTP checks. [Quality gates](quality-gates.md). Draft remains unmerged with CI approval pending; human review and performance attribution remain open. |
 | Staff engineer | PASS WITH LIMITATIONS | Owned resources, fixture isolation, pinned tree reconstruction, controlled process/error cleanup and 36 targeted fast tests. [Separate review](prelaunch-final-review.md) independently tests failure paths. Docker daemon/source are trusted; complete OS/security/platform validation is not claimed. |
 | Research reviewer | PASS WITH LIMITATIONS |130groups plus manifests/arithmetic checked, raw data and failures retained, unsupported causal/equivalence claims rejected. [Performance-final](performance-final.md). Normal-upload measurements remain inconclusive, including an unfavorable repeatable observation. |
-| Open-source user | PASS WITH LIMITATIONS | Focused CLI-first utility, reader paths, troubleshooting, contributing/security guidance, no unnecessary service/UI/framework. [README](../README.md). It requires Node24/native build tooling or local Docker; known upstream advisories restrict use to isolated research. |
+| Open-source user | PASS WITH LIMITATIONS | Focused CLI-first utility, reader paths, troubleshooting, contributing/security guidance, no unnecessary service/UI/framework. [README](../README.md). It requires Node 24/native build tooling or local Docker; known upstream advisories restrict use to isolated research. |
 
 No required local gate has an unexplained failure. Failed development attempts remain documented, with targeted fixes and real successful retries; the exact record is in [quality gates](quality-gates.md). Documentation does not substitute for functional validation.
 

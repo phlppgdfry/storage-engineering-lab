@@ -47,3 +47,11 @@ Published the already-authorized RC and genuine demo on an own-repository review
 ## D010 — Reject unsupported adaptive benefit
 
 Implemented a bounded fixed-catalog prototype using Node primitives, JSONL and existing process/ownership helpers, with no new dependency. Froze the evaluation before running it. Fixed, adaptive and random all detect 4/6 known synthetic cases under the declared budget; keep fixed default and preserve the negative result. This is no evidence of real-world self-improvement. [Decision, alternatives and risks](cycle/ADR.md).
+
+## D011 — Distinguish continued hashing from stream leaks
+
+Actual local HTTP experiments on current upstream establish continued pre-header MD5 work, while Fastify closes partial full/range response streams correctly. Preserve both findings. Use a minimal signal-forwarding intervention only to test causality; do not claim a complete production fix or HTTP-standard violation. [Evidence and boundary](../reports/showcase-review.md).
+
+## D012 — Treat a nondiscriminating evaluation as inconclusive
+
+Independent review found the frozen balanced corpus forces every two-probe ranking to the same effectiveness score. Preserve corpus/results, report this limitation programmatically across all6rankings, and reject general equivalence/self-improvement claims. A separately justified, versioned corpus is a future prerequisite for testing planner benefit. Do not tune workload frequencies to obtain a win.

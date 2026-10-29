@@ -1,0 +1,19 @@
+diff --git a/src/storage/backend/file.ts b/src/storage/backend/file.ts
+--- a/src/storage/backend/file.ts
++++ b/src/storage/backend/file.ts
+@@ -97,11 +97,12 @@
+     bucketName: string,
+     key: string,
+     version: string | null | undefined,
+-    headers?: BrowserCacheHeaders
++    headers?: BrowserCacheHeaders,
++    signal?: AbortSignal
+   ): Promise<ObjectResponse> {
+     // 'Range: bytes=#######-######
+     const file = this.resolveSecurePath(withOptionalVersion(`${bucketName}/${key}`, version))
+     const data = await this.statObjectFile(file)
+-    const eTag = await this.etag(file, data)
++    const eTag = await this.etag(file, data, signal)
+     const fileSize = data.size
+     const { cacheControl, contentEncoding, mimetype } = await this.getFileMetadata(file)
+     const lastModified = data.mtime

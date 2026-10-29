@@ -4,7 +4,7 @@ Use Node **24.x**, Git and macOS or Linux. The native path requires extended att
 
 ## Native adapter path
 
-From a directory containing this lab checkout:
+From the root of this lab checkout:
 
 ```sh
 git clone https://github.com/phlppgdfry/storage.git ../supabase-storage
@@ -70,3 +70,16 @@ Each run retains logs/summary in a new `evidence/local/<kind>-<random>/` directo
 ## Short terminal demonstration
 
 After the native prerequisites above, run `node scripts/demo.mjs ../supabase-storage`. It executes the real reproducer with one native repetition per variant, shows native observations, the actual applied patch and labelled excerpts from actual regression logs. Full logs stay local. The [recorded terminal transcript](../evidence/prelaunch/demo-terminal.txt) was captured on 2026-10-29 using macOS `script`; it is actual output, not a video. To record again on macOS: `script -q evidence/local/demo.raw node scripts/demo.mjs ../supabase-storage`. Inspect output before sharing.
+
+## Verified public quickstart and local HTTP follow-up
+
+A fresh public clone of review branch `prelaunch/reproducibility-rc` at `4f98bb5` passed check, 36 tests, doctor and the real native demo on macOS arm64/Node 24.22.2: [execution record](../evidence/showcase/public-quickstart.json). Native dependencies were reused from the pinned prepared Storage checkout; no fresh native install is claimed. The README names this branch because public main does not yet include the new CLI/scripts.
+
+The following commands are **local research-branch experiments**, absent from the published PR#1 branch. They require the same prepared checkout plus the recorded current-upstream commit object. They create a loopback-only server, use synthetic 16 MiB objects and cap each worker at30seconds, three repetitions. Full auth/database/CDN behavior is excluded.
+
+```sh
+node scripts/download-probe.mjs --http ../supabase-storage
+node scripts/download-probe.mjs --http --intervention ../supabase-storage
+```
+
+The second command applies only the diagnostic MD5 signal-forwarding patch in its own detached worktree. Neither command edits your checkout or publishes anything. Expected original result: abort before headers while the MD5 stream still reads the entire object. Expected intervention: MD5 stops early. Both variants require successful full GET, partial full/range disconnect cleanup, actual HEAD abort rejection and closed descriptors. A late disconnect, failed control or cleanup error returns failure; do not treat infrastructure failure as confirmation. [Observations, controls and interpretation](../reports/showcase-review.md).

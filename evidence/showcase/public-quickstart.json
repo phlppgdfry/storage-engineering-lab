@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-10-29T07:44:22.134Z",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "check",
+      "status": 0,
+      "logSha256": "31ee1af54b6ce27902df18a05b06e19587d372416d00df273461768ed3f14a5c"
+    },
+    {
+      "name": "tests",
+      "status": 0,
+      "logSha256": "14a416e39f4c5f6e5b9cbe697e67c2d787f92e23ec14f1f0f57fd8e500046378"
+    },
+    {
+      "name": "doctor",
+      "status": 0,
+      "logSha256": "673a274a4cc4d1986d31dc42890cf67673757cb5869e97ab7d1ba022d0ae5d3e"
+    },
+    {
+      "name": "demo",
+      "status": 0,
+      "logSha256": "6d6e9e59fc890d4a93119825cac055a7e64c8ffc523db18d977d607c4b0f4732"
+    }
+  ],
+  "environment": {
+    "node": "v24.22.2",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "revision": "4f98bb5861a2df5b0e68cac9a5184bd0f8d744ca",
+  "cleanup": "PASS"
+}

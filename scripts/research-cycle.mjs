@@ -35,7 +35,7 @@ if (values.help) {
     try {
       const command = await runCommand('fixture', process.execPath, [path.join(LAB, 'research/cycle/fixture.mjs'), values.scenario, selected, owner.temporary], { cwd: owner.temporary, env: fixtureEnv(), evidence: owner.evidence, timeout: definition.timeoutMs, signal: interruption.signal })
       result = JSON.parse(command.stdout)
-      classification = review(result)
+      classification = review(result, selected)
     } catch (failure) { error = failure.message; process.exitCode = 1 }
     const elapsedMs = performance.now() - started
     // Cleanup is part of the verdict; failed cleanup cannot yield a confirmed record.

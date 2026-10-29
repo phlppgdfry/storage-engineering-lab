@@ -73,3 +73,9 @@ Publicatie is expliciet goedgekeurd door de gebruiker en uitgevoerd:
 De bestaande lab-upgrade is gepubliceerd op `prelaunch/reproducibility-rc` in [eigen PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1), niet gemerged. Push- en PR-fast-CI zijn daadwerkelijk geslaagd, ook op documentatiecommit `4f98bb5`. De echte terminaldemo herhaalde native gedrag en red2/green5. Upstream #1616 blijft open/draft/mergeable zonder feedback; CI/Acceptance `action_required`.
 
 Nieuw werk staat afzonderlijk lokaal op `research/bounded-cycle`: native downloadannulering driemaal gereproduceerd op huidige upstream `dcbb8eb7`, zonder FD-lek of bewezen HTTP-impact; experimentele een-cyclus-runner met vaste catalogus en hashgeheugen; vaste/adaptieve/random evaluatie elk 4/6 synthetische defectgevallen, dus geen gemeten adaptief voordeel. 43 labtests slagen. [Uitvoering, resultaten en vervolgoracle](../reports/next-level.md). Historische resultaten blijven historisch; Storage Doctor onaangeroerd.
+
+## Showcase-review — 29 oktober
+
+De publieke reviewbranch is nu ook vanuit een echte schone publieke kloon gecontroleerd: check,36tests,doctor en native demo slagen. De nieuwe lokale uitbreiding heeft44geslaagde tests. Aparte agentreview reproduceerde twee prototypefouten; symlink-geheugentoegang en onvolledig beoordelingsbewijs zijn gecorrigeerd. De planner-evaluatie blijkt niet onderscheidend: iedere ordening moet4/6vinden.
+
+Drie daadwerkelijke HTTP-proeven bevestigen MD5-werk na disconnect vóór headers; een lokale diagnostische signaaldoorgifte stopt dit vroeg. Volledige/range-responsstreams ruimen wel op; geen descriptorlek. Onderbreking met SIGINT geeft de bedoelde FAIL met cleanupPASS. Alle nieuwe wijzigingen blijven lokaal; geen push/merge/PR-edit/bericht. [Actueel verslag en vervolgstappen](../reports/showcase-review.md).

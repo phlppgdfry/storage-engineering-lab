@@ -20,15 +20,14 @@ try {
         const observations = []
         for (let i = 0; i < corpus.repeats; i++) observations.push(await probe(scenario, experiment, owner.temporary))
         const control = await probe('correct', experiment, owner.temporary)
-        const classification = review({ observations, control })
+        const classification = review({ observations, control }, experiment)
         const row = { split, index, scenario, experiment, observations, control, classification, elapsedMs: performance.now() - begin }
         matrix.push(row)
         if (split === 'training') history.push(row)
       }
     }
   }
-  for (const policy of ['fixed', 'adaptive', 'random']) for (const seed of corpus.seeds) {
-    const ranking = order(policy, policy === 'adaptive' ? history : [], seed)
+  const score = ranking => {
     let found = 0, falsePositives = 0, attempts = 0, detectionIndex = 0, costMs = 0, unreliable = 0
     for (const [index, scenario] of corpus.evaluation.entries()) {
       for (const [step, experiment] of ranking.slice(0, corpus.budget).entries()) {
@@ -41,13 +40,22 @@ try {
         }
       }
     }
-    results.push({ policy, seed, ranking, confirmedFixtures: found, totalDefectiveFixtures: 6, falsePositives, attempts, meanDetectionIndex: found ? detectionIndex / found : null, replayedProbeCostMs: costMs, unreliable })
+    return { ranking, confirmedFixtures: found, totalDefectiveFixtures: 6, falsePositives, attempts, meanDetectionIndex: found ? detectionIndex / found : null, replayedProbeCostMs: costMs, unreliable }
   }
+  for (const policy of ['fixed', 'adaptive', 'random']) for (const seed of corpus.seeds) {
+    results.push({ policy, seed, ...score(order(policy, policy === 'adaptive' ? history : [], seed)) })
+  }
+  // Check whether this corpus can distinguish ANY ordering before interpreting equality.
+  const permutations = list => list.length ? list.flatMap((value, index) => permutations(list.filter((_, i) => i !== index)).map(rest => [value, ...rest])) : [[]]
+  const allRankings = permutations(corpus.probes).map(score)
+  const distinctEffectivenessScores = new Set(allRankings.map(r => JSON.stringify([r.confirmedFixtures, r.attempts, r.meanDetectionIndex, r.falsePositives, r.unreliable]))).size
+  const discrimination = { rankingsChecked: allRankings.length, distinctEffectivenessScores, discriminating: distinctEffectivenessScores > 1, allRankings, limitation: 'Balanced one-probe mutant families and budget two force equal effectiveness for every ordering; scheduler benefit is INCONCLUSIVE.' }
+
   const mean = policy => results.filter(r => r.policy === policy).reduce((sum, r) => sum + r.confirmedFixtures, 0) / corpus.seeds.length
-  const improved = mean('adaptive') > mean('fixed') && mean('adaptive') > mean('random') && results.filter(r => r.policy === 'adaptive').every(r => r.falsePositives === 0 && r.unreliable === 0)
-  const summary = { sourceSha: git(LAB, ['rev-parse', 'HEAD']).trim(), codeHashes: Object.fromEntries(['research/cycle/fixture.mjs', 'research/cycle/policy.mjs', 'scripts/evaluate-cycle.mjs'].map(n => [n, hash(readFileSync(path.join(LAB, n)))])), recordedAt: new Date().toISOString(), corpusHash, node: process.version, platform: process.platform, arch: process.arch, matrix, results, adaptiveImproved: improved, decision: improved ? 'Experimental synthetic benefit only; real-world improvement NOT ESTABLISHED' : 'Keep fixed planner; adaptive superiority NOT DEMONSTRATED', elapsedMs: performance.now() - started, methodology: 'Each matrix cell actually executed twice plus a correct control. Policies replay the same frozen observations for fair experiment budgets. Probe costs are descriptive shared observations, not independent scheduler timings.' }
+  const improved = discrimination.discriminating && mean('adaptive') > mean('fixed') && mean('adaptive') > mean('random') && results.filter(r => r.policy === 'adaptive').every(r => r.falsePositives === 0 && r.unreliable === 0)
+  const summary = { sourceSha: git(LAB, ['rev-parse', 'HEAD']).trim(), codeHashes: Object.fromEntries(['research/cycle/fixture.mjs', 'research/cycle/policy.mjs', 'scripts/evaluate-cycle.mjs'].map(n => [n, hash(readFileSync(path.join(LAB, n)))])), recordedAt: new Date().toISOString(), corpusHash, node: process.version, platform: process.platform, arch: process.arch, matrix, results, discrimination, adaptiveImproved: improved, decision: improved ? 'Experimental synthetic benefit only; real-world improvement NOT ESTABLISHED' : 'Keep fixed planner; adaptive superiority NOT DEMONSTRATED; corpus effectiveness comparison NONDISCRIMINATING', elapsedMs: performance.now() - started, methodology: 'Each matrix cell actually executed twice plus a correct control. Policies replay the same frozen observations for fair experiment budgets. Probe costs are descriptive shared observations, not independent scheduler timings.' }
   cleanupOwned(owner)
   summary.cleanup = 'PASS'
   writeFileSync(path.join(owner.evidence, 'evaluation.json'), JSON.stringify(summary, null, 2) + '\n', { flag: 'wx' })
-  console.log(JSON.stringify({ evidence: path.relative(LAB, owner.evidence), adaptiveImproved: improved, meanConfirmed: { fixed: mean('fixed'), adaptive: mean('adaptive'), random: mean('random') }, decision: summary.decision, observations: matrix.length, cleanup: summary.cleanup }, null, 2))
+  console.log(JSON.stringify({ evidence: path.relative(LAB, owner.evidence), adaptiveImproved: improved, meanConfirmed: { fixed: mean('fixed'), adaptive: mean('adaptive'), random: mean('random') }, decision: summary.decision, discriminating: discrimination.discriminating, observations: matrix.length, cleanup: summary.cleanup }, null, 2))
 } catch (error) { cleanupOwned(owner); throw error }

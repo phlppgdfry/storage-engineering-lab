@@ -31,3 +31,52 @@ Use the code and evidence to explain decisions. This is a case study, not proof 
 3. Design a normal-upload equivalence study on a stable host: predeclare a practical margin (for example 5% only if justified), randomize paired order, demonstrate stable identical-code controls first, preserve raw observations and report INCONCLUSIVE if precision is inadequate.
 4. Practice S3 multipart/TUS lease and distributed-failure reasoning using existing upstream regressions. This project has not demonstrated operating those protocols at production scale.
 5. Obtain actual human review and respond to specific comments. Agent checks are useful evidence but do not demonstrate maintainer endorsement or professional incident leadership.
+
+## Portfolio text (prepared locally, not posted)
+
+**GitHub description:** Reproducible Supabase Storage cancellation research: native before/after probes, focused regression tests, a draft upstream fix and inspectable evidence.
+
+**Case-study summary:** Traced an accepted upload abort signal through a filesystem backend, reproduced two contract failures, proposed an eight-insertion/one-deletion production change and added five regression/control cases. Verified native cleanup and broader Linux/PostgreSQL behavior while preserving unfavorable and inconclusive performance results. The contribution remains a draft, not an accepted upstream change. A follow-up local HTTP experiment isolates continuing MD5 work after disconnect; it is separate from the upload patch.
+
+**Factual contribution:** One draft PR, [supabase/storage#1616](https://github.com/supabase/storage/pull/1616), one production commit at `3bbc9717`, two changed files, five tests. No merged contribution or maintainer endorsement is claimed. The research repository and its own PR are separate from Supabase's repository. AI assistance and agent review are disclosed.
+
+## 60-second demonstration
+
+Prepare dependencies using [the reproduction guide](reproduction.md). Run `node scripts/demo.mjs ../supabase-storage`; the script's duration depends on the host, so the narration is a target, not a recording-duration claim. Use the existing genuine transcript if setup is unavailable; do not pretend it is a live run.
+
+| Time | Show / explain |
+|---|---|
+| 0–10 s | README contract: an accepted signal should stop the body-transfer pipeline. Publication after the last byte is a separate boundary. |
+| 10–25 s | Actual native BEFORE output and two expected regression failures. Cancellation still resolves and publishes. |
+| 25–40 s | Actual patch: pre-abort guard, pipeline signal, abort-error normalization after staging cleanup. |
+| 40–50 s | Actual native AFTER and five passing tests: source destroyed, old destination preserved, staging empty. |
+| 50–60 s | State draft upstream status, unresolved normal-upload performance and no hosted-impact claim. |
+
+If execution takes longer, show the full result and extend the explanation; do not hide a meaningful failure or splice fabricated output.
+
+## Five-minute engineering walkthrough
+
+| Time | Discussion and evidence |
+|---|---|
+| 0:00–0:45 | Contract and call path: upload route → request-body signal → Uploader → FileBackend → staging pipeline. Use the README diagram and pinned source. |
+| 0:45–1:30 | Oracle: pre-abort, active transfer, old destination/staging/source lifecycle. Explain why a `data` listener once broke the harness and why `resume` alone does not prove a disk write. |
+| 1:30–2:15 | Patch alternatives: reuse pipeline cancellation rather than bespoke listeners; preserve metadata/rename after body completion. Explain AbortError normalization compatibility. |
+| 2:15–3:00 | Regression red/green versus actual xattrs versus HTTP/PostgreSQL checks; distinguish historical runs, current quickstart and hosted CI approval. |
+| 3:00–3:45 | Performance method: 130 groups preserved; reduced source production is not physical I/O; unfavorable paired observations plus unstable sham controls leave normal-upload attribution inconclusive. |
+| 3:45–4:30 | Download follow-up: real client disconnect before headers versus post-header Fastify cleanup. MD5 keeps reading; all descriptors close. A local diagnostic signal-forwarding intervention tests the causal explanation. |
+| 4:30–5:00 | Maintenance and credibility: small upstream patch; no speculative bundled fix; bounded synthetic agent remains experimental. Its balanced evaluation cannot distinguish ordering policies. |
+
+## Ten challenging questions to practice
+
+1. What interleavings exist between pre-abort checking, staging creation and pipeline listener registration? Which resource does each failure path own?
+2. Why may rename legitimately complete after the client disconnects, and where does that decision belong in the uploader/backend contract?
+3. Can a stream's `destroyed` property prove its descriptor has closed? How do the experiments distinguish `destroyed`, `closed` and `fd === null`?
+4. Which observation would disprove the claim that the missing pipeline signal caused the original failures? Why is red/green stronger than only testing the fixed code?
+5. Why does observing `data` change a stream experiment, whereas `open` or `resume` can answer different lifecycle questions without proving the same facts?
+6. Why does passing a signal into `getObject` matter before headers, even when Fastify cleans up a streamed response after socket close?
+7. How could version indirection invalidate an apparent same-key overwrite/data-loss claim? Which higher-layer experiment would be required?
+8. What would justify a 5% performance-equivalence margin, and what stable control/precision requirements would you predeclare before collecting more samples?
+9. Why can a hash chain detect accidental/torn evidence changes but not authenticate an attacker-controlled rewrite of the entire history? How does no-follow opening change the filesystem threat model?
+10. Why does the balanced three-family, two-probe evaluation force every ordering to detect four cases? What separate versioned, independently specified corpus would be necessary before evaluating adaptive value?
+
+Good answers should reference this repository's actual code and limitations. They do not substitute for production operational experience or human code review.

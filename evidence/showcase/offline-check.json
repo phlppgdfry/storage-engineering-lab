@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "scope": "Offline evidence consistency and lab syntax; not a benchmark rerun or performance approval.",
+  "filesChecked": 145,
+  "measuredGroups": 130,
+  "registry": {
+    "hypotheses": 5,
+    "recommendation": {
+      "id": "H002",
+      "nextAction": "Keep REPRODUCED and separate from #1616. Before proposing a complete upstream fix, add focused getObject regression/control cases for pre-abort, metadata pending, range, mtime/MD5 and source-error behavior at current upstream; confirm intended cancellation contract and overlapping work. Diagnostic patch is not production-ready.",
+      "method": "Priority ascending, then ID; excludes held, deferred, submitted and terminal work. Recommendation is not a confirmed finding."
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "B/6/fixed: warm-up rule not met; retained as inconclusive evidence"
+  ]
+}

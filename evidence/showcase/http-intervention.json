@@ -1,0 +1,364 @@
+{
+  "revision": "dcbb8eb78fd389a51ba0e6477fde0c02f6466986",
+  "recordedAt": "2026-10-29T07:43:47.635Z",
+  "environment": {
+    "node": "v24.22.2",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "worker": "experiments/http-download-cancellation.ts",
+  "workerSha256": "9797f3711cd5fcea4a2fb4bae2c032eecbdf0fc32ea9c3e2bef54e57645e507d",
+  "observations": [
+    {
+      "size": 16777216,
+      "signalForwarded": true,
+      "observations": [
+        {
+          "mode": "complete",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "pre-header-md5",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            65536
+          ],
+          "streams": [
+            {
+              "bytesRead": 65536,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "mid-body",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 48723,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "mid-body-range",
+          "clientHeaders": true,
+          "httpStatus": 206,
+          "clientBytes": 65210,
+          "contentLength": 1048576,
+          "contentRange": "bytes 0-1048575/16777216",
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "native-head-control",
+          "rejected": true,
+          "signalAborted": true,
+          "errorName": "AbortError",
+          "errorCode": 20,
+          "bytesRead": 0,
+          "closed": true,
+          "fd": null
+        }
+      ],
+      "components": [
+        "actual Fastify",
+        "actual RequestSignals plugin",
+        "actual AssetRenderer",
+        "actual FileBackend/native xattrs"
+      ],
+      "limitations": [
+        "Minimal local route bypasses authentication/database lookup/CDN/proxy",
+        "No throttling, mocks or synthetic sleeps in file read path",
+        "Bytes read are logical native stream bytes, not physical disk IO",
+        "Diagnostic intervention stops pre-header hash; not a complete production fix"
+      ]
+    },
+    {
+      "size": 16777216,
+      "signalForwarded": true,
+      "observations": [
+        {
+          "mode": "complete",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "pre-header-md5",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            65536
+          ],
+          "streams": [
+            {
+              "bytesRead": 65536,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "mid-body",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 65264,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "mid-body-range",
+          "clientHeaders": true,
+          "httpStatus": 206,
+          "clientBytes": 65211,
+          "contentLength": 1048576,
+          "contentRange": "bytes 0-1048575/16777216",
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "native-head-control",
+          "rejected": true,
+          "signalAborted": true,
+          "errorName": "AbortError",
+          "errorCode": 20,
+          "bytesRead": 0,
+          "closed": true,
+          "fd": null
+        }
+      ],
+      "components": [
+        "actual Fastify",
+        "actual RequestSignals plugin",
+        "actual AssetRenderer",
+        "actual FileBackend/native xattrs"
+      ],
+      "limitations": [
+        "Minimal local route bypasses authentication/database lookup/CDN/proxy",
+        "No throttling, mocks or synthetic sleeps in file read path",
+        "Bytes read are logical native stream bytes, not physical disk IO",
+        "Diagnostic intervention stops pre-header hash; not a complete production fix"
+      ]
+    },
+    {
+      "size": 16777216,
+      "signalForwarded": true,
+      "observations": [
+        {
+          "mode": "complete",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "pre-header-md5",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            65536
+          ],
+          "streams": [
+            {
+              "bytesRead": 65536,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "mid-body",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 65263,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "mid-body-range",
+          "clientHeaders": true,
+          "httpStatus": 206,
+          "clientBytes": 65210,
+          "contentLength": 1048576,
+          "contentRange": "bytes 0-1048575/16777216",
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true
+        },
+        {
+          "mode": "native-head-control",
+          "rejected": true,
+          "signalAborted": true,
+          "errorName": "AbortError",
+          "errorCode": 20,
+          "bytesRead": 0,
+          "closed": true,
+          "fd": null
+        }
+      ],
+      "components": [
+        "actual Fastify",
+        "actual RequestSignals plugin",
+        "actual AssetRenderer",
+        "actual FileBackend/native xattrs"
+      ],
+      "limitations": [
+        "Minimal local route bypasses authentication/database lookup/CDN/proxy",
+        "No throttling, mocks or synthetic sleeps in file read path",
+        "Bytes read are logical native stream bytes, not physical disk IO",
+        "Diagnostic intervention stops pre-header hash; not a complete production fix"
+      ]
+    }
+  ],
+  "status": "PASS",
+  "limitation": "Current source with reused pinned study dependencies, not a fresh installation at current upstream lock; minimal route bypasses database/auth when --http.",
+  "variant": "diagnostic MD5 signal forwarding",
+  "adapterSha256": "ae9490f90b74ecdf04aa1bb4a0314e955c50a85091d88b2bb0fd9aac108261ad",
+  "sourceTree": "dfb0bee98a2e724adc15a359006c9ed404ee2ccc",
+  "cleanup": "PASS"
+}

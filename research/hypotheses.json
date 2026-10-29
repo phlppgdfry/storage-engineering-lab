@@ -91,10 +91,18 @@
         {
           "path": "reports/next-level.md",
           "kind": "source-review"
+        },
+        {
+          "path": "evidence/showcase/http-original.json",
+          "kind": "experiment"
+        },
+        {
+          "path": "evidence/showcase/http-intervention.json",
+          "kind": "experiment"
         }
       ],
-      "experiment": "Native current-upstream getObject with full/range streams and a signal during consumption; MD5 signal abort at native open without forcing flow. Compare explicit body.destroy control. See scripts/download-probe.mjs.",
-      "impact": "Possible unnecessary disk I/O for cancelled local downloads; HTTP streaming may already destroy the body.",
+      "experiment": "Minimal loopback Fastify route with actual RequestSignals, AssetRenderer and FileBackend. Compare normal GET, pre-header MD5 disconnect, post-header full/range disconnect and native HEAD abort control. Repeat original and diagnostic forwarding in separate owned worktrees.",
+      "impact": "Confirmed continued logical MD5 read work after a local disconnect; no persistent descriptor leak, physical-I/O magnitude, production impact or HTTP protocol violation established.",
       "overlap": [
         "https://github.com/supabase/storage/pull/854",
         "https://github.com/supabase/storage/pull/1615"
@@ -113,8 +121,8 @@
           "src/storage/backend/file.ts"
         ]
       },
-      "nextAction": "P1: reproduce an actual local HTTP disconnect during pending MD5 with the real renderer/request response signal; require abort before hash completion and compare bytes-read-at-abort versus final bytes. Confirm the contract and overlap before proposing a separate fix. Native signal gap is reproduced; HTTP/resource leak remains unconfirmed.",
-      "verification": "Three native runs at current upstream dcbb8eb7: signal does not stop full/range consumption or pending MD5 read. Explicit consumer destroy closes streams. No FD leak or HTTP disconnect defect established."
+      "nextAction": "Keep REPRODUCED and separate from #1616. Before proposing a complete upstream fix, add focused getObject regression/control cases for pre-abort, metadata pending, range, mtime/MD5 and source-error behavior at current upstream; confirm intended cancellation contract and overlapping work. Diagnostic patch is not production-ready.",
+      "verification": "Three actual local HTTP repetitions per variant at dcbb8eb7: disconnect before headers with MD5 at 64 KiB still reads 16 MiB; diagnostic signal forwarding stops at 64\u2013128 KiB. Actual renderer and request-disconnect signal used; full/range streamed responses close early, all measured descriptors close. Protocol/auth/database/hosted scope remains limited."
     },
     {
       "id": "H003",

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, copyFileSync, existsSync } from 'node:fs'
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, copyFileSync, existsSync, symlinkSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
@@ -17,14 +17,30 @@ test('safe mutations reproduce only their own invariant; controls pass twice', a
     for (const kind of ['abort', 'cleanup', 'error']) {
       const result = { observations: [await probe(scenario, kind, root), await probe(scenario, kind, root)], control: await probe('correct', kind, root) }
       const defect = scenario === 'ignore-signal' && kind === 'abort' || scenario === 'cleanup-leak' && kind === 'cleanup' || scenario === 'swallow-error' && kind === 'error'
-      assert.equal(review(result), defect ? 'CONFIRMED_SYNTHETIC' : 'REFUTED_FOR_FIXTURE')
+      assert.equal(review(result, kind), defect ? 'CONFIRMED_SYNTHETIC' : 'REFUTED_FOR_FIXTURE')
     }
   }
 })
 test('review rejects missing evidence, bad control and inconsistent repetitions', () => {
-  assert.equal(review({}), 'INCONCLUSIVE')
-  assert.equal(review({ observations: [{ pass: false }, { pass: true }], control: { pass: true } }), 'INCONCLUSIVE')
-  assert.equal(review({ observations: [{ pass: false }, { pass: false }], control: { pass: false } }), 'INCONCLUSIVE')
+  const good = { pass: true, rejected: true, bytes: 65536, stageRemains: false }
+  const failed = { pass: false, rejected: false, bytes: 131072, stageRemains: false }
+  assert.equal(review({}, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [failed, good], control: good }, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [failed, failed], control: failed }, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [{ pass: false }, { pass: false }], control: { pass: true } }, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [failed, failed], control: good }, 'abort'), 'CONFIRMED_SYNTHETIC')
+  assert.equal(review({ observations: [failed, failed], control: good }, 'unknown'), 'INCONCLUSIVE')
+  for (const missing of ['rejected', 'bytes', 'stageRemains']) {
+    const incomplete = { ...failed }; delete incomplete[missing]
+    assert.equal(review({ observations: [incomplete, incomplete], control: good }, 'abort'), 'INCONCLUSIVE')
+  }
+  for (const bytes of [-1, 131073, NaN, Infinity, 0.5, '65536']) {
+    const invalid = { ...failed, bytes }
+    assert.equal(review({ observations: [invalid, invalid], control: good }, 'abort'), 'INCONCLUSIVE')
+  }
+  // A worker's pass boolean cannot override the actual experiment invariant.
+  const inconsistent = { ...good, pass: false }
+  assert.equal(review({ observations: [inconsistent, inconsistent], control: good }, 'abort'), 'INCONCLUSIVE')
 })
 test('feedback changes priorities only; random selection is replayable and unknown policies refuse', () => {
   assert.deepEqual(order('fixed'), ['abort', 'cleanup', 'error'])
@@ -48,6 +64,17 @@ test('memory preserves previous entries, rejects missing artifacts, tampering an
   assert.throws(() => readMemory(file, root), /chain/)
   writeFileSync(file, original.subarray(0, original.length - 1))
   assert.throws(() => readMemory(file, root), /Interrupted/)
+})
+test('memory refuses dangling and existing symlinks on both read and append', t => {
+  const root = fixture(t), file = path.join(root, 'memory.jsonl'), target = path.join(root, 'unintended-target.jsonl')
+  symlinkSync(target, file)
+  assert.throws(() => readMemory(file, root))
+  assert.throws(() => appendMemory(file, [], { experiment: 'abort', scenario: 'correct', evidence: [] }))
+  assert.equal(existsSync(target), false)
+  writeFileSync(target, 'unrelated contents')
+  assert.throws(() => readMemory(file, root))
+  assert.throws(() => appendMemory(file, [], { experiment: 'abort', scenario: 'correct', evidence: [] }))
+  assert.equal(readFileSync(target, 'utf8'), 'unrelated contents')
 })
 test('unsafe catalog or path inputs cannot become executed commands', async t => {
   const root = fixture(t)
