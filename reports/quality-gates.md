@@ -1,3 +1,9 @@
+# Final gate update — 2026-10-31
+
+The [closure matrix](final-project-closure.md#validation-record) and [checksummed evidence](../evidence/closure/manifest.json) supersede prior unverified-Linux statements for the named scopes: lab45/45; current GET3,439 passes/2 root skips; separate lifecycle fixture3,420/2; combined overlay3,439/2; pinned upload3,304/2 plus native/red-green, lint and build. Known environment failures and the earlier upstream lifecycle failure remain retained. Hosted checks on the final candidate are **NOT EXECUTED**. No performance or adaptive-superiority gate is cleared.
+
+---
+
 # Quality gates and dated execution evidence
 
 **Latest checked 2026-10-29:** public PR#1 fast CI and fresh public-clone quickstart PASS; local prototype tests44/44 PASS; HTTP original/intervention controls and intentional SIGINT cleanup PASS. The old tables below describe their recorded executions, not current reruns. [Current review](showcase-review.md) contains interpretation and remaining gates.

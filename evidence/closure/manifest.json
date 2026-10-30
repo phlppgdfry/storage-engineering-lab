@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "scope": "Finalization on macOS/Linux. Actual results and environmental failures retained; excerpts labelled. No hosted candidate execution or release. Historical evidence unchanged.",
+  "artifacts": [
+    {
+      "path": "evidence/backend-focused-green.log",
+      "bytes": 976,
+      "sha256": "0e9e7c294618549f70a5ea06e6972c2e3de88475223acda720971a9e648c20bb"
+    },
+    {
+      "path": "evidence/closure/build.log",
+      "bytes": 227,
+      "sha256": "ea7d841dcd271bedc261ded8efd6352fe112ffc5104b06797deddc454e5ec47e"
+    },
+    {
+      "path": "evidence/closure/composite-unit.log",
+      "bytes": 187,
+      "sha256": "46e532f5b8abe7a19ca3626887affad83b65757f270ca7b72bb437094d67acd2"
+    },
+    {
+      "path": "evidence/closure/current-linux.json",
+      "bytes": 83341,
+      "sha256": "a4fa2566eeb022246b98088d3b88591f2e1d1e8213bcdd9c4a22db393095db61"
+    },
+    {
+      "path": "evidence/closure/demo-terminal.txt",
+      "bytes": 3249,
+      "sha256": "78b6b8991b3af0b1fd5e27559bfda98dec17b6f650eeabe2f9e014c32c5652bd"
+    },
+    {
+      "path": "evidence/closure/download-full-unit.log",
+      "bytes": 191,
+      "sha256": "b2019c66a6a0e721778ff46cc4935e23bdde4595f4307fa2e6fcb9652b8f3154"
+    },
+    {
+      "path": "evidence/closure/download-red.log",
+      "bytes": 2470,
+      "sha256": "0e4568bbc0e6cb317642aecc1ff1f34bc902fc2245c5a5940bc2576f5f4ff8fe"
+    },
+    {
+      "path": "evidence/closure/final-lab-tests.log",
+      "bytes": 4533,
+      "sha256": "27d442ea2beafab5a10445e2cfa686534c62a1f27c8e8a1cbb32c9a9493d7f5c"
+    },
+    {
+      "path": "evidence/closure/final-offline-check.json",
+      "bytes": 793,
+      "sha256": "a7716179f4a382e45b07c5edb3b133ebf8e9c310164f5a7c64e9ed333d305283"
+    },
+    {
+      "path": "evidence/closure/fixture-build.log",
+      "bytes": 227,
+      "sha256": "ea7d841dcd271bedc261ded8efd6352fe112ffc5104b06797deddc454e5ec47e"
+    },
+    {
+      "path": "evidence/closure/fixture-lint.log",
+      "bytes": 158,
+      "sha256": "dca920d989722864c24b8e0c4aa60bcef3c26b4469162a639e9131127bfaffef"
+    },
+    {
+      "path": "evidence/closure/fixture-only-unit.log",
+      "bytes": 190,
+      "sha256": "0662b057220e9dd876c75c38543ef8d002b48596b2a12e8ecffbbb0b5a4ba669"
+    },
+    {
+      "path": "evidence/closure/gitleaks-candidate.json",
+      "bytes": 589,
+      "sha256": "39e5ddadea3d9ee080052a04848637c70cb55f77385e303ce92e114645836cf2"
+    },
+    {
+      "path": "evidence/closure/gitleaks-history.json",
+      "bytes": 434,
+      "sha256": "2aa8716f610c1478769cdbfb2677b7210b7cc3cb5c0a75953885214193579999"
+    },
+    {
+      "path": "evidence/closure/green.log",
+      "bytes": 172,
+      "sha256": "e0e70fb59d735a9b1826f909c410d57d620d9795cc62c210ad6c487083da0a5f"
+    },
+    {
+      "path": "evidence/closure/historical-path-redactions.json",
+      "bytes": 3696,
+      "sha256": "665cce9c58ee30c9692c364318f397c3e1ab1204778bd30b2c95c0e2516b99d6"
+    },
+    {
+      "path": "evidence/closure/lab-linux-tests.log",
+      "bytes": 4467,
+      "sha256": "fc5acfce6ba49d18ce72d3f4865654fd78f8b8376bb8caf8d00f6c82e57486f2"
+    },
+    {
+      "path": "evidence/closure/lab-linux.json",
+      "bytes": 1927,
+      "sha256": "bde557a512102125425add82d40f40208b8fdbe1f29a643f2018785bee9b97fd"
+    },
+    {
+      "path": "evidence/closure/lint.log",
+      "bytes": 146,
+      "sha256": "fab55bcc19231bb8f8f2100824dbae5880cfee316e9e4fdfbdcf316726470b68"
+    },
+    {
+      "path": "evidence/closure/quickstart.json",
+      "bytes": 1180,
+      "sha256": "6ae4ed04756b353a42b80bbd608a98dd867c3f9c045a901d33c08295e96a2b58"
+    },
+    {
+      "path": "evidence/closure/retained-environment-failures.json",
+      "bytes": 1998,
+      "sha256": "b5ffadecc989729ca0ab1530f5559f2f6fe5e2f6920e8233dd9a11c1389b2471"
+    },
+    {
+      "path": "evidence/closure/summary.json",
+      "bytes": 3811,
+      "sha256": "a243a0be9299d5e392eb3a469bf43a7795038f45a3e18166cdc382da9831b997"
+    },
+    {
+      "path": "evidence/closure/upload-linux.json",
+      "bytes": 3668,
+      "sha256": "12e90f2f5f64306f1cb15094158486157c228588235f123ad3ad0d53ff6691f4"
+    },
+    {
+      "path": "evidence/closure/upstream-audit.json",
+      "bytes": 34290,
+      "sha256": "bc517d5cf67bda15080540bd5f29cbea92295d91b261fa196410ea523dba400a"
+    },
+    {
+      "path": "evidence/s3-baseline.log",
+      "bytes": 923,
+      "sha256": "a36ed011e8972ac0d72f612b920e09875471030e649e0aa34061011c1c335120"
+    },
+    {
+      "path": "evidence/unit-baseline-summary.log",
+      "bytes": 3315,
+      "sha256": "66aadf73e9eec05937b42cabc802c4395dbfbb0ca2be5113e5ea24209326d08b"
+    },
+    {
+      "path": "evidence/unit-latest-summary.log",
+      "bytes": 2830,
+      "sha256": "5fd6602e0c336dbd24c16dc44d8d311dda46c22ae1d4c01c5284113300596af3"
+    },
+    {
+      "path": "evidence/upload-cancellation-green.log",
+      "bytes": 966,
+      "sha256": "453cfefabb86e741a903343655d496a2e611b1ff6a206b74a45a13bdb1131cab"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+Actual Linux result excerpt. Ten failure names, counts and exit retained; full assertion/buffer diffs remain local.
+     × rejects pre-aborted mtime retrieval before filesystem work 28ms
+     × rejects pre-aborted md5 retrieval before filesystem work 11ms
+     × checks cancellation after pending mtime statObjectFile settles 7ms
+     × checks cancellation after pending md5 statObjectFile settles 9ms
+     × checks cancellation after pending mtime getFileMetadata settles 5ms
+     × checks cancellation after pending md5 getFileMetadata settles 9ms
+     × cancels a native MD5 stream and preserves the abort reason as its cause 13ms
+     × cancels an acquired body (range: undefined), with no retained abort listener 156ms
+     × cancels an acquired body (range: bytes=0-262143), with no retained abort listener 162ms
+     × retains the first timeout reason when another caller signal aborts during metadata 7ms
+ Test Files  1 failed (1)
+      Tests  10 failed | 9 passed | 152 skipped (171)
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > rejects pre-aborted mtime retrieval before filesystem work
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > rejects pre-aborted md5 retrieval before filesystem work
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending mtime statObjectFile settles
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending mtime getFileMetadata settles
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending md5 statObjectFile settles
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending md5 getFileMetadata settles
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > cancels a native MD5 stream and preserves the abort reason as its cause
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > cancels an acquired body (range: undefined), with no retained abort listener
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > cancels an acquired body (range: bytes=0-262143), with no retained abort listener
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > retains the first timeout reason when another caller signal aborts during metadata

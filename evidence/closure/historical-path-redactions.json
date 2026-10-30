@@ -1,0 +1,60 @@
+{
+  "scope": "Five already-published historical log presentations, not measurement data. Existing Git history and all original bytes preserved; this does not erase previously public paths.",
+  "artifacts": [
+    {
+      "path": "evidence/unit-baseline-summary.log",
+      "originalCommit": "254c6fbdaa5ffbc0639b9783939048452405a778",
+      "originalGitBlob": "2ff527ca6b6d897fdd8ec4cd77535abd03dfd2aa",
+      "originalBytes": 3325,
+      "originalSha256": "a3f62c0d6f637a6a953e7a15fc19b6c3a9b7a0d42179df8386322ec71839e830",
+      "redactedBytes": 3315,
+      "redactedSha256": "66aadf73e9eec05937b42cabc802c4395dbfbb0ca2be5113e5ea24209326d08b",
+      "transformation": "Label added; absolute home/check-out prefixes replaced with portable placeholders. No test outcomes removed or changed.",
+      "rawPreserved": "Git object and ignored evidence/local/closure-original-logs/unit-baseline-summary.log"
+    },
+    {
+      "path": "evidence/s3-baseline.log",
+      "originalCommit": "254c6fbdaa5ffbc0639b9783939048452405a778",
+      "originalGitBlob": "ab53fc6451286d10a0b3c95bd1785b7b62931fb4",
+      "originalBytes": 723,
+      "originalSha256": "ee651efb8de72b4fa8767df373e66f1ef80eb085d45d73abb927125be5b18743",
+      "redactedBytes": 923,
+      "redactedSha256": "a36ed011e8972ac0d72f612b920e09875471030e649e0aa34061011c1c335120",
+      "transformation": "Label added; absolute home/check-out prefixes replaced with portable placeholders. No test outcomes removed or changed.",
+      "rawPreserved": "Git object and ignored evidence/local/closure-original-logs/s3-baseline.log"
+    },
+    {
+      "path": "evidence/upload-cancellation-green.log",
+      "originalCommit": "254c6fbdaa5ffbc0639b9783939048452405a778",
+      "originalGitBlob": "b4d30e36fde021e136c9c2f4749b20cc7a537e07",
+      "originalBytes": 766,
+      "originalSha256": "0f5945b2785484c8b9c66ac834c6b62d7aa0cf4867b87ffd9513ad558de1636a",
+      "redactedBytes": 966,
+      "redactedSha256": "453cfefabb86e741a903343655d496a2e611b1ff6a206b74a45a13bdb1131cab",
+      "transformation": "Label added; absolute home/check-out prefixes replaced with portable placeholders. No test outcomes removed or changed.",
+      "rawPreserved": "Git object and ignored evidence/local/closure-original-logs/upload-cancellation-green.log"
+    },
+    {
+      "path": "evidence/backend-focused-green.log",
+      "originalCommit": "254c6fbdaa5ffbc0639b9783939048452405a778",
+      "originalGitBlob": "96beca7fd67fb774b00ccb6f92020b5e82065533",
+      "originalBytes": 776,
+      "originalSha256": "49787249578fadc11ff33c7dd9cef231643f3303ff5797870c420ae2925117c8",
+      "redactedBytes": 976,
+      "redactedSha256": "0e9e7c294618549f70a5ea06e6972c2e3de88475223acda720971a9e648c20bb",
+      "transformation": "Label added; absolute home/check-out prefixes replaced with portable placeholders. No test outcomes removed or changed.",
+      "rawPreserved": "Git object and ignored evidence/local/closure-original-logs/backend-focused-green.log"
+    },
+    {
+      "path": "evidence/unit-latest-summary.log",
+      "originalCommit": "254c6fbdaa5ffbc0639b9783939048452405a778",
+      "originalGitBlob": "61b0289c73ee56fcd2725b8961e42cac13917f86",
+      "originalBytes": 3080,
+      "originalSha256": "a5a3776680e8bf7ff066bb50f05e570972702816bb865606028e49cebd12e06a",
+      "redactedBytes": 2830,
+      "redactedSha256": "5fd6602e0c336dbd24c16dc44d8d311dda46c22ae1d4c01c5284113300596af3",
+      "transformation": "Label added; absolute home/check-out prefixes replaced with portable placeholders. No test outcomes removed or changed.",
+      "rawPreserved": "Git object and ignored evidence/local/closure-original-logs/unit-latest-summary.log"
+    }
+  ]
+}

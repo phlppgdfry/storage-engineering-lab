@@ -58,8 +58,17 @@ This proves an adapter cancellation gap. It does not establish hosted-service im
 
 ## Upstream and project status
 
-Checked **2026-10-30**: [Supabase PR #1616](https://github.com/supabase/storage/pull/1616) is **open, draft and unmerged**, with no returned reviews/comments; upstream CI/Acceptance require approval. No maintainer endorsement is claimed. [Lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1) is open and mergeable with successful fast GitHub checks.
+Checked **2026-10-31**: [Supabase PR #1616](https://github.com/supabase/storage/pull/1616) is **open, draft and unmerged**, with no returned reviews/comments; upstream CI/Acceptance require approval. No maintainer endorsement is claimed. [Lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1) is open and mergeable; successful fast GitHub checks cover its published head `4f98bb5`, not this local release candidate.
 
 This working branch also contains **unpublished experimental research**: download/HTTP cancellation and a bounded synthetic research cycle. A separate [current-upstream GET fix and engineering audit](reports/advanced-engineering.md) records Node 26 validation. The planner evaluation cannot distinguish ordering policies and supports no adaptive-superiority claim. [Current research and review](reports/showcase-review.md) · [Registry](research/hypotheses.json) · [Architecture](docs/architecture.md) · [Interview walkthrough](docs/technical-interview-preparation.md).
+
+| Scope | Supported conclusion |
+|---|---|
+| Upload | Native before/after, five focused upstream cases; draft contribution |
+| Download | Local GET correction and nineteen cases; real disconnect/read observations; separate contribution |
+| Lab | 45 tests; historical evidence integrity and bounded research tooling |
+| Performance / planner | Normal-upload performance inconclusive; adaptive benefit not demonstrated |
+
+**Portfolio release candidate `v1.0.0`: local preparation only.** No tag or release exists. [Final audit, validation and publication gates](reports/final-project-closure.md) · [Release notes](CHANGELOG.md). The clone command above intentionally retrieves the existing public upload study, not the unpublished candidate.
 
 [Contributing](CONTRIBUTING.md) · [Release readiness](reports/release-readiness.md) · Apache-2.0; derived patches retain Supabase attribution: [LICENSE](LICENSE), [NOTICE](NOTICE).

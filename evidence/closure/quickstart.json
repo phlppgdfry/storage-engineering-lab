@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "kind": "quickstart",
+  "lab": "254c6fbdaa5ffbc0639b9783939048452405a778",
+  "commands": [
+    {
+      "label": "clone",
+      "command": [
+        "git",
+        "clone",
+        "--no-hardlinks",
+        "<lab>",
+        "<tmp>/storage-lab-53RavW/checkout"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "checkout",
+      "command": [
+        "git",
+        "switch",
+        "--detach",
+        "254c6fbdaa5ffbc0639b9783939048452405a778"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "check",
+      "command": [
+        "node",
+        "scripts/check.mjs",
+        "--json"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "tests",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "doctor",
+      "command": [
+        "node",
+        "scripts/doctor.mjs",
+        "--checkout",
+        "<storage>",
+        "--json"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "demo",
+      "command": [
+        "node",
+        "scripts/demo.mjs",
+        "<storage>"
+      ],
+      "exit": 0
+    }
+  ],
+  "node": "v24.22.2",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cleanup": "PASS"
+}

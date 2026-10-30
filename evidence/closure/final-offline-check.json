@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "scope": "Offline evidence consistency and lab syntax; not a benchmark rerun or performance approval.",
+  "filesChecked": 209,
+  "measuredGroups": 130,
+  "registry": {
+    "hypotheses": 5,
+    "recommendation": {
+      "id": "H002",
+      "nextAction": "Review local GET candidate8eceb9 and separate lifecycle test-fixture correction9a76025. Preserve the baseline failure investigation, obtain independent human and hosted/Linux validation and explicit publication approval; do not bundle with upload#1616.",
+      "method": "Priority ascending, then ID; excludes held, deferred, submitted and terminal work. Recommendation is not a confirmed finding."
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "B/6/fixed: warm-up rule not met; retained as inconclusive evidence"
+  ]
+}

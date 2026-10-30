@@ -1,0 +1,9 @@
+{
+  "tool": "gitleaks8.30.1",
+  "command": "gitleaks git . --log-opts=--all --redact=100 --report-format json --report-path <ignored-local-report> --no-banner --no-color --timeout 90",
+  "source": "254c6fbdaa5ffbc0639b9783939048452405a778",
+  "exit": 0,
+  "commitsScanned": 11,
+  "findings": [],
+  "limits": "Default rules; no complete confidentiality/security certification. Ignored local raw files are excluded from publication."
+}

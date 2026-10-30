@@ -8,4 +8,4 @@ Run `npm run check` and `npm test` with Node 24. New native/container behavior n
 
 Do not submit secrets, private logs or vulnerability details. See [security](SECURITY.md). Discuss substantial changes before implementing a framework, interface or broad protocol suite. This repository does not endorse automatic issue/PR generation or contacting maintainers without review.
 
-Apache-2.0 applies; preserve upstream attribution and NOTICE for derived patches. There is no release or npm publishing process in this candidate.
+Apache-2.0 applies; preserve upstream attribution and NOTICE for derived patches. The [portfolio release checklist](reports/final-project-closure.md) separates branch publication, hosted checks, merge, tag and release approvals. The package remains private; no npm publication is intended.

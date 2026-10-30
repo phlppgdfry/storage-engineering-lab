@@ -1,3 +1,9 @@
+# Final portfolio gate — 2026-10-31
+
+**CONDITIONALLY READY, not released.** See [final closure](final-project-closure.md) and [release notes](../CHANGELOG.md). Local macOS/Linux validation and exact-lock advisory review completed; all remaining publication/hosted/merge/tag/release gates are explicit. Earlier statements below retain their dated scope. The full `release/portfolio-rc` candidate is distinct from the smaller `showcase/presentation-rc` update and requires its own approval.
+
+---
+
 # Current merge and publication disposition
 
 Checked 2026-10-29: published lab PR#1 is mergeable with successful fast CI; its real public quickstart passes. Recommendation: **READY WITH DOCUMENTATION LIMITATIONS** for the existing reproducibility scope. Local showcase/status corrections are prepared; review and explicitly approve their scoped push, observe CI on that head, then approve merging. No push or merge was performed in this session.

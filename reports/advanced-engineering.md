@@ -1,5 +1,7 @@
 # Advanced Storage engineering assessment — 2026-10-30
 
+**Follow-up 2026-10-31:** the [final closure](final-project-closure.md) records newly executed Linux lab/GET/fixture/HTTP validation, a fresh pinned upload Linux run and release preparation. The dated results and outstanding platform statements below describe the earlier investigation; none of its failed observations are replaced.
+
 **Local work only.** No push, merge, PR-status change, release or maintainer communication. This assessment supersedes earlier current-state statements while retaining their dated evidence. It covers the lab and its associated Storage checkout only.
 
 ## Verified inventory and change from handoff

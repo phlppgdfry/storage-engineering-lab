@@ -1,0 +1,51 @@
+[
+  {
+    "classification": "ENVIRONMENTAL FAILURE",
+    "label": "lab-image-missing-git",
+    "record": {
+      "status": "FAIL",
+      "source": "254c6fbdaa5ffbc0639b9783939048452405a778",
+      "commands": [
+        {
+          "label": "archive",
+          "command": [
+            "git",
+            "archive",
+            "HEAD",
+            "-o",
+            "<tmp>/storage-lab-Q4yqOs/lab.tar"
+          ],
+          "exit": 0
+        },
+        {
+          "label": "extract",
+          "command": [
+            "tar",
+            "-xf",
+            "<tmp>/storage-lab-Q4yqOs/lab.tar",
+            "-C",
+            "<tmp>/storage-lab-Q4yqOs/lab"
+          ],
+          "exit": 0
+        }
+      ],
+      "error": "lab-linux: exit 1. Evidence: <lab>/evidence/local/closure-lab-linux-EZ1K84/lab-linux.log\nUnable to find image 'node:24.21.0-bookworm-slim@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20' locally\ndocker.io/library/node@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20: Pulling from library/node\nDigest: sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20\nStatus: Downloaded newer image for node@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20\n",
+      "cleanup": "PASS"
+    }
+  },
+  {
+    "classification": "ENVIRONMENTAL FAILURE",
+    "label": "http-runner-missing-esm-context",
+    "record": {
+      "status": "FAIL",
+      "baseline": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
+      "download": "8eceb9017690cc4d19ecc47a06452a943b2d0256",
+      "fixture": "9a760254b942d109054f941b5b21c93d4bd3ffdb",
+      "evidence": "<lab>/evidence/local/closure-current-linux-mk3ZcP",
+      "lab": "254c6fbdaa5ffbc0639b9783939048452405a778",
+      "image": "sha256:b88e6dcb8237e73123f4d186d6fc5b527a4baea55341dc2c39fa4d8b8deb1cb9",
+      "error": "current-linux: exit 1. Evidence: <lab>/evidence/local/closure-current-linux-mk3ZcP/current-linux.log\n",
+      "cleanup": "PASS"
+    }
+  }
+]
