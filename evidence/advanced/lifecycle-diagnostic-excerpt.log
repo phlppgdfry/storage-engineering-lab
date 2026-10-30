@@ -1,0 +1,6 @@
+EXCERPT: diagnostic-only onError hook; assertions unchanged. Validation400errors omitted, original full log retained locally.
+LIFECYCLE_DIAGNOSTIC TypeError: Cannot read properties of undefined (reading 'lifecycle_configuration')
+    at Storage.getBucketLifecycle (<checkout>/src/storage/storage.ts:93:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.<anonymous> (<checkout>/src/http/routes/bucket/lifecycle.ts:86:29)
+

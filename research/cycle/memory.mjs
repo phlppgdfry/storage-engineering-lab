@@ -21,7 +21,13 @@ export function readMemory(file, evidenceRoot) {
       if (typeof artifact.path !== 'string' || path.isAbsolute(artifact.path) || artifact.path.split(/[\\/]/).includes('..')) throw new Error('Unsafe evidence reference')
       const file = path.join(evidenceRoot, artifact.path)
       const relative = path.relative(realpathSync(evidenceRoot), realpathSync(file))
-      if (relative.startsWith('..') || path.isAbsolute(relative) || lstatSync(file).isSymbolicLink() || hash(readFileSync(file)) !== artifact.sha256) throw new Error('Missing or corrupted evidence')
+      if (relative.startsWith('..') || path.isAbsolute(relative) || lstatSync(file).isSymbolicLink()) throw new Error('Missing or corrupted evidence')
+      // Validate/read the same opened regular file. A final-component replacement
+      // after lstat must not turn a checked artifact into a followed symlink/FIFO.
+      const descriptor = openRegularMemory(file, constants.O_RDONLY)
+      try {
+        if (hash(readFileSync(descriptor)) !== artifact.sha256) throw new Error('Missing or corrupted evidence')
+      } finally { closeSync(descriptor) }
     }
     previous = digest
   }

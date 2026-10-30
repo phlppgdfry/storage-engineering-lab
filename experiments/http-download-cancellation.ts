@@ -10,6 +10,7 @@ import { pathToFileURL } from 'node:url'
 
 const checkout = path.resolve(process.argv[2])
 const signalForwarded = process.argv[3] === 'forwarded'
+const extended = process.argv.includes('extended')
 const root = await mkdtemp(path.join(tmpdir(), 'http-download-'))
 Object.assign(process.env, { STORAGE_FILE_BACKEND_PATH: root, STORAGE_FILE_ETAG_ALGORITHM: 'mtime' })
 const load = (file: string) => import(pathToFileURL(path.join(checkout, file)).href)
@@ -36,16 +37,19 @@ try {
   const renderer = new AssetRenderer(backend)
   app.get('/object', async (request: any, reply: any) => {
     const run = active
+    run.rawResponse = reply.raw
+    run.events.push({ event: 'handler-enter', ms: performance.now() - run.started })
     run.signal = request.signals.disconnect.signal
     run.signal.addEventListener('abort', () => {
       run.abortSeen = true
+      run.events.push({ event: 'signal-abort', ms: performance.now() - run.started })
       run.headersAtAbort = reply.raw.headersSent
       run.bytesAtAbort = run.streams.map((s: fs.ReadStream) => s.bytesRead)
     }, { once: true })
     try {
       // Same signal/renderer/backend path as getObject route, without DB/auth setup.
       return await renderer.render(request, reply, { bucket: 'bucket', key: 'object', version: undefined, signal: run.signal })
-    } finally { run.routeSettled = true }
+    } finally { run.routeSettled = true; run.finalizations++; run.events.push({ event: 'handler-settled', ms: performance.now() - run.started }) }
   })
   await app.listen({ host: '127.0.0.1', port: 0 })
   const port = app.server.address().port
@@ -54,39 +58,60 @@ try {
     if (active && String(args[0]) === path.join(root, 'bucket/object')) {
       active.streams.push(stream)
       const run = active
+      if (run.events) stream.once('close', () => run.events.push({ event: 'stream-close', bytesRead: stream.bytesRead, fd: stream.fd, ms: performance.now() - run.started }))
       // Observation only: never attach a data listener or throttle native reads.
-      if (run.trigger === 'hash-open' && run.streams.length === 1) stream.once('open', () => run.client.destroy())
+      if (run.trigger === 'hash-open' && run.streams.length === 1) stream.once('open', () => {
+        run.events.push({ event: 'hash-open', ms: performance.now() - run.started })
+        if (run.mode === 'server-socket-close') app.server.closeAllConnections(); else run.client.destroy()
+      })
       if (run.trigger === 'head-control' && run.streams.length === 1) stream.once('open', () => run.controller.abort())
     }
     return stream
   }) as typeof fs.createReadStream
   const observations: any[] = []
-  for (const mode of ['complete', 'pre-header-md5', 'mid-body', 'mid-body-range']) {
-    backend.etagAlgorithm = mode.includes('md5') || mode === 'complete' ? 'md5' : 'mtime'
-    const run: any = { mode, trigger: mode === 'pre-header-md5' ? 'hash-open' : 'client-data', streams: [], abortSeen: false, clientHeaders: false, routeSettled: false, clientBytes: 0, digest: createHash('md5') }
+  for (const mode of ['complete', 'pre-header-md5', 'mid-body', 'mid-body-range', ...(extended ? ['headers-only-close', 'slow-consumer', 'near-completion', 'server-socket-close'] : [])]) {
+    backend.etagAlgorithm = mode.includes('md5') || mode === 'complete' || mode === 'server-socket-close' ? 'md5' : 'mtime'
+    const run: any = { mode, trigger: mode === 'pre-header-md5' || mode === 'server-socket-close' ? 'hash-open' : 'client-data', streams: [], abortSeen: false, clientHeaders: false, routeSettled: false, clientBytes: 0, events: [], finalizations: 0, started: performance.now(), digest: createHash('md5') }
     active = run
     const clientClosed = new Promise<void>(resolve => {
       run.client = http.get({ host: '127.0.0.1', port, path: '/object', agent: false, headers: mode === 'mid-body-range' ? { range: 'bytes=0-1048575' } : {} }, response => {
         run.clientHeaders = true; run.httpStatus = response.statusCode
+        run.events.push({ event: 'client-headers', ms: performance.now() - run.started })
         run.contentLength = Number(response.headers['content-length']); run.contentRange = response.headers['content-range'] ?? null; run.etag = response.headers.etag
         response.on('error', () => {})
+        if (mode === 'headers-only-close') { response.destroy(); run.client.destroy(); return }
+        if (mode === 'slow-consumer') {
+          response.pause()
+          run.slowControl = (async () => {
+            await sleep(100)
+            run.pausedObservation = { bytesRead: run.streams[0].bytesRead, readableLength: run.streams[0].readableLength, writableLength: run.rawResponse.writableLength }
+            assert(run.pausedObservation.bytesRead < size, 'Paused client did not constrain read-ahead in this environment')
+            response.resume()
+          })().catch(error => { run.slowError = error.message; response.destroy(); run.client.destroy() })
+        }
         response.on('data', chunk => {
           run.clientBytes += chunk.length; run.digest.update(chunk)
-          if (mode.startsWith('mid-body')) { response.destroy(); run.client.destroy() }
+          if (mode.startsWith('mid-body') || (mode === 'near-completion' && run.clientBytes >= size - 65536)) { response.destroy(); run.client.destroy() }
         })
       })
       run.client.on('error', () => {}) // Expected ECONNRESET is not a test pass oracle.
       run.client.once('close', resolve)
     })
     await clientClosed
+    await run.slowControl
+    assert.equal(run.slowError, undefined)
     await waitFor(() => run.routeSettled && run.streams.length > 0 && run.streams.every((s: fs.ReadStream) => s.closed), mode)
     const streams = run.streams.map((s: fs.ReadStream) => ({ bytesRead: s.bytesRead, closed: s.closed, fd: s.fd }))
-    if (mode === 'complete') {
+    assert.equal(run.finalizations, 1)
+    if (mode === 'complete' || mode === 'slow-consumer') {
       assert.equal(run.httpStatus, 200); assert.equal(run.clientBytes, size); assert.equal(run.abortSeen, false)
-      assert.equal(run.digest.digest('hex'), expectedMd5); assert.equal(run.etag, `"${expectedMd5}"`); assert.equal(run.contentLength, size)
+      assert.equal(run.digest.digest('hex'), expectedMd5); if (mode === 'complete') assert.equal(run.etag, `"${expectedMd5}"`); assert.equal(run.contentLength, size)
+    } else if (mode === 'near-completion') {
+      assert.equal(run.httpStatus, 200); assert(run.clientBytes >= size - 65536); assert(run.clientBytes <= size)
+      assert(streams[0].bytesRead <= size) // A finished server response need not abort its signal.
     } else {
       assert.equal(run.abortSeen, true)
-      if (mode === 'pre-header-md5') {
+      if (mode === 'pre-header-md5' || mode === 'server-socket-close') {
         assert.equal(run.clientHeaders, false); assert.equal(run.headersAtAbort, false)
         assert(run.bytesAtAbort[0] < size, 'Disconnect happened too late: inconclusive oracle')
         if (signalForwarded) {
@@ -98,13 +123,13 @@ try {
       } else {
         const responseSize = mode.endsWith('range') ? 1048576 : size
         assert.equal(run.httpStatus, mode.endsWith('range') ? 206 : 200)
-        assert.equal(run.contentLength, responseSize); assert(run.clientBytes > 0)
+        assert.equal(run.contentLength, responseSize); if (mode !== 'headers-only-close') assert(run.clientBytes > 0); else assert.equal(run.clientBytes, 0)
         assert.equal(run.contentRange, mode.endsWith('range') ? `bytes 0-1048575/${size}` : null)
         assert.equal(streams.length, 1); assert(streams[0].bytesRead < responseSize, 'Streaming disconnect did not stop before full body read')
       }
     }
     assert(streams.every((s: any) => s.closed && s.fd === null))
-    observations.push({ mode, clientHeaders: run.clientHeaders, httpStatus: run.httpStatus ?? null, clientBytes: run.clientBytes, contentLength: run.contentLength ?? null, contentRange: run.contentRange ?? null, abortSeen: run.abortSeen, headersAtAbort: run.headersAtAbort ?? null, bytesAtAbort: run.bytesAtAbort ?? null, streams, routeSettled: run.routeSettled })
+    observations.push({ mode, clientHeaders: run.clientHeaders, httpStatus: run.httpStatus ?? null, clientBytes: run.clientBytes, contentLength: run.contentLength ?? null, contentRange: run.contentRange ?? null, abortSeen: run.abortSeen, headersAtAbort: run.headersAtAbort ?? null, bytesAtAbort: run.bytesAtAbort ?? null, streams, routeSettled: run.routeSettled, finalizations: run.finalizations, pausedObservation: run.pausedObservation ?? null, events: run.events })
   }
   backend.etagAlgorithm = 'md5'
   active = { trigger: 'head-control', controller: new AbortController(), streams: [] }
@@ -115,7 +140,7 @@ try {
   assert(rejection === active.controller.signal.reason || rejection.name === 'AbortError' || rejection.code === 'ABORT_ERR')
   assert(active.streams[0].bytesRead < size); assert.equal(active.streams[0].fd, null)
   observations.push({ mode: 'native-head-control', rejected: true, signalAborted: active.controller.signal.aborted, errorName: rejection.name, errorCode: rejection.code ?? null, bytesRead: active.streams[0].bytesRead, closed: active.streams[0].closed, fd: active.streams[0].fd })
-  console.log(JSON.stringify({ size, signalForwarded, observations, components: ['actual Fastify', 'actual RequestSignals plugin', 'actual AssetRenderer', 'actual FileBackend/native xattrs'], limitations: ['Minimal local route bypasses authentication/database lookup/CDN/proxy', 'No throttling, mocks or synthetic sleeps in file read path', 'Bytes read are logical native stream bytes, not physical disk IO', signalForwarded ? 'Diagnostic intervention stops pre-header hash; not a complete production fix' : 'No descriptor leak observed; pre-header MD5 work continues after disconnect'] }))
+  console.log(JSON.stringify({ size, signalForwarded, extended, maxRssKiB: process.resourceUsage().maxRSS, observations, components: ['actual Fastify', 'actual RequestSignals plugin', 'actual AssetRenderer', 'actual FileBackend/native xattrs'], limitations: ['Minimal local route bypasses authentication/database lookup/CDN/proxy', 'No throttling, mocks or synthetic sleeps in file read path', 'Bytes read are logical native stream bytes, not physical disk IO', signalForwarded ? 'Diagnostic intervention stops pre-header hash; not a complete production fix' : 'No descriptor leak observed; pre-header MD5 work continues after disconnect'] }))
 } finally {
   fs.createReadStream = original
   if (active?.client) active.client.destroy()

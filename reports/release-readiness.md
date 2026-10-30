@@ -41,3 +41,11 @@ Publication approval is an explicit user boundary. No new external write is requ
 ## 2026-10-29 disposition
 
 Authorized lab update is published in own-repository PR #1 with actual fast CI passes; PR is open, not merged. The current local research extension is experimental and **not published**. Its separate [gate matrix](next-level.md) documents 43 passing lab tests, native download observations, equal synthetic planner scores and unresolved HTTP/performance/containment boundaries. No upstream source change, status transition, maintainer outreach, release or Storage Doctor change was performed.
+
+## 2026-10-30 independent scope decisions
+
+Lab: CONDITIONAL GO for the existing presentation-only c9006dc unit, subject to explicit push approval and actual CI on that head, then separate merge approval. Upload#1616: CONDITIONAL GO for review, not a performance or production clearance. New local download e1e033c: CONDITIONAL GO for separate review with fresh current-engine local validation; Linux/integration/human/hosted gates remain unexecuted. Self-improvement claims: UNSUPPORTED; comparative planner benefit INCONCLUSIVE. [Complete current assessment and publication boundaries](advanced-engineering.md).
+
+### Frozen latest baseline9d15cdc9
+
+A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](advanced-engineering.md).

@@ -15,13 +15,13 @@ const interruption = interruptController()
 const owner = createOwnedRun(values.http ? 'http-download' : 'download')
 const worktree = path.join(owner.temporary, 'checkout')
 let created = false
-const summary = { revision, recordedAt: new Date().toISOString(), environment: { node: process.version, platform: process.platform, arch: process.arch }, worker, workerSha256: hash(readFileSync(path.join(LAB, worker))), observations: [], status: 'RUNNING', limitation: 'Current source with reused pinned study dependencies, not a fresh installation at current upstream lock; minimal route bypasses database/auth when --http.' }
+const summary = { revision, recordedAt: new Date().toISOString(), environment: { node: process.version, platform: process.platform, arch: process.arch }, worker, workerSha256: hash(readFileSync(path.join(LAB, worker))), observations: [], status: 'RUNNING', limitation: 'Historical pinned dcbb8eb7 source with reused study dependencies, not an installation at moving upstream HEAD; minimal route bypasses database/auth when --http.' }
 try {
   git(checkout, ['worktree', 'add', '--detach', worktree, revision]); created = true
   symlinkSync(dependencies.modules, path.join(worktree, 'node_modules'), 'dir')
   for (const name of ['.env', '.env.test']) copyFileSync(path.join(worktree, `${name}.sample`), path.join(worktree, name))
   if (values.intervention) git(worktree, ['apply', path.join(LAB, 'experiments/download-md5-intervention.patch')])
-  summary.variant = values.intervention ? 'diagnostic MD5 signal forwarding' : 'original current upstream'
+  summary.variant = values.intervention ? 'diagnostic MD5 signal forwarding' : 'original historical pinned source'
   summary.adapterSha256 = hash(readFileSync(path.join(worktree, 'src/storage/backend/file.ts')))
   summary.sourceTree = git(worktree, ['rev-parse', 'HEAD^{tree}']).trim()
   for (let i = 0; i < 3; i++) {

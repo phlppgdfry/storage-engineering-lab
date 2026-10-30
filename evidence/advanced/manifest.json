@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "scope": "Two frozen upstream baselines (211 and9d), retained failures and a separate fixture mitigation. Curated excerpts labelled; full raw logs and every attempt remain local. No hosted CI or independent human attestation. Historical evidence unchanged.",
+  "artifacts": [
+    {
+      "path": "evidence/advanced/advanced-lab-tests.log",
+      "bytes": 4471,
+      "sha256": "5322c52b55d8c42888b02534872366877dad2d7721a5ad93148a41c088fb1e6b"
+    },
+    {
+      "path": "evidence/advanced/artifact-race-green.log",
+      "bytes": 972,
+      "sha256": "e33ad257450166a0500ba364b710bf67a8549a8aef80eb986073971ae58aca2a"
+    },
+    {
+      "path": "evidence/advanced/artifact-race-red.log",
+      "bytes": 1850,
+      "sha256": "625d9404db1b1b61739eef380218a2d05482ab59469df66e073c24187b8acc37"
+    },
+    {
+      "path": "evidence/advanced/build-final.log",
+      "bytes": 87,
+      "sha256": "2d6c7afc52325e551c0ec53166ff0be99234b5cd99023de189134ff67903fd53"
+    },
+    {
+      "path": "evidence/advanced/composite-unit.log",
+      "bytes": 435,
+      "sha256": "a067c958bf00881fd2a9661455ca656b96b9d40042ea0db7a7f01aa3fbfa7116"
+    },
+    {
+      "path": "evidence/advanced/composite.json",
+      "bytes": 466,
+      "sha256": "e917aad74711e3a81f0bea767e3fe7feef3887ed8cf43093293539ca714ac84a"
+    },
+    {
+      "path": "evidence/advanced/current-build-final.log",
+      "bytes": 87,
+      "sha256": "2d6c7afc52325e551c0ec53166ff0be99234b5cd99023de189134ff67903fd53"
+    },
+    {
+      "path": "evidence/advanced/current-dependency-audit.json",
+      "bytes": 34290,
+      "sha256": "bc517d5cf67bda15080540bd5f29cbea92295d91b261fa196410ea523dba400a"
+    },
+    {
+      "path": "evidence/advanced/current-http-fixed.json",
+      "bytes": 33201,
+      "sha256": "7346e44c47c51094459c30997f9ec84ab6f82cd0a149a8fba08e5a4bee8d1b1a"
+    },
+    {
+      "path": "evidence/advanced/current-http-original.json",
+      "bytes": 34755,
+      "sha256": "935abffb3c57506cf0782e9c00686c6a572a891e8c0a5d62f2e69bca9d1cfc56"
+    },
+    {
+      "path": "evidence/advanced/current-lint-final.log",
+      "bytes": 43,
+      "sha256": "a4174233a64c02e5886ba0f1471336b93b95c232171e43e573be7a0ebff16ab0"
+    },
+    {
+      "path": "evidence/advanced/current-summary.json",
+      "bytes": 2010,
+      "sha256": "95a9623626136757446cfce43ba2d35feed93dd4b6e685d3167de6e9c54f2225"
+    },
+    {
+      "path": "evidence/advanced/current-unit-first.log",
+      "bytes": 554,
+      "sha256": "625059fd5f59f7986f8940c09e181cd4a43d7de0b9b416eed4f867bc15542065"
+    },
+    {
+      "path": "evidence/advanced/current-unit-rerun.log",
+      "bytes": 531,
+      "sha256": "1746a6a838fadc250ba3127831a0ed09144fd44ec154e1f2b241933378c808ff"
+    },
+    {
+      "path": "evidence/advanced/current-upload.json",
+      "bytes": 2319,
+      "sha256": "4f704a5b6b692acc377fbceafc6fbc6869f848b8fdcbe0bee7e0bfea9848ae35"
+    },
+    {
+      "path": "evidence/advanced/dependency-audit.json",
+      "bytes": 34290,
+      "sha256": "bc517d5cf67bda15080540bd5f29cbea92295d91b261fa196410ea523dba400a"
+    },
+    {
+      "path": "evidence/advanced/download-red-excerpt.log",
+      "bytes": 2822,
+      "sha256": "9a711cea3c042ceefde361a014b564926d45f4138664a0a81233b356c45a3a08"
+    },
+    {
+      "path": "evidence/advanced/green2.log",
+      "bytes": 610,
+      "sha256": "3d635a05d902cff312c13ca693d845b9dd34b2e00fbc4a7267851cc20b3fb101"
+    },
+    {
+      "path": "evidence/advanced/http-fixed.json",
+      "bytes": 33192,
+      "sha256": "8fa2056eb7f0ba65e2e7d4b3f1f2678588a6d4c32775a52e1953d80aa098396c"
+    },
+    {
+      "path": "evidence/advanced/http-original.json",
+      "bytes": 34698,
+      "sha256": "34ba555822f9d3d687610b45e7b79782ed8f4e83b3b6ab3db914ce77f98a4545"
+    },
+    {
+      "path": "evidence/advanced/lab-final-check.json",
+      "bytes": 793,
+      "sha256": "cd1da2450f27fa57e1eb4190ca303f157cf79d0a47d106e3fd0939adfb144af2"
+    },
+    {
+      "path": "evidence/advanced/lab-final-tests.log",
+      "bytes": 4468,
+      "sha256": "0dcdb1c417dce033bf6d301a595ed420a7ff11095c9d5f9ab2dc6fc191644777"
+    },
+    {
+      "path": "evidence/advanced/lifecycle-baseline-failure.json",
+      "bytes": 567,
+      "sha256": "88f29744a2fc0c26a3432efb4c2ae110b6582b2c1db38ac3be6bcaabaa9cd744"
+    },
+    {
+      "path": "evidence/advanced/lifecycle-baseline-failure.log",
+      "bytes": 457,
+      "sha256": "fbc67d574cea0d29bb43e48463c62403072a8e57f7aff8462df959aa41c65f0f"
+    },
+    {
+      "path": "evidence/advanced/lifecycle-diagnostic-excerpt.log",
+      "bytes": 471,
+      "sha256": "30f4e461acaa2bcb68947649280d8348f7e7031b9082b1377c6f33cb9ae00ef1"
+    },
+    {
+      "path": "evidence/advanced/lifecycle-fixture-unit.log",
+      "bytes": 531,
+      "sha256": "c0003219ca6b387aa8d46a033f764ad02efec4b3ba54becbad67baeed6d3b19d"
+    },
+    {
+      "path": "evidence/advanced/lifecycle-fixture.json",
+      "bytes": 449,
+      "sha256": "b26d7284e5bc98cfda1ad363d0efdcc4115d1508a65c4b32ddd80d4c8b4bce06"
+    },
+    {
+      "path": "evidence/advanced/lint-final.log",
+      "bytes": 43,
+      "sha256": "4203b118b3e512877cd17ab924956091fa04c7d33b775461f6e751f1aded04bf"
+    },
+    {
+      "path": "evidence/advanced/offline-check.json",
+      "bytes": 797,
+      "sha256": "672a73c87454d91bdaf9af4a7adcc1a84fc8f208f03f5e3cd60069fc2705cad3"
+    },
+    {
+      "path": "evidence/advanced/rejected-isolation-hypothesis.json",
+      "bytes": 838,
+      "sha256": "22e7954bcbc1d0fd5bbd4641082c80d7ca5213cbd4f316cef042d6da8fb05e51"
+    },
+    {
+      "path": "evidence/advanced/summary.json",
+      "bytes": 3358,
+      "sha256": "5d02730c4d0a9dcb131f2ca236b48197e39da211a658e4aeec69e95285cd5b33"
+    },
+    {
+      "path": "evidence/advanced/unit-final.log",
+      "bytes": 460,
+      "sha256": "2cf5045287558d6f41b45068745dc7df0a14bea618bad0aaace5ffe3d469f408"
+    },
+    {
+      "path": "evidence/advanced/upload-current.json",
+      "bytes": 2319,
+      "sha256": "e98ad557759105cb47515f83fe97e2295be82bc3ec7dd201c60dceb257b56296"
+    }
+  ]
+}

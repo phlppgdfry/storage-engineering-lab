@@ -1,0 +1,10 @@
+EXCERPT: actual result and diagnostics; complete original log retained locally.
+ Test Files  1 failed | 181 passed (182)
+      Tests  1 failed | 3440 passed (3441)
+   Start at  20:40:41
+   Duration  23.13s (tests 61%, import 27%, transform 11%, worker 1%)
+
+     Import  604 modules were evaluated 2463 times · 15.85s total, 27% of tracked time
+             ~1.60s faster with isolate: false — shared modules are evaluated once per worker instead of once per file
+             learn more: https://vitest.dev/guide/improving-performance#test-isolation
+

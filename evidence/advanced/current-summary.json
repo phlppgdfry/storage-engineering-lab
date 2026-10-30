@@ -1,0 +1,77 @@
+{
+  "baseline": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
+  "downloadCommit": "8eceb9017690cc4d19ecc47a06452a943b2d0256",
+  "branch": "fix/file-download-cancellation-current",
+  "fixtureCommit": "9a760254b942d109054f941b5b21c93d4bd3ffdb",
+  "node": "26.13.0",
+  "npm": "12.2.1",
+  "dependencyVersions": {
+    "vitest": "5.0.5",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "fastify": "5.12.7",
+    "undici": "8.12.3",
+    "pino": "10.4.0",
+    "lru-cache": "11.5.3",
+    "fs-xattr": "0.4.0"
+  },
+  "lockSha256": "ed8f0baf5f8e5180102244fe76974a63a68fb39a87aaef2bc8cbdfdc9d7895f9",
+  "focusedRegressionBefore": {
+    "failed": 10,
+    "passed": 9,
+    "expectedExit": 1
+  },
+  "downloadOnlyFullUnit": {
+    "first": {
+      "failed": 1,
+      "passed": 3440,
+      "files": 182,
+      "exit": 1
+    },
+    "boundedRepeat": {
+      "failed": 0,
+      "passed": 3441,
+      "files": 182,
+      "exit": 0
+    }
+  },
+  "untouchedBaselineFullUnit": {
+    "failed": 1,
+    "passed": 3421,
+    "files": 182,
+    "exit": 1
+  },
+  "fixtureOnlyValidation": {
+    "passed": 3422,
+    "files": 182,
+    "lint": "PASS",
+    "typecheck": "PASS"
+  },
+  "compositeValidation": {
+    "passed": 3441,
+    "files": 182,
+    "lint": "PASS",
+    "build": "PASS",
+    "overlayReversed": true
+  },
+  "candidateLint": "PASS:708 files",
+  "candidateBuild": "PASS",
+  "httpRepetitionsPerVariant": 3,
+  "httpCasesPerRepetition": 9,
+  "advisoryPackages": {
+    "info": 0,
+    "low": 0,
+    "moderate": 11,
+    "high": 13,
+    "critical": 0,
+    "total": 24
+  },
+  "labTests": 45,
+  "historicalGroups": 130,
+  "cleanup": "PASS: own latest installed checkout removed; all three contribution branches and raw evidence retained",
+  "limits": [
+    "Original suite failures retained; underlying Vitest module-cache/order mechanism not proven.",
+    "No hosted/Linux/current-DB/provider conformance, normal-upload benchmark or production security certification."
+  ],
+  "rawEvidence": "evidence/local/advanced-download-latest-bJ9vG6"
+}

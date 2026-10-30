@@ -116,3 +116,32 @@ test('one-cycle CLI stops duplicates, concurrent/crashed locks and corrupt evide
   assert.equal(readFileSync(memoryFile, 'utf8'), before)
   assert.equal(existsSync(path.join(parent, 'cycle.lock')), false)
 })
+
+test('evidence read refuses a final-path symlink replacement between path validation and open', t => {
+  const root = fixture(t)
+  const program = `
+    import fs from 'node:fs'; import path from 'node:path';
+    import { syncBuiltinESMExports } from 'node:module';
+    import { appendMemory, readMemory } from './research/cycle/memory.mjs';
+    import { hash } from './scripts/runtime.mjs';
+    const root = process.argv[1], evidence = path.join(root,'evidence'); fs.mkdirSync(evidence);
+    const outside = path.join(root,'outside.txt'), artifact = path.join(evidence,'result.json');
+    fs.writeFileSync(outside,'private fixture bytes'); fs.writeFileSync(artifact,'original evidence');
+    const memory = path.join(evidence,'memory.jsonl');
+    appendMemory(memory,[],{experiment:'abort',scenario:'correct',evidence:[{path:'result.json',sha256:hash('private fixture bytes')}]});
+    const original = fs.lstatSync; let swapped = false;
+    fs.lstatSync = function(file,...args) {
+      const result = original(file,...args);
+      if(file === artifact && !swapped) { swapped=true;fs.unlinkSync(artifact);fs.symlinkSync(outside,artifact) }
+      return result;
+    }; syncBuiltinESMExports();
+    let refused=false; try { readMemory(memory,evidence) } catch { refused=true }
+    console.log(JSON.stringify({refused,swapped,outside:fs.readFileSync(outside,'utf8')}));
+  `
+  const child = spawnSync(process.execPath, ['--input-type=module', '-e', program, root], { encoding: 'utf8', timeout: 5000 })
+  assert.equal(child.status, 0, child.stderr)
+  const result = JSON.parse(child.stdout)
+  assert.equal(result.swapped, true)
+  assert.equal(result.refused, true)
+  assert.equal(result.outside, 'private fixture bytes')
+})

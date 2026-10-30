@@ -1,0 +1,36 @@
+diff --git a/src/http/routes/bucket/lifecycle-disabled.test.ts b/src/http/routes/bucket/lifecycle-disabled.test.ts
+index 16af0169..81f5e5e2 100644
+--- a/src/http/routes/bucket/lifecycle-disabled.test.ts
++++ b/src/http/routes/bucket/lifecycle-disabled.test.ts
+@@ -8,16 +8,10 @@ import { errorSchema } from '../../schemas/error'
+ describe('REST bucket lifecycle feature flag', () => {
+   it('keeps generic writes closed and rejects dedicated lifecycle routes when disabled', async () => {
+     const config = await import('../../../config')
+-    const configured = config.getConfig()
+-    vi.resetModules()
+-    vi.doMock('../../../config', () => ({
+-      ...config,
+-      getConfig: () => ({
+-        ...configured,
+-        storageVersioningEnabled: false,
+-        isMultitenant: false,
+-      }),
+-    }))
++    // Exercise the actual flag reload instead of replacing the module graph.
++    vi.stubEnv('MULTI_TENANT', 'false')
++    vi.stubEnv('STORAGE_VERSIONING_ENABLED', 'false')
++    config.getConfig({ reload: true })
+ 
+     const [{ default: createBucket }, { default: lifecycle }, { default: updateBucket }] =
+       await Promise.all([import('./createBucket'), import('./lifecycle'), import('./updateBucket')])
+@@ -95,8 +89,8 @@ describe('REST bucket lifecycle feature flag', () => {
+       expect(db.deleteLifecycleConfiguration).not.toHaveBeenCalled()
+     } finally {
+       await app.close()
+-      vi.doUnmock('../../../config')
+-      vi.resetModules()
++      vi.unstubAllEnvs()
++      config.getConfig({ reload: true })
+     }
+   })
+ })

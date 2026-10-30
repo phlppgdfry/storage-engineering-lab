@@ -53,3 +53,13 @@ The separate local `research/bounded-cycle` extension passes **43/43** tests: [a
 ## Showcase review executions
 
 [44-test log](../evidence/showcase/tests.log), [public quickstart](../evidence/showcase/public-quickstart.json), [original HTTP](../evidence/showcase/http-original.json), [diagnostic HTTP](../evidence/showcase/http-intervention.json), [interruption](../evidence/showcase/interruption.json), [planner matrix](../evidence/showcase/evaluation.json), [manifest](../evidence/showcase/manifest.json). The interrupted run is intentionally FAIL/exit1 with cleanupPASS, not a successful functional experiment. All six probe rankings have the same effectiveness score; this corpus cannot distinguish planner benefit.
+
+## 2026-10-30 exact-current-source verification
+
+Current upstream211b2beb requires Node26/npm12. Separate local download commit e1e033c: fresh exact-lock installation,171file cases,3410unit cases/180files,lint704files and TypeScript/esbuild PASS. Focused original regression stage is an expected exit1 with10failed/9passed; all19new cases pass with the fix. Real extended HTTP original/fixed runs and independent upload-patch compatibility probes are retained in [the current audit](advanced-engineering.md). Lab45/45tests PASS, historical130groups remain checked, one honest warm-up warning retained.
+
+No new Linux/PostgreSQL/real-provider matrix or normal-upload benchmark was executed. Hosted CI on c9006dc/e1e033c/newlabhead is NOT EXECUTED. Actual prior head4f98bb5 hosted checks remain historical successful runs. The [current summary](../evidence/advanced/summary.json) and manifest separate exits, failed attempts and limitations.
+
+### Frozen latest baseline9d15cdc9
+
+A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](advanced-engineering.md).

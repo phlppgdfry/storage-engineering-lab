@@ -1,0 +1,2 @@
+npm notice run supa-storage@1.11.2 build
+npm notice run tsc -noEmit && node ./build.js

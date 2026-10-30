@@ -1,0 +1,105 @@
+{
+  "baseline": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
+  "recordedAt": "2026-10-30T20:01:03.764Z",
+  "node": "v26.13.0",
+  "before": [
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "after": [
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "status": "PASS",
+  "red": {
+    "failed": 2,
+    "passed": 3,
+    "exitCode": 1
+  },
+  "green": {
+    "passed": 5,
+    "exitCode": 0
+  },
+  "adapterSha256": "13aeee850cc7263a87b0fd2431a429e2360d7cd135b98ccf8ce5f1d422cfb710",
+  "cleanup": "PASS"
+}

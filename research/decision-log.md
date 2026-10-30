@@ -55,3 +55,15 @@ Actual local HTTP experiments on current upstream establish continued pre-header
 ## D012 — Treat a nondiscriminating evaluation as inconclusive
 
 Independent review found the frozen balanced corpus forces every two-probe ranking to the same effectiveness score. Preserve corpus/results, report this limitation programmatically across all6rankings, and reject general equivalence/self-improvement claims. A separately justified, versioned corpus is a future prerequisite for testing planner benefit. Do not tune workload frequencies to obtain a win.
+
+## D013 — Separate current GET correction from the historical upload study
+
+Upstream advanced to Node26/npm12 and new lifecycle/undici code. Keep old source, lock,130groups and upload branch unchanged. Prepare a new GET-only branch on211b2beb using fresh locked dependencies. Reject a manual abort-listener framework and abandoned promise races; use boundary checks and existing native stream/MD5 signal support. Exact current-base red10/green19 controls,171file tests,3410unit tests and real HTTP variants support local review. In-flight stat/xattrs remain cooperative, not instantly cancellable. Linux/DB/provider/human/hosted gates remain explicit. [Current audit](../reports/advanced-engineering.md).
+
+## D014 — Open and read the same artifact descriptor
+
+A deterministic test reproduced final-path replacement after artifact validation. Reuse the existing no-follow/nonblocking regular-file opener and hash its descriptor, rather than reading the path again. No memory schema change, dependency or privileged filesystem helper. The same-UID adversarial parent-directory problem remains outside private-root trust assumptions; do not claim complete TOCTOU immunity or a remote Supabase exploit. [Red/green evidence](../evidence/advanced/artifact-race-green.log).
+
+## D015 — Freeze moving upstream and separate fixture reliability from GET correctness
+
+After validating211/e1, upstream advanced to9d15cdc9 with native env loading and dependency changes. Preserve the first green series and validate the same GET correction on a new local branch8eceb9, not by rewriting history. A lifecycle-disabled failure appeared in both broad untouched baseline and candidate, while isolated baseline and bounded candidate repeat passed. Retain all outcomes; the first class/handler hypothesis was not supported. A one-file real-config fixture mitigation9a76025 keeps every assertion and production file unchanged, passes3422baseline cases, and an explicit reversible GET+fixture overlay passes3441pluslint/build. Exact Vitest/cache/order mechanics remain unproven. Keep the fixture patch separate; no extra PR or outreach without approval.

@@ -1,0 +1,9 @@
+EXCERPT: result and subsequent diagnostics from the actual complete unit log; full log retained locally.
+ Test Files  180 passed (180)
+      Tests  3410 passed (3410)
+   Start at  05:08:57
+   Duration  19.01s (tests 69%, import 27%, transform 3%, worker 1%)
+
+    Isolate  180 workers spawned · ~152ms startup each (spawn + environment, per file)
+             at least ~6.67s faster with isolate: false — reuses workers across files instead of one per file
+

@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "scope": "Offline evidence consistency and lab syntax; not a benchmark rerun or performance approval.",
+  "filesChecked": 163,
+  "measuredGroups": 130,
+  "registry": {
+    "hypotheses": 5,
+    "recommendation": {
+      "id": "H002",
+      "nextAction": "Review local fix/file-download-cancellation e1e033c separately from upload#1616; inspect the two patches and current-base evidence. Obtain human review, relevant hosted/Linux validation and explicit publication approval before creating any new upstream PR.",
+      "method": "Priority ascending, then ID; excludes held, deferred, submitted and terminal work. Recommendation is not a confirmed finding."
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "B/6/fixed: warm-up rule not met; retained as inconclusive evidence"
+  ]
+}

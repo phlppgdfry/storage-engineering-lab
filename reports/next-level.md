@@ -111,3 +111,11 @@ Correction to prior planner interpretation: the balanced corpus mathematically f
 Changed source includes only local experiment/prototype scripts/tests and a diagnostic patch. The upstream checkout and Storage Doctor remain unchanged. Next commands: `npm run check` and review the final local commit; publication requires explicit approval. Before any complete download fix, write focused current-upstream regression/controls and establish the intended contract separately from upload#1616.
 
 A concrete publication unit is now prepared separately: local `showcase/presentation-rc` at `c9006dcd`, directly based on public4f98bb5,11presentation/evidence files, offline check and36testsPASS. It excludes the local HTTP/prototype changes. No push/merge performed. See [exact review/publication commands](showcase-review.md).
+
+## Advanced current-upstream milestone — 2026-10-30
+
+See [advanced engineering assessment](advanced-engineering.md) for the authoritative current inventory and gates. Historical artifacts and prior branches remain preserved. New local work: current Node26 GET correction with19regressions and3410unit passes, extended HTTP/backpressure cases, separate current-base upload compatibility, and an artifact-reader race correction with45labpasses. No new external write; presentation-only c9006dc remains the proposed public update, separate from all research additions.
+
+### Frozen latest baseline9d15cdc9
+
+A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](advanced-engineering.md).

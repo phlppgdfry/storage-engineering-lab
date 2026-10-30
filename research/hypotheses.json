@@ -99,6 +99,26 @@
         {
           "path": "evidence/showcase/http-intervention.json",
           "kind": "experiment"
+        },
+        {
+          "path": "evidence/advanced/summary.json",
+          "kind": "experiment"
+        },
+        {
+          "path": "reports/advanced-engineering.md",
+          "kind": "source-review"
+        },
+        {
+          "path": "experiments/download-regression.patch",
+          "kind": "regression"
+        },
+        {
+          "path": "evidence/advanced/current-summary.json",
+          "kind": "experiment"
+        },
+        {
+          "path": "evidence/advanced/composite.json",
+          "kind": "regression"
         }
       ],
       "experiment": "Minimal loopback Fastify route with actual RequestSignals, AssetRenderer and FileBackend. Compare normal GET, pre-header MD5 disconnect, post-header full/range disconnect and native HEAD abort control. Repeat original and diagnostic forwarding in separate owned worktrees.",
@@ -115,14 +135,14 @@
       "disposition": "active",
       "source": {
         "repository": "https://github.com/supabase/storage",
-        "commit": "dcbb8eb78fd389a51ba0e6477fde0c02f6466986",
+        "commit": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
         "paths": [
           "src/storage/backend/adapter.ts",
           "src/storage/backend/file.ts"
         ]
       },
-      "nextAction": "Keep REPRODUCED and separate from #1616. Before proposing a complete upstream fix, add focused getObject regression/control cases for pre-abort, metadata pending, range, mtime/MD5 and source-error behavior at current upstream; confirm intended cancellation contract and overlapping work. Diagnostic patch is not production-ready.",
-      "verification": "Three actual local HTTP repetitions per variant at dcbb8eb7: disconnect before headers with MD5 at 64 KiB still reads 16 MiB; diagnostic signal forwarding stops at 64\u2013128 KiB. Actual renderer and request-disconnect signal used; full/range streamed responses close early, all measured descriptors close. Protocol/auth/database/hosted scope remains limited."
+      "nextAction": "Review local GET candidate8eceb9 and separate lifecycle test-fixture correction9a76025. Preserve the baseline failure investigation, obtain independent human and hosted/Linux validation and explicit publication approval; do not bundle with upload#1616.",
+      "verification": "Latest frozen9d Node26/locked-dependency validation:19focused cases red10/9;171file tests;3441full-unit passes on a bounded repeat, with the first lifecycle failure also observed on untouched baseline. Separate fixture mitigation9a76025 passes3422baseline and composite3441tests. Real HTTP original/fixed3x9cases preserve normal/range/backpressure/late-close behavior and close measured descriptors. See current-summary for all failures and limits."
     },
     {
       "id": "H003",

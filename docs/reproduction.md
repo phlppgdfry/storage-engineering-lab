@@ -83,3 +83,5 @@ node scripts/download-probe.mjs --http --intervention ../supabase-storage
 ```
 
 The second command applies only the diagnostic MD5 signal-forwarding patch in its own detached worktree. Neither command edits your checkout or publishes anything. Expected original result: abort before headers while the MD5 stream still reads the entire object. Expected intervention: MD5 stops early. Both variants require successful full GET, partial full/range disconnect cleanup, actual HEAD abort rejection and closed descriptors. A late disconnect, failed control or cleanup error returns failure; do not treat infrastructure failure as confirmation. [Observations, controls and interpretation](../reports/showcase-review.md).
+
+The older `scripts/download-probe.mjs` intentionally retains its historical `dcbb8eb7` source/dependency study; it does not follow current upstream. For the separately validated Node26/9d15cdc9 candidate, exact patches, failed baseline tests and reproduction commands, use [the advanced engineering report](../reports/advanced-engineering.md).

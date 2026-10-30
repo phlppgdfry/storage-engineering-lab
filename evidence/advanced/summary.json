@@ -1,0 +1,94 @@
+{
+  "recordedAt": "2026-10-30",
+  "labBase": "9ae5d196f4bc88862dd14f8871880858046a6c3d",
+  "upstreamBase": "211b2beba30e34f4b365b2c2637c544fc9d444b2",
+  "downloadCommit": "e1e033c05c96afd334fe6dee4f7e6d9e0eed4b4f",
+  "downloadBranch": "fix/file-download-cancellation",
+  "node": "26.13.0",
+  "npm": "12.2.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "dependencyVersions": {
+    "vitest": "5.0.5",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "fs-xattr": "0.4.0",
+    "fastify": "5.12.7",
+    "undici": "8.12.3"
+  },
+  "lockSha256": "66fb9927a6b7154461dce5b23d4d3bd5782410233f6021d451a77572e6917dbe",
+  "installation": "Fresh npm ci from exact current lock, upstream allowScripts; 951 packages reported installed. Historical installation unchanged.",
+  "checks": {
+    "install12": {
+      "exitCode": 0,
+      "exitSignal": null
+    },
+    "red": {
+      "exitCode": 1,
+      "exitSignal": null
+    },
+    "green2": {
+      "exitCode": 0,
+      "exitSignal": null
+    },
+    "unit-final": {
+      "exitCode": 0,
+      "exitSignal": null
+    },
+    "lint-final": {
+      "exitCode": 0,
+      "exitSignal": null
+    },
+    "build-final": {
+      "exitCode": 0,
+      "exitSignal": null
+    },
+    "audit": {
+      "exitCode": 1,
+      "exitSignal": null
+    }
+  },
+  "downloadRegression": {
+    "before": {
+      "failed": 10,
+      "passed": 9,
+      "expectedNonzero": true
+    },
+    "afterFileSuite": 171,
+    "newCases": 19,
+    "fullUnitTests": 3410,
+    "fullUnitFiles": 180
+  },
+  "labTests": 45,
+  "historicalMeasuredGroups": 130,
+  "performance": "No normal-upload benchmark rerun; equivalence remains INCONCLUSIVE. Logical cancellation bytes and backpressure checkpoints are functional observations.",
+  "hostedCiForNewCommits": "NOT EXECUTED (publication not authorized)",
+  "rawEvidence": "evidence/local/advanced-download-JqZalf",
+  "retainedAttempts": [
+    {
+      "label": "install",
+      "result": "FAIL",
+      "reason": "First command used npm11.20 rather than required12; engine guard refused. Successful install12 used temporarily cached npm12.2.1."
+    },
+    {
+      "label": "lint",
+      "result": "FAIL",
+      "reason": "New regression test formatting; corrected only changed test file with upstream Biome. Final lint passes."
+    },
+    {
+      "label": "build",
+      "result": "FAIL",
+      "reason": "Two unit assertions referenced fd, absent from Node typings. Unit tests use public finished/closed contract; actual native HTTP workers retain fd closure observations. Final build passes."
+    }
+  ],
+  "cleanup": "PASS: own installed current checkout removed; branch and evidence retained",
+  "httpFixedEvidence": "evidence/local/http-current-fixed-qsxj9D",
+  "httpFixedAdapterSha256": "66e43eb7f3e3123708b6396d9ae39eb53f79c2be7d2593810d6e8b72a635c7d1",
+  "labSourceHashes": {
+    "research/cycle/memory.mjs": "8395a876f6010270184e9a7ddde3b7370d4fa083522a85790331300491554cf8",
+    "test/cycle.test.mjs": "3eae6935f0ba0741738aec3e965cf93a2fc56737efa6d0b5507d2ab83ade6421",
+    "experiments/http-download-cancellation.ts": "8097289d6dde555a85696c3fc61c59b558cf0da23daee0c6101837a5852e9518",
+    "experiments/download-fix.patch": "be1390fad5ec0a480ad4575dcafaf0b482e7454cb4638d35df8da665f15bc02a",
+    "experiments/download-regression.patch": "9943870ea18ed978dd0d907a9e30921335ce1aa5bb52992f068faf808cc5bd5a"
+  }
+}

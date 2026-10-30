@@ -79,3 +79,13 @@ Nieuw werk staat afzonderlijk lokaal op `research/bounded-cycle`: native downloa
 De publieke reviewbranch is nu ook vanuit een echte schone publieke kloon gecontroleerd: check,36tests,doctor en native demo slagen. De nieuwe lokale uitbreiding heeft44geslaagde tests. Aparte agentreview reproduceerde twee prototypefouten; symlink-geheugentoegang en onvolledig beoordelingsbewijs zijn gecorrigeerd. De planner-evaluatie blijkt niet onderscheidend: iedere ordening moet4/6vinden.
 
 Drie daadwerkelijke HTTP-proeven bevestigen MD5-werk na disconnect vóór headers; een lokale diagnostische signaaldoorgifte stopt dit vroeg. Volledige/range-responsstreams ruimen wel op; geen descriptorlek. Onderbreking met SIGINT geeft de bedoelde FAIL met cleanupPASS. Alle nieuwe wijzigingen blijven lokaal; geen push/merge/PR-edit/bericht. [Actueel verslag en vervolgstappen](../reports/showcase-review.md).
+
+## Advanced review — 30 oktober 2026
+
+Upstream schoof naar211b2beb met Node26/npm12. Historische bron/dependencies/130groepen blijven intact. Een afzonderlijke lokale GET-fix op `fix/file-download-cancellation` (`e1e033c`) voegt19gerichte controles toe; de oorspronkelijke code faalt10keer en slaagt9keer. De fix passeert171file-tests,3410unit-tests in180bestanden,lint en build. Echte HTTP-varianten omvatten header-only/late/server-close en slow-consumer-backpressure. De bestaande uploadpatch is afzonderlijk op huidige Node26basis gevalideerd: red2/green5 en native3+3.
+
+Het lab sluit een gereproduceerde artifact-symlinkrace met descriptor-gebaseerde reads;45labtests slagen. Geen nieuwe publicatie,merge,PR-edit of communicatie. Huidige GO-beslissingen, inventaris, bewijs en resterende gates staan in [het engineeringrapport](../reports/advanced-engineering.md).
+
+### Frozen latest baseline9d15cdc9
+
+A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](../reports/advanced-engineering.md).

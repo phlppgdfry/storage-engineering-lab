@@ -26,7 +26,7 @@ Use the code and evidence to explain decisions. This is a case study, not proof 
 
 ## Focused learning plan from the remaining gaps
 
-1. Trace and test a real pre-header HTTP disconnect through request signals, renderer and file MD5; deliver a repeatable abort-before-completion oracle with cleanup controls. Current native evidence does not establish endpoint behavior.
+1. Completed locally: trace and test actual pre-header HTTP disconnect through request signals, renderer and file MD5, including cleanup controls. Next: independently review the current GET candidate and validate its Linux/hosted matrix; the minimal route does not establish full auth/database/CDN or production behavior.
 2. Explain PostgreSQL transaction/version publication and trigger-aborted writes at current upstream #1600; construct one isolated failure/rollback trace before proposing database changes. Existing integration passes do not prove database design expertise.
 3. Design a normal-upload equivalence study on a stable host: predeclare a practical margin (for example 5% only if justified), randomize paired order, demonstrate stable identical-code controls first, preserve raw observations and report INCONCLUSIVE if precision is inadequate.
 4. Practice S3 multipart/TUS lease and distributed-failure reasoning using existing upstream regressions. This project has not demonstrated operating those protocols at production scale.
@@ -80,3 +80,7 @@ If execution takes longer, show the full result and extend the explanation; do n
 10. Why does the balanced three-family, two-probe evaluation force every ordering to detect four cases? What separate versioned, independently specified corpus would be necessary before evaluating adaptive value?
 
 Good answers should reference this repository's actual code and limitations. They do not substitute for production operational experience or human code review.
+
+## 2026-10-30 verified extension
+
+The local GET candidate is now `8eceb9` on frozen9d15cdc9, separate from the published upload contribution. Nineteen cases give10failed/9passed before and pass after; the current full-suite rerun passes3441tests/182files. The first failure also occurred on untouched baseline; a separate real-config test-fixture mitigation passes3422baseline and3441composite cases. Explain both the failure and the mitigation, including the unproven module-cache mechanism. The lab artifact reader also has a real final-path replacement regression and descriptor-based correction. [Exact evidence and current gates](../reports/advanced-engineering.md). No additional upstream acceptance or production experience is implied.
