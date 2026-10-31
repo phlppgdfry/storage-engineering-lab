@@ -1,5 +1,5 @@
 {
-  "scope": "Five already-published historical log presentations, not measurement data. Existing Git history and all original bytes preserved; this does not erase previously public paths.",
+  "scope": "Five earlier home-path log redactions plus one final-review per-user IPC path redaction. Historical outcomes, measurements, original Git objects and raw local copies preserved. This does not erase previously public paths.",
   "artifacts": [
     {
       "path": "evidence/unit-baseline-summary.log",
@@ -55,6 +55,17 @@
       "redactedSha256": "5fd6602e0c336dbd24c16dc44d8d311dda46c22ae1d4c01c5284113300596af3",
       "transformation": "Label added; absolute home/check-out prefixes replaced with portable placeholders. No test outcomes removed or changed.",
       "rawPreserved": "Git object and ignored evidence/local/closure-original-logs/unit-latest-summary.log"
+    },
+    {
+      "path": "evidence/prelaunch/retained-failures.json",
+      "originalCommit": "1856d4440551d6c4d5274e1d39d69265885ef1f2",
+      "originalGitBlob": "dbc17c83eb5e30486447bb2ec482bacf86537935",
+      "originalBytes": 5071,
+      "originalSha256": "466de6130fd7f54ad06c7138f27011515f3105befe206c8e29cd49269c2207b8",
+      "redactedBytes": 5208,
+      "redactedSha256": "989435c9cc9b604a48a9240ba2a2462ded4c6c0e7a983c8e031cd9bbf2806c4e",
+      "transformation": "Only the two occurrences of a real per-user temporary IPC socket path replaced; explicit label added. Failure, stack, error code and cleanup results preserved.",
+      "rawPreserved": "Git object and ignored evidence/local/release-gap-review/retained-failures-original.json"
     }
   ]
 }

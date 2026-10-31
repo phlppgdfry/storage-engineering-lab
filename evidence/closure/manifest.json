@@ -79,8 +79,8 @@
     },
     {
       "path": "evidence/closure/historical-path-redactions.json",
-      "bytes": 3696,
-      "sha256": "665cce9c58ee30c9692c364318f397c3e1ab1204778bd30b2c95c0e2516b99d6"
+      "bytes": 4494,
+      "sha256": "86943b31c1ea0db43af5e3f1b771bd97f4474040e66f953e9f5c8cff3201354e"
     },
     {
       "path": "evidence/closure/lab-linux-tests.log",

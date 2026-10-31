@@ -14,8 +14,9 @@
   {
     "artifact": "evidence/local/reproduce-UDkgga/summary.json",
     "status": "FAIL",
-    "error": "native-before-1: exit 1. Evidence: <lab>/evidence/local/reproduce-UDkgga/native-before-1.log\nnode:net:2306\n      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);\n                    ^\n\nError: listen EPERM: operation not permitted /var/folders/0t/_2j7v2495074t2z4ghq8jx3h0000gn/T/tsx-501/77478.pipe\n    at Server.setupListenHandle [as _listen2] (node:net:2306:21)\n    at listenInCluster (node:net:2437:12)\n    at Server.listen (node:net:2579:5)\n    at file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32174\n    at new Promise (<anonymous>)\n    at createIpcServer (file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32152)\n    at async file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:55:542 {\n  code: 'EPERM',\n  errno: -1,\n  syscall: 'listen',\n  address: '/var/folders/0t/_2j7v2495074t2z4ghq8jx3h0000gn/T/tsx-501/77478.pipe',\n  port: -1\n}\n\nNode.js v24.21.0\n",
-    "cleanup": "own temporary worktree removed"
+    "error": "native-before-1: exit 1. Evidence: <lab>/evidence/local/reproduce-UDkgga/native-before-1.log\nnode:net:2306\n      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);\n                    ^\n\nError: listen EPERM: operation not permitted <temporary-ipc-socket>\n    at Server.setupListenHandle [as _listen2] (node:net:2306:21)\n    at listenInCluster (node:net:2437:12)\n    at Server.listen (node:net:2579:5)\n    at file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32174\n    at new Promise (<anonymous>)\n    at createIpcServer (file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:53:32152)\n    at async file://<storage-checkout>/node_modules/tsx/dist/cli.mjs:55:542 {\n  code: 'EPERM',\n  errno: -1,\n  syscall: 'listen',\n  address: '<temporary-ipc-socket>',\n  port: -1\n}\n\nNode.js v24.21.0\n",
+    "cleanup": "own temporary worktree removed",
+    "pathRedaction": "Per-user temporary IPC socket path only; original bytes preserved in Git and ignored local evidence. See evidence/closure/historical-path-redactions.json. Error, exit and cleanup observations unchanged."
   },
   {
     "artifact": "evidence/local/fresh-export-BWK3T2/summary.json",
