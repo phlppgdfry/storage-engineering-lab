@@ -75,7 +75,7 @@ After the native prerequisites above, run `node scripts/demo.mjs ../supabase-sto
 
 A fresh public clone of review branch `prelaunch/reproducibility-rc` at `4f98bb5` passed check, 36 tests, doctor and the real native demo on macOS arm64/Node 24.22.2: [execution record](../evidence/showcase/public-quickstart.json). Native dependencies were reused from the pinned prepared Storage checkout; no fresh native install is claimed. The README names this branch because public main does not yet include the new CLI/scripts.
 
-The following commands are **local research-branch experiments**, absent from the published PR#1 branch. They require the same prepared checkout plus the recorded current-upstream commit object. They create a loopback-only server, use synthetic 16 MiB objects and cap each worker at30seconds, three repetitions. Full auth/database/CDN behavior is excluded.
+The following commands are **research experiments on the published release branch**, absent from the earlier PR#1 branch. They require the same prepared checkout plus the recorded current-upstream commit object. They create a loopback-only server, use synthetic 16 MiB objects and cap each worker at30seconds, three repetitions. Full auth/database/CDN behavior is excluded.
 
 ```sh
 node scripts/download-probe.mjs --http ../supabase-storage

@@ -1,3 +1,9 @@
+# Final publication operation — 2026-11-01
+
+The release branch is published; exact final merge/tag/release outcomes belong to the [current closure record](../reports/final-project-closure.md). Earlier sections below are dated validation snapshots, not the current publication state. No performance, cleanup or adaptive-learning claim is strengthened.
+
+---
+
 # Finalization — 2026-10-31
 
 Local portfolio candidate `release/portfolio-rc` prepares version1.0.0; no push, merge, tag or release. [Final closure](../reports/final-project-closure.md) supersedes dated readiness statements below. Current Linux validation now includes45 lab tests, GET3,439 passes/2 root skips, separate fixture3,420/2 and composite3,439/2; fresh pinned upload Linux3,304/2 plus native/red-green/lint/build. Historical failures and130 groups remain. Hosted checks on the new candidate await approved publication; upstream acceptance is separate. No further features are required for portfolio closure.

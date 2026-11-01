@@ -30,10 +30,10 @@ The proposed fix rejects pre-aborted calls, passes `{ signal }` into the existin
 
 ## Reproduce
 
-Node **24.x** is required. The published review branch has no lab dependencies:
+Node **24.x** is required. The lab has no npm dependencies. Clone the published release branch; the official `v1.0.0` tag, once published, identifies the immutable release:
 
 ```sh
-git clone --branch prelaunch/reproducibility-rc https://github.com/phlppgdfry/storage-engineering-lab.git
+git clone --branch release/portfolio-rc https://github.com/phlppgdfry/storage-engineering-lab.git
 cd storage-engineering-lab
 npm run check
 npm test
@@ -50,7 +50,7 @@ The demo executes real files/xattrs and exact regression red/green checks; full 
 
 ## Evidence and limitations
 
-The published candidate records **36 lab tests**, **130 retained measurement groups**, **3,304 Linux unit passes / 2 root-permission skips**, and **1,379 PostgreSQL tests plus five HTTP checks**. These are dated, scoped executions; the [quality gates](reports/quality-gates.md) distinguish them from new local runs and link commands, environment and evidence.
+The lab passes **45 tests**. Retained evidence includes **130 measurement groups**, **3,304 pinned upload Linux unit passes / 2 root-permission skips**, and **1,379 PostgreSQL tests plus five HTTP checks**. The separate current-base GET Linux suite records **3,439 passes / 2 permission skips**. These are dated, scoped executions; the [quality gates](reports/quality-gates.md) distinguish them from new local runs and link commands, environment and evidence.
 
 **Normal-upload performance remains inconclusive.** All five timed 4 MiB/concurrency-1 pairs were slower with the fix (median paired throughput observation −16.70%); identical-code controls were unstable. Neither equivalence, a causal slowdown magnitude nor a speedup is established. [Full assessment](reports/performance-final.md).
 
@@ -58,9 +58,9 @@ This proves an adapter cancellation gap. It does not establish hosted-service im
 
 ## Upstream and project status
 
-Checked **2026-10-31**: [Supabase PR #1616](https://github.com/supabase/storage/pull/1616) is **open, draft and unmerged**, with no returned reviews/comments; upstream CI/Acceptance require approval. No maintainer endorsement is claimed. [Lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1) is open and mergeable; successful fast GitHub checks cover its published head `4f98bb5`, not this local release candidate.
+Checked **2026-11-01**: [Supabase PR #1616](https://github.com/supabase/storage/pull/1616) is **open, draft and unmerged**, with no returned reviews/comments; upstream CI/Acceptance require approval. No maintainer endorsement is claimed. [Lab PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1) is preserved; its commits are included in the release branch. Hosted checks passed for published candidate `1856d44` ([run](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41168483501)); later release verification belongs to its exact commit, not that historical run.
 
-This working branch also contains **unpublished experimental research**: download/HTTP cancellation and a bounded synthetic research cycle. A separate [current-upstream GET fix and engineering audit](reports/advanced-engineering.md) records Node 26 validation. The planner evaluation cannot distinguish ordering policies and supports no adaptive-superiority claim. [Current research and review](reports/showcase-review.md) · [Registry](research/hypotheses.json) · [Architecture](docs/architecture.md) · [Interview walkthrough](docs/technical-interview-preparation.md).
+The published release branch also contains **experimental research**: download/HTTP cancellation and a bounded synthetic research cycle. A separate [current-upstream GET fix and engineering audit](reports/advanced-engineering.md) records Node 26 validation. The planner evaluation cannot distinguish ordering policies and supports no adaptive-superiority claim. [Current research and review](reports/showcase-review.md) · [Registry](research/hypotheses.json) · [Architecture](docs/architecture.md) · [Interview walkthrough](docs/technical-interview-preparation.md).
 
 | Scope | Supported conclusion |
 |---|---|
@@ -69,6 +69,6 @@ This working branch also contains **unpublished experimental research**: downloa
 | Lab | 45 tests; historical evidence integrity and bounded research tooling |
 | Performance / planner | Normal-upload performance inconclusive; adaptive benefit not demonstrated |
 
-**Portfolio release candidate `v1.0.0`: local preparation only.** No tag or release exists. [Final audit, validation and publication gates](reports/final-project-closure.md) · [Release notes](CHANGELOG.md). The clone command above intentionally retrieves the existing public upload study, not the unpublished candidate.
+**Portfolio edition `v1.0.0`.** The [official release record](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) is authoritative for publication status, tagged commit and final CI. This page does not itself certify that a tag or release has been published. [Final audit, validation and publication gates](reports/final-project-closure.md) · [Release notes](CHANGELOG.md). The clone command above retrieves the complete release branch, including the upload study and clearly scoped experimental work.
 
 [Contributing](CONTRIBUTING.md) · [Release readiness](reports/release-readiness.md) · Apache-2.0; derived patches retain Supabase attribution: [LICENSE](LICENSE), [NOTICE](NOTICE).

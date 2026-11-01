@@ -1,3 +1,9 @@
+# Final publication operation — 2026-11-01
+
+The release branch is published; exact final merge/tag/release outcomes belong to the [current closure record](final-project-closure.md). Earlier sections below are dated validation snapshots, not the current publication state. No performance, cleanup or adaptive-learning claim is strengthened.
+
+---
+
 # Final portfolio gate — 2026-10-31
 
 **CONDITIONALLY READY, not released.** See [final closure](final-project-closure.md) and [release notes](../CHANGELOG.md). Local macOS/Linux validation and exact-lock advisory review completed; all remaining publication/hosted/merge/tag/release gates are explicit. Earlier statements below retain their dated scope. The full `release/portfolio-rc` candidate is distinct from the smaller `showcase/presentation-rc` update and requires its own approval.

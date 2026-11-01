@@ -1,3 +1,19 @@
+# Publication and final closure record — 2026-11-01
+
+The release branch was published at `1856d4440551d6c4d5274e1d39d69265885ef1f2`; its [hosted push checks passed](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41168483501). A subsequent four-file correction redacts one retained per-user IPC socket path, with original bytes and updated hashes preserved. No assertions or results changed. The archived validation report below captures the earlier prepublication state and is retained as dated evidence.
+
+The **[official v1.0.0 release record](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0)** is the final post-publication closure report: it records actual release status, final main SHA, published branch SHA, merged PR, CI URLs/results, security limits, portfolio readiness and remaining maintenance. Until GitHub confirms that record, the tag and the verified main commit, release completion must not be inferred from these prepared documents. This avoids self-referential commit hashes and premature publication claims.
+
+For this final operation, publication, the release PR, normal merge and annotated tag/GitHub release are explicitly authorized only after their validation gates pass. No package publishing, upstream changes, branch deletion or paid deployment is included. PR#1's head is an ancestor of the release branch; its commits are preserved without a second integration. Its remaining PR state must be inspected after the release merge. The independently prepared presentation-only branch is retained without overwriting it.
+
+The two Linux permission skips are existing deletion tests named `reports filesystem failures without hiding successful deletions` and `rethrows the original filesystem error from the existing wrapper`. Their `canLockDirectories` guard excludes root because chmod does not enforce the intended EACCES oracle there; both execute in the recorded171/171 macOS file suite. They are not skipped cancellation regressions and are not counted as Linux passes.
+
+The final release source archive must contain only tracked files, including decoded gzip evidence checks; ignored local evidence is never a release asset. Gitleaks credential rules are supplemented with personal home/temporary-path scans. Six historical path presentations now have explicit redactions and original Git/blob hashes. Previously public history is not erased. The standalone lab has no npm dependencies; the retained upstream24-package audit (13 high/11 moderate) remains a fixture restriction, not a security clearance. Normal-upload performance stays INCONCLUSIVE and planner superiority remains unsupported.
+
+**NO FURTHER ENGINEERING WORK REQUIRED FOR V1.0.0.** Finish the authorized publication gates and then stop feature development. Upstream review and optional future research remain independent.
+
+---
+
 # Final project closure — 2026-10-31
 
 **CONDITIONALLY READY.** Local engineering and release preparation are complete within the tested scope. Publication authorization and hosted checks on the final approved commit remain required. Therefore **PROJECT RELEASE COMPLETE is not yet true**. **UPSTREAM CONTRIBUTIONS PENDING** is a separate state, not a prerequisite for releasing this research portfolio.
