@@ -6,6 +6,12 @@ import os from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 
+const { assertDisposable, containerEnv } = await import('../scripts/container.mjs')
+const environment = assertDisposable()
+const safeEnv = containerEnv()
+for (const key of Object.keys(process.env)) delete process.env[key]
+Object.assign(process.env, safeEnv)
+
 const root = await mkdtemp(path.join(os.tmpdir(), 'storage-http-file-validation-'))
 Object.assign(process.env, { STORAGE_BACKEND: 'file', STORAGE_FILE_BACKEND_PATH: root,
   STORAGE_FILE_ETAG_ALGORITHM: 'md5', OTEL_METRICS_ENABLED: 'false', PROMETHEUS_METRICS_ENABLED: 'false' })
@@ -91,7 +97,7 @@ try {
   checks.push('disconnect after actual partial disk write: staging cleaned, old object still readable')
 
   await writeFile('/evidence/integration/http-file.json', JSON.stringify({
-    recordedAt: new Date().toISOString(), commit: '3bbc971796fe9907a030c4fc70a07d440930d7b2',
+    recordedAt: new Date().toISOString(), environment,
     database: 'real isolated PostgreSQL 17', backend: 'native Linux FileBackend', checks,
     limitation: 'End-to-end regression assurance; not proof that an HTTP disconnect bypassed source-error handling on the parent.'
   }, null, 2) + '\n')

@@ -1,0 +1,17 @@
+✔ safe mutations reproduce only their own invariant; controls pass twice (31.12175ms)
+✔ review rejects missing evidence, bad control and inconsistent repetitions (0.208416ms)
+✔ feedback changes priorities only; random selection is replayable and unknown policies refuse (0.600583ms)
+✔ memory preserves previous entries, rejects missing artifacts, tampering and torn writes (2.373041ms)
+✔ memory refuses dangling and existing symlinks on both read and append (0.65825ms)
+✔ unsafe catalog or path inputs cannot become executed commands (84.820125ms)
+✔ frozen corpus identity prevents unrecorded evaluation tuning (1.072834ms)
+✔ one-cycle CLI stops duplicates, concurrent/crashed locks and corrupt evidence before execution (504.680375ms)
+✔ evidence read refuses a final-path symlink replacement between path validation and open (45.86675ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 730.735542

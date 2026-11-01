@@ -1,0 +1,238 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.unit.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.5 /private/tmp/storage-lab-q7O2lN/checkout
+
+ ❯ src/storage/backend/file.test.ts (157 tests | 2 failed | 152 skipped) 33ms
+   ↓ FileBackend xattr metadata (7)
+     ↓ uses a distinct linux xattr key for etag
+     ↓ keeps the previous part intact when a re-upload fails
+     ↓ keeps the previous part intact when a part copy fails
+     ↓ reads linux etag xattr during multipart completion
+     ↓ accepts the quoted ETag from a CompleteMultipartUpload body
+     ↓ rejects a mismatched quoted ETag
+     ↓ rejects a matching weak ETag
+   ↓ FileBackend multipart part order (1)
+     ↓ assembles parts in part-number order when completion lists them out of order
+   ↓ FileBackend traversal protection (5)
+     ↓ rejects traversal key in multipart create with InvalidKey
+     ↓ rejects traversal key in multipart upload-part with InvalidKey
+     ↓ rejects traversal key in object operations with InvalidKey
+     ↓ rejects traversal key in copy/delete list operations with InvalidKey
+     ↓ rejects traversal key in multipart auxiliary operations with InvalidKey
+   ↓ FileBackend bulk deletion outcomes (34)
+     ↓ leaves files and directories untouched when the caller signal is already aborted
+     ↓ starts every deletion before the first settles when no signal is given
+     ↓ bounds concurrent deletions with a live signal and preserves per-key outcomes
+     ↓ stops starting deletions after cancellation and preserves completed outcomes
+     ↓ stops queued deletions when cancelled while concurrent deletions are pending
+     ↓ does not report an empty directory key deleted when cancelled before cleanup
+     ↓ waits for an in-flight deletion after cancellation and skips directory cleanup
+     ↓ confirms deleted and absent keys while cleaning empty parents
+     ↓ treats a file ancestor as an absent key
+     ↓ deletes the valid keys when another key is invalid
+     ↓ rejects deleteObjects before deleting anything when a key is invalid
+     ↓ maps a regular file unlink EACCES to FAILED
+     ↓ maps a regular file unlink EPERM to FAILED
+     ↓ maps a regular file unlink EROFS to FAILED
+     ↓ maps a regular file unlink EIO to UNKNOWN
+     ↓ reports filesystem failures without hiding successful deletions
+     ↓ rethrows the original filesystem error from the existing wrapper
+     ↓ does not delete versions stored under a NULL-version key directory
+     ↓ allows uploading to an empty directory key after single deletion
+     ↓ allows uploading to an empty directory key after bulk deletion
+     ↓ allows uploading to an empty directory key after detailed deletion
+     ↓ preserves a version created before empty directory cleanup after EISDIR
+     ↓ preserves a version created before empty directory cleanup after EPERM
+     ↓ preserves a file replacing an empty directory before cleanup
+     ↓ preserves a version uploaded during single deletion of an absent key
+     ↓ preserves a version uploaded during bulk deletion of an absent key
+     ↓ preserves a version uploaded during detailed deletion of an absent key
+     ↓ only treats EPERM as absent when the target is a directory
+     ↓ confirms deletion when the EPERM directory check encounters ENOENT
+     ↓ confirms deletion when the EPERM directory check encounters ENOTDIR
+     ↓ preserves the original EPERM when the directory check fails for another reason
+     ↓ treats a directory at a NULL-version key as missing on read
+     ↓ treats a path the filesystem cannot name as absent
+     ↓ returns an empty result without removing directories
+   ↓ FileBackend empty directory cleanup (9)
+     ↓ preserves a directory repopulated by an upload
+     ↓ uploads when a concurrent cleanup removes the new parent directories
+     ↓ initiates a multipart upload when abort cleanup removes a parent during mkdir
+     ↓ uploads when a delete of the same path runs mid-write
+     ↓ keeps the existing object and removes the staged file when an overwrite fails
+     ↓ uploads a key whose last segment is near the filename length limit
+     ↓ removes empty directories recursively up to the storage root
+     ↓ continues cleaning parents when the target directory is already absent
+     ↓ does not clean a sibling directory that shares the storage-root prefix
+   ↓ FileBackend copy metadata options (8)
+     ↓ preserves source metadata when copyMetadata is true
+     ↓ overwrites file metadata when copyMetadata is false
+     ↓ removes omitted metadata when copyMetadata is false
+     ↓ removes all metadata when replacement metadata is empty
+     ↓ preserves absent source metadata when copyMetadata is true
+     ↓ ignores already absent destination metadata
+     ↓ propagates genuine source metadata read errors
+     ↓ propagates genuine destination metadata removal errors
+   ↓ FileBackend lastModified (1)
+     ↓ headObject/getObject should return mtime as lastModified
+   ❯ FileBackend uploadObject signal (5)
+     × rejects an already-aborted upload without creating an object or staging file 16ms
+     × cancels an active upload, preserves the old object and removes the staged file 6ms
+     ✓ preserves the payload and releases signal listeners after a successful upload 4ms
+     ✓ finishes publishing when cancellation arrives after the body has been received 4ms
+     ✓ preserves a source failure and cleans up when a live signal is provided 3ms
+   ↓ FileBackend headObject signal (5)
+     ↓ destroys the active md5 read when aborted after its first chunk
+     ↓ removes the abort listener after a successful HEAD
+     ↓ aborts the mtime etag path when aborted before the call
+     ↓ aborts the mtime etag path when aborted while stat is pending
+     ↓ aborts the mtime etag path when aborted while metadata read is pending
+   ↓ FileBackend conditional reads (29)
+     ↓ returns 304 when if-modified-since echoes the Last-Modified header
+     ↓ returns 304 when if-modified-since is later than the last modification
+     ↓ returns 200 when the object changed after if-modified-since
+     ↓ returns 304 when if-none-match matches the etag
+     ↓ retains the content encoding in not-modified metadata
+     ↓ returns 304 when if-none-match is a weak tag matching the etag
+     ↓ returns 304 when if-none-match is a tag list matching the etag
+     ↓ returns 304 when if-none-match is a wildcard matching the etag
+     ↓ returns 304 when if-none-match is an unquoted tag matching the etag
+     ↓ returns 200 when no tag in an if-none-match list matches
+     ↓ returns 200 when a quoted if-none-match tag contains commas and a wildcard
+     ↓ ignores if-modified-since when if-none-match is present and does not match
+     ↓ ignores an invalid if-modified-since date
+     ↓ ignores if-modified-since Thu, 01 Jan 2026 00:00:00 GMT when if-none-match is empty
+     ↓ ignores if-modified-since Thu, 01 Jan 2026 00:01:00 GMT when if-none-match is empty
+     ↓ returns 200 when if-match matches the etag
+     ↓ rejects if-match with a stale weak tag before range and cache checks
+     ↓ rejects if-match with a quoted wildcard before range and cache checks
+     ↓ allows a range when if-match has a wildcard
+     ↓ allows a range when if-match has a match in a list
+     ↓ allows a range when if-match has an unquoted tag
+     ↓ allows a range when if-match has a weak tag
+     ↓ allows a range when if-match has a weak tag in a list
+     ↓ rejects with 412 when if-match does not match the etag
+     ↓ rejects an empty if-match even when if-unmodified-since passes
+     ↓ returns 200 when the object was not modified after if-unmodified-since
+     ↓ rejects with 412 when the object changed after if-unmodified-since
+     ↓ ignores an invalid if-unmodified-since date
+     ↓ ignores if-unmodified-since when if-match matches
+   ↓ FileBackend range reads (13)
+     ↓ returns expected bytes and metadata for bytes=2-5
+     ↓ returns expected bytes and metadata for Bytes=2-5
+     ↓ returns expected bytes and metadata for bytes=7-
+     ↓ returns expected bytes and metadata for BYTES=7-
+     ↓ returns expected bytes and metadata for bytes=-5
+     ↓ returns expected bytes and metadata for bYtEs=-5
+     ↓ returns expected bytes and metadata for bytes=8-99
+     ↓ rejects invalid byte range bytes=-0
+     ↓ rejects invalid byte range bytes=10-12
+     ↓ rejects invalid byte range bytes=8-4
+     ↓ rejects invalid byte range bytes=-
+     ↓ rejects invalid byte range bytes=a-b
+     ↓ rejects invalid byte range items=0-1
+   ↓ FileBackend copy source preconditions (40)
+     ↓ rejects the copy when if-match does not match the source etag
+     ↓ copies when if-match matches the source etag
+     ↓ rejects the copy when if-none-match matches the source etag
+     ↓ rejects the copy when the source was modified after if-unmodified-since
+     ↓ copies when the source was not modified after if-unmodified-since
+     ↓ rejects the copy when the source was not modified after if-modified-since
+     ↓ copies when the source was modified after if-modified-since
+     ↓ copies when if-match is true even if if-unmodified-since is false
+     ↓ rejects the copy when if-none-match is false even if if-modified-since is true
+     ↓ rejects the copy when both if-match and if-none-match match the source
+     ↓ does not hash the source when conditions are absent
+     ↓ does not hash the source when conditions are empty
+     ↓ does not hash the source when conditions are all undefined
+     ↓ does not hash the source when conditions are date-only
+     ↓ ignores invalid precondition dates
+     ↓ preserves an existing destination when if-match fails
+     ↓ preserves an existing destination when if-none-match fails
+     ↓ preserves an existing destination when if-modified-since fails
+     ↓ preserves an existing destination when if-unmodified-since fails
+     ↓ copies when if-match is a wildcard
+     ↓ copies when if-match is a weak etag
+     ↓ copies when if-match is an etag list
+     ↓ copies when if-match is an unquoted etag
+     ↓ rejects the copy when if-match W/"not-the-source-etag" does not match the source
+     ↓ rejects the copy when if-match "not-the-source-etag", "another-etag" does not match the source
+     ↓ rejects the copy when if-match not-the-source-etag does not match the source
+     ↓ rejects the copy when if-match "not-the,*,source-etag" does not match the source
+     ↓ rejects the copy when if-none-match is a wildcard
+     ↓ rejects the copy when if-none-match is a weak etag
+     ↓ rejects the copy when if-none-match is an etag list
+     ↓ rejects the copy when if-none-match is an unquoted etag
+     ↓ copies when if-none-match W/"not-the-source-etag" does not match the source
+     ↓ copies when if-none-match "not-the-source-etag", "another-etag" does not match the source
+     ↓ copies when if-none-match not-the-source-etag does not match the source
+     ↓ copies when if-none-match "not-the,*,source-etag" does not match the source
+     ↓ copies when if-none-match does not match even if the source was not modified after if-modified-since
+     ↓ rejects the copy when if-modified-since equals the last-modified second
+     ↓ copies when if-unmodified-since equals the last-modified second
+     ↓ rejects the copy when if-match is empty
+     ↓ copies when if-none-match is empty even if the source was not modified after if-modified-since
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/storage/backend/file.test.ts > FileBackend uploadObject signal > rejects an already-aborted upload without creating an object or staging file
+AssertionError: promise resolved "{ httpStatusCode: 200, size: 9, …(6) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "cacheControl": "no-cache",
++   "contentEncoding": undefined,
++   "contentLength": 9,
++   "eTag": "\"38881e0a24039dc2621e1d6f86cb71f7\"",
++   "httpStatusCode": 200,
++   "lastModified": 2026-10-28T21:42:50.312Z,
++   "mimetype": "application/octet-stream",
++   "size": 9,
+  }
+
+ ❯ src/storage/backend/file.test.ts:1360:6
+    1358|         controller.signal
+    1359|       )
+    1360|     ).rejects.toMatchObject({ code: ErrorCode.Aborted })
+       |      ^
+    1361|
+    1362|     await expect(fsp.readdir(ctx.tmpDir)).resolves.toEqual([])
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/storage/backend/file.test.ts > FileBackend uploadObject signal > cancels an active upload, preserves the old object and removes the staged file
+AssertionError: expected { ok: true } to match object { ok: false, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "error": {
+-     "code": "AbortedTerminate",
+-   },
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ src/storage/backend/file.test.ts:1385:27
+    1383|     body.push(null)
+    1384|
+    1385|     expect(await outcome).toMatchObject({
+       |                           ^
+    1386|       ok: false,
+    1387|       error: { code: ErrorCode.AbortedTerminate },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed | 152 skipped (157)
+   Start at  22:42:50
+   Duration  327ms (transform 61%, import 23%, tests 14%, worker 2%)
+

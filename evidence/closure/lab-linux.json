@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "source": "254c6fbdaa5ffbc0639b9783939048452405a778",
+  "commands": [
+    {
+      "label": "archive",
+      "command": [
+        "git",
+        "archive",
+        "HEAD",
+        "-o",
+        "<tmp>/storage-lab-f4URxB/lab.tar"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "extract",
+      "command": [
+        "tar",
+        "-xf",
+        "<tmp>/storage-lab-f4URxB/lab.tar",
+        "-C",
+        "<tmp>/storage-lab-f4URxB/lab"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "build",
+      "command": [
+        "docker",
+        "build",
+        "--label",
+        "storage.lab.owner=105fb120-bf65-4cf1-8f0c-f7a7d393a0a6",
+        "-t",
+        "storage-lab-closure-tests:105fb120-bf65-4cf1-8f0c-f7a7d393a0a6",
+        "<tmp>/storage-lab-f4URxB"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "lab-linux",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--init",
+        "--network",
+        "none",
+        "--cpus",
+        "2",
+        "--memory",
+        "1g",
+        "--pids-limit",
+        "256",
+        "--mount",
+        "type=bind,src=<tmp>/storage-lab-f4URxB/lab,dst=/lab,readonly",
+        "-w",
+        "/lab",
+        "storage-lab-closure-tests:105fb120-bf65-4cf1-8f0c-f7a7d393a0a6",
+        "node",
+        "--test",
+        "test/container.test.mjs",
+        "test/cycle.test.mjs",
+        "test/evidence.test.mjs",
+        "test/runtime.test.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "cleanup-inspect",
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "storage-lab-closure-tests:105fb120-bf65-4cf1-8f0c-f7a7d393a0a6"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "cleanup-image",
+      "command": [
+        "docker",
+        "image",
+        "rm",
+        "storage-lab-closure-tests:105fb120-bf65-4cf1-8f0c-f7a7d393a0a6"
+      ],
+      "exit": 0
+    }
+  ],
+  "cleanup": "PASS"
+}

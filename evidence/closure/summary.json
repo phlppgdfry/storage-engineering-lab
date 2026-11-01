@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-31",
+  "verdict": "CONDITIONALLY READY",
+  "releaseState": "LOCAL PREPARATION ONLY; no push, merge, tag or release",
+  "implementation": "254c6fbdaa5ffbc0639b9783939048452405a778",
+  "candidateBranch": "release/portfolio-rc",
+  "version": "1.0.0",
+  "upstreamBase": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
+  "download": "8eceb9017690cc4d19ecc47a06452a943b2d0256",
+  "fixture": "9a760254b942d109054f941b5b21c93d4bd3ffdb",
+  "labMacOS": {
+    "tests": 45,
+    "exit": 0,
+    "raw": "evidence/local/closure-quickstart-dr5LDr"
+  },
+  "labLinux": {
+    "node": "24.21.0",
+    "arch": "arm64",
+    "tests": 45,
+    "exit": 0,
+    "raw": "evidence/local/closure-lab-linux-T5ie4m"
+  },
+  "uploadLinux": {
+    "node": "24.21.0",
+    "npm": "11.12.1",
+    "arch": "arm64",
+    "passed": 3304,
+    "skipped": 2,
+    "red": {
+      "failed": 2,
+      "passed": 3
+    },
+    "green": {
+      "passed": 5
+    },
+    "nativeRepetitionsEach": 3,
+    "lint": "PASS",
+    "build": "PASS",
+    "cleanup": "PASS",
+    "raw": "evidence/local/validate-linux-idaRyN"
+  },
+  "currentLinux": {
+    "node": "26.13.0",
+    "npm": "12.2.1",
+    "arch": "arm64",
+    "red": {
+      "failed": 10,
+      "passed": 9,
+      "exit": 1
+    },
+    "file": {
+      "passed": 169,
+      "skipped": 2
+    },
+    "download": {
+      "passed": 3439,
+      "skipped": 2,
+      "files": 182
+    },
+    "fixtureOnly": {
+      "passed": 3420,
+      "skipped": 2,
+      "files": 182
+    },
+    "composite": {
+      "passed": 3439,
+      "skipped": 2,
+      "files": 182
+    },
+    "httpRepetitionsEach": 3,
+    "httpCasesEach": 9,
+    "lint": "PASS",
+    "build": "PASS",
+    "cleanup": "PASS",
+    "raw": "evidence/local/closure-current-linux-zJ1MlH"
+  },
+  "audit": {
+    "command": [
+      {
+        "label": "audit",
+        "command": [
+          "/opt/homebrew/opt/node@26/bin/node",
+          "<home>/.npm/_npx/57098e76d8736150/node_modules/npm/bin/npm-cli.js",
+          "audit",
+          "--package-lock-only",
+          "--ignore-scripts",
+          "--json"
+        ],
+        "exit": 1
+      }
+    ],
+    "exit": 1,
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 11,
+        "high": 13,
+        "critical": 0,
+        "total": 24
+      },
+      "dependencies": {
+        "prod": 860,
+        "dev": 161,
+        "optional": 91,
+        "peer": 35,
+        "peerOptional": 0,
+        "total": 1028
+      }
+    },
+    "standaloneLabDependencies": 0,
+    "limits": "Upstream runtime/transitive advisories; no exploitability certification or automatic upgrade."
+  },
+  "historicalGroups": 130,
+  "hostedCandidate": "NOT EXECUTED",
+  "remaining": "Explicit publication approval, actual hosted checks on exact approved head, separate merge/tag/release approvals. Upstream acceptance is independent.",
+  "secretScan": {
+    "historyExit": 0,
+    "candidateExit": 0,
+    "candidateFindings": 0,
+    "labelledHistoricalPathRedactions": 5,
+    "originalsPreserved": true
+  },
+  "finalCandidateLocalChecks": {
+    "implementation": "254c6fbdaa5ffbc0639b9783939048452405a778",
+    "overlay": "Release docs/version metadata and labelled historical path-only redactions; no runtime code changes",
+    "commands": [
+      {
+        "command": [
+          "npm",
+          "test"
+        ],
+        "exit": 0,
+        "tests": 45
+      },
+      {
+        "command": [
+          "node",
+          "scripts/check.mjs",
+          "--json"
+        ],
+        "exit": 0,
+        "groups": 130
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit": 0
+      }
+    ],
+    "evidence": [
+      "evidence/closure/final-lab-tests.log",
+      "evidence/closure/final-offline-check.json"
+    ]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "status": "PASS",
+  "environment": {
+    "commit": "3bbc971796fe9907a030c4fc70a07d440930d7b2",
+    "tree": "c33756a072ec09e39e5a7e2210b199aa5590853e",
+    "files": 816,
+    "node": "v24.21.0",
+    "platform": "linux",
+    "arch": "arm64",
+    "kernel": "7.0.14-linuxkit",
+    "cpuMax": "400000 100000",
+    "memoryMax": "3221225472"
+  },
+  "mode": "linux",
+  "before": [
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "after": [
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "regression before",
+      "failed": 2,
+      "passed": 3,
+      "expectedFailure": true
+    },
+    {
+      "name": "regression after",
+      "failed": 0,
+      "passed": 5
+    },
+    {
+      "name": "full unit",
+      "outcome": "passed",
+      "tests": 3304,
+      "skipped": 2
+    },
+    {
+      "name": "lint",
+      "outcome": "passed"
+    },
+    {
+      "name": "build",
+      "outcome": "passed"
+    }
+  ],
+  "sourceRestored": true
+}

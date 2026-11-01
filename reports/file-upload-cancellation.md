@@ -1,4 +1,4 @@
-# File upload cancellation
+# Investigating File Upload Cancellation in Supabase Storage
 
 ## Finding and scope
 
@@ -21,7 +21,7 @@ Recent upstream commits improved file publication, cleanup and HEAD cancellation
 5. Run a separate experiment with actual files, native xattrs and no dependency mocks.
 6. In a disposable worktree, repeat native before/after observations three times and verify a regression-only patch fails before the production patch makes it pass.
 
-No randomized testing or benchmark was needed. No public service was tested.
+The initial functional oracle did not require randomized testing or a benchmark. Later performance measurements are reported separately below. No public service was tested.
 
 ## Correction during self-review
 
@@ -31,7 +31,7 @@ Both reproductions now wait for `resume`, which does not itself start the source
 
 ## Results
 
-`evidence/reproduction-summary.json` records runtime, timestamp and all six native observations.
+[Original reproduction record](../evidence/reproduction-summary.json) records runtime, timestamp and all six native observations. The [genuine terminal transcript](../evidence/prelaunch/demo-terminal.txt) reran the native and regression sequence. [Reproduction instructions](../docs/reproduction.md) pin source and dependency setup.
 
 | Check | Before | After |
 |---|---|---|
@@ -45,9 +45,20 @@ Tests cover pre-aborted calls, active cancellation with cleanup/preservation, su
 
 ## Root cause and fix
 
-The signal was accepted but never passed into `pipeline(body, destination)`. The fix rejects already-aborted calls before staging, passes `{ signal }` to the pipeline and maps AbortError to `AbortedTerminate` after existing temporary-file cleanup. Error conventions match the S3 upload backend.
+The signal was accepted but never passed into `pipeline(body, destination)` in [the pinned backend](https://github.com/supabase/storage/blob/4134dbba1b94757f400d5d7c09f9382935efd726/src/storage/backend/file.ts). The fix rejects already-aborted calls before staging, passes `{ signal }` to the pipeline and maps AbortError to `AbortedTerminate` after existing temporary-file cleanup. Error conventions match the S3 upload backend.
 
 The production diff contains eight insertions and one deletion. No dependency, public parameter type, database schema or S3 behavior changes.
+
+## Alternatives and maintainer-facing boundary
+
+| Approach | Decision and evidence |
+|---|---|
+| Rely on request/source errors alone | Insufficient for the adapter contract: the native signal-only probe resolves before the fix. The separate HTTP disconnect check may already succeed through source-error handling. |
+| Manually wire abort listeners to both streams | Adds listener/error-order cleanup responsibilities already handled by the existing pipeline. Reuse the pipeline signal option; the success/error controls check listener cleanup. |
+| Check cancellation before metadata/rename too | Rejected: the uploader permits publication after receiving all bytes. The late-abort control preserves that boundary. |
+| Refactor backend adapters or optimize performance here | Rejected: neither is needed to reproduce or fix the two cancellation failures; performance attribution remains unresolved. |
+
+The maintenance unit stays two upstream files and no new dependency. The lab owns orchestration and larger evidence, so maintainers can review the production contract and five tests without adopting a research framework. Upstream workflow approval and human review remain separate requirements; no speculative download change belongs in this patch.
 
 ## Compatibility and risks
 
@@ -67,7 +78,10 @@ At initial publication, lint, build, focused backend/upload tests and native rep
 
 Searches may miss unpublished work or alternate terms. No severity, production incident, performance gain or maintainer acceptance is claimed.
 
-## Contribution
+## Current contribution status
+
+As checked 2026-10-29, [upstream #1616](https://github.com/supabase/storage/pull/1616) remains open/draft/unmerged with no returned reviews/comments, and CI/Acceptance require approval. The lab's own fast CI is separate. [Live-review record and exact next actions](next-level.md).
+
 
 Two upstream files: `file.ts` and its existing `file.test.ts`. The harness and evidence remain in this lab. Invite review of the cancellation boundary; do not bundle other suspected lifecycle gaps into the fix.
 

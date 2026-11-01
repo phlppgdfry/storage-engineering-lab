@@ -1,0 +1,120 @@
+{
+  "revision": "dcbb8eb78fd389a51ba0e6477fde0c02f6466986",
+  "recordedAt": "2026-10-29T03:10:28.041Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "observations": [
+    {
+      "observations": [
+        {
+          "trigger": "signal during consumption",
+          "range": null,
+          "bytes": 4194304,
+          "closed": true
+        },
+        {
+          "trigger": "consumer destroy control",
+          "range": null,
+          "bytes": 0,
+          "closed": true
+        },
+        {
+          "trigger": "signal during consumption",
+          "range": "bytes=0-1048575",
+          "bytes": 1048576,
+          "closed": true
+        },
+        {
+          "trigger": "consumer destroy control",
+          "range": "bytes=0-1048575",
+          "bytes": 0,
+          "closed": true
+        },
+        {
+          "trigger": "abort at MD5 native open",
+          "bytesHashedRead": 4194304,
+          "closed": true,
+          "outcome": "resolved"
+        }
+      ],
+      "scope": "Native adapter; no HTTP disconnect or production leak established"
+    },
+    {
+      "observations": [
+        {
+          "trigger": "signal during consumption",
+          "range": null,
+          "bytes": 4194304,
+          "closed": true
+        },
+        {
+          "trigger": "consumer destroy control",
+          "range": null,
+          "bytes": 0,
+          "closed": true
+        },
+        {
+          "trigger": "signal during consumption",
+          "range": "bytes=0-1048575",
+          "bytes": 1048576,
+          "closed": true
+        },
+        {
+          "trigger": "consumer destroy control",
+          "range": "bytes=0-1048575",
+          "bytes": 0,
+          "closed": true
+        },
+        {
+          "trigger": "abort at MD5 native open",
+          "bytesHashedRead": 4194304,
+          "closed": true,
+          "outcome": "resolved"
+        }
+      ],
+      "scope": "Native adapter; no HTTP disconnect or production leak established"
+    },
+    {
+      "observations": [
+        {
+          "trigger": "signal during consumption",
+          "range": null,
+          "bytes": 4194304,
+          "closed": true
+        },
+        {
+          "trigger": "consumer destroy control",
+          "range": null,
+          "bytes": 0,
+          "closed": true
+        },
+        {
+          "trigger": "signal during consumption",
+          "range": "bytes=0-1048575",
+          "bytes": 1048576,
+          "closed": true
+        },
+        {
+          "trigger": "consumer destroy control",
+          "range": "bytes=0-1048575",
+          "bytes": 0,
+          "closed": true
+        },
+        {
+          "trigger": "abort at MD5 native open",
+          "bytesHashedRead": 4194304,
+          "closed": true,
+          "outcome": "resolved"
+        }
+      ],
+      "scope": "Native adapter; no HTTP disconnect or production leak established"
+    }
+  ],
+  "status": "PASS",
+  "limitation": "Current source with reused pinned study dependencies, not a fresh installation at current upstream lock; native adapter only.",
+  "sourceTree": "dfb0bee98a2e724adc15a359006c9ed404ee2ccc",
+  "cleanup": "PASS"
+}

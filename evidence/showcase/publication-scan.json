@@ -1,0 +1,29 @@
+{
+  "branch": "prelaunch/reproducibility-rc",
+  "head": "4f98bb5861a2df5b0e68cac9a5184bd0f8d744ca",
+  "files": 65,
+  "largestFiles": [
+    {
+      "bytes": 17116,
+      "path": "reports/prelaunch-final-review.md"
+    },
+    {
+      "bytes": 15051,
+      "path": "scripts/evidence.mjs"
+    },
+    {
+      "bytes": 13837,
+      "path": "evidence/prelaunch/regression-red.log"
+    },
+    {
+      "bytes": 11549,
+      "path": "test/runtime.test.mjs"
+    },
+    {
+      "bytes": 11465,
+      "path": "scripts/check.mjs"
+    }
+  ],
+  "highConfidenceMatches": [],
+  "limits": "Targeted scan of proposed branch files, not exhaustive secret certification. Synthetic credentials and redaction-test tokens remain intentional."
+}

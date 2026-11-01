@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "stages": [
+    "pinned fresh source image built with locked npm dependencies",
+    "integration runner exited successfully"
+  ],
+  "context": {
+    "name": "desktop-linux",
+    "endpoint": "unix://<local-docker-socket>"
+  },
+  "mode": "integration",
+  "project": "storage-lab-a413d1a7e72a0fda",
+  "evidence": "<lab>/evidence/local/validate-integration-ZDTxyl",
+  "image": "sha256:946560350ae6849ef9e0e938d4b648dbdc837751d5f85dd36bda0878e03f4f44",
+  "cleanup": "own containers/network/volumes/image tag and temporary source removed; evidence retained"
+}

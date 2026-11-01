@@ -1,3 +1,15 @@
+# Final publication operation — 2026-11-01
+
+The release branch is published; exact final merge/tag/release outcomes belong to the [current closure record](../reports/final-project-closure.md). Earlier sections below are dated validation snapshots, not the current publication state. No performance, cleanup or adaptive-learning claim is strengthened.
+
+---
+
+# Finalization — 2026-10-31
+
+Local portfolio candidate `release/portfolio-rc` prepares version1.0.0; no push, merge, tag or release. [Final closure](../reports/final-project-closure.md) supersedes dated readiness statements below. Current Linux validation now includes45 lab tests, GET3,439 passes/2 root skips, separate fixture3,420/2 and composite3,439/2; fresh pinned upload Linux3,304/2 plus native/red-green/lint/build. Historical failures and130 groups remain. Hosted checks on the new candidate await approved publication; upstream acceptance is separate. No further features are required for portfolio closure.
+
+---
+
 # Status
 
 Gestart op 2026-10-27. Deze pagina wordt bijgewerkt na daadwerkelijke uitvoering.
@@ -67,3 +79,25 @@ Publicatie is expliciet goedgekeurd door de gebruiker en uitgevoerd:
 - GitHub Actions CI en Acceptance melden `action_required`; de lokale testresultaten zijn afzonderlijk vastgelegd. Dit is geen geslaagde upstream-CI-run.
 - De GitHub-connector kon geen PR openen door een integratie-403; de bestaande CLI-login kon dat wel. Geen extra authenticatie of overdracht van tokens gebruikt.
 - AI-assistentie staat vermeld in de PR. Er zijn geen losse issues, commentaren, reviewer-verzoeken of berichten geplaatst.
+
+## Volgende mijlpaal — 29 oktober 2026
+
+De bestaande lab-upgrade is gepubliceerd op `prelaunch/reproducibility-rc` in [eigen PR #1](https://github.com/phlppgdfry/storage-engineering-lab/pull/1), niet gemerged. Push- en PR-fast-CI zijn daadwerkelijk geslaagd, ook op documentatiecommit `4f98bb5`. De echte terminaldemo herhaalde native gedrag en red2/green5. Upstream #1616 blijft open/draft/mergeable zonder feedback; CI/Acceptance `action_required`.
+
+Nieuw werk staat afzonderlijk lokaal op `research/bounded-cycle`: native downloadannulering driemaal gereproduceerd op huidige upstream `dcbb8eb7`, zonder FD-lek of bewezen HTTP-impact; experimentele een-cyclus-runner met vaste catalogus en hashgeheugen; vaste/adaptieve/random evaluatie elk 4/6 synthetische defectgevallen, dus geen gemeten adaptief voordeel. 43 labtests slagen. [Uitvoering, resultaten en vervolgoracle](../reports/next-level.md). Historische resultaten blijven historisch; Storage Doctor onaangeroerd.
+
+## Showcase-review — 29 oktober
+
+De publieke reviewbranch is nu ook vanuit een echte schone publieke kloon gecontroleerd: check,36tests,doctor en native demo slagen. De nieuwe lokale uitbreiding heeft44geslaagde tests. Aparte agentreview reproduceerde twee prototypefouten; symlink-geheugentoegang en onvolledig beoordelingsbewijs zijn gecorrigeerd. De planner-evaluatie blijkt niet onderscheidend: iedere ordening moet4/6vinden.
+
+Drie daadwerkelijke HTTP-proeven bevestigen MD5-werk na disconnect vóór headers; een lokale diagnostische signaaldoorgifte stopt dit vroeg. Volledige/range-responsstreams ruimen wel op; geen descriptorlek. Onderbreking met SIGINT geeft de bedoelde FAIL met cleanupPASS. Alle nieuwe wijzigingen blijven lokaal; geen push/merge/PR-edit/bericht. [Actueel verslag en vervolgstappen](../reports/showcase-review.md).
+
+## Advanced review — 30 oktober 2026
+
+Upstream schoof naar211b2beb met Node26/npm12. Historische bron/dependencies/130groepen blijven intact. Een afzonderlijke lokale GET-fix op `fix/file-download-cancellation` (`e1e033c`) voegt19gerichte controles toe; de oorspronkelijke code faalt10keer en slaagt9keer. De fix passeert171file-tests,3410unit-tests in180bestanden,lint en build. Echte HTTP-varianten omvatten header-only/late/server-close en slow-consumer-backpressure. De bestaande uploadpatch is afzonderlijk op huidige Node26basis gevalideerd: red2/green5 en native3+3.
+
+Het lab sluit een gereproduceerde artifact-symlinkrace met descriptor-gebaseerde reads;45labtests slagen. Geen nieuwe publicatie,merge,PR-edit of communicatie. Huidige GO-beslissingen, inventaris, bewijs en resterende gates staan in [het engineeringrapport](../reports/advanced-engineering.md).
+
+### Frozen latest baseline9d15cdc9
+
+A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](../reports/advanced-engineering.md).

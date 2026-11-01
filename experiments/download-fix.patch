@@ -1,0 +1,50 @@
+diff --git a/src/storage/backend/file.ts b/src/storage/backend/file.ts
+index c500dd12..c3e68af0 100644
+--- a/src/storage/backend/file.ts
++++ b/src/storage/backend/file.ts
+@@ -92,19 +92,25 @@ export class FileBackend implements StorageBackendAdapter {
+    * @param key
+    * @param version
+    * @param headers
++   * @param signal
+    */
+   async getObject(
+     bucketName: string,
+     key: string,
+     version: string | null | undefined,
+-    headers?: BrowserCacheHeaders
++    headers?: BrowserCacheHeaders,
++    signal?: AbortSignal
+   ): Promise<ObjectResponse> {
+     // 'Range: bytes=#######-######
+     const file = this.resolveSecurePath(withOptionalVersion(`${bucketName}/${key}`, version))
++    signal?.throwIfAborted()
+     const data = await this.statObjectFile(file)
+-    const eTag = await this.etag(file, data)
++    signal?.throwIfAborted()
++    const eTag = await this.etag(file, data, signal)
++    signal?.throwIfAborted()
+     const fileSize = data.size
+     const { cacheControl, contentEncoding, mimetype } = await this.getFileMetadata(file)
++    signal?.throwIfAborted()
+     const lastModified = data.mtime
+ 
+     // RFC 9110 13.1.4: If-Unmodified-Since is ignored when If-Match is present.
+@@ -149,7 +155,7 @@ export class FileBackend implements StorageBackendAdapter {
+ 
+     if (headers?.range) {
+       const range = parseRangeHeader(headers.range, fileSize)
+-      const body = fs.createReadStream(file, { start: range.fromByte, end: range.toByte })
++      const body = fs.createReadStream(file, { start: range.fromByte, end: range.toByte, signal })
+ 
+       return {
+         metadata: {
+@@ -167,7 +173,7 @@ export class FileBackend implements StorageBackendAdapter {
+         body,
+       }
+     } else {
+-      const body = fs.createReadStream(file)
++      const body = fs.createReadStream(file, { signal })
+       return {
+         metadata: {
+           cacheControl,

@@ -1,0 +1,3 @@
+npm warn Unknown env config "nodedir". This will error in a future major version of npm. See `npm help npmrc` for supported config options.
+npm notice run supa-storage@1.11.2 build
+npm notice run tsc -noEmit && node ./build.js

@@ -1,0 +1,14 @@
+{
+  "baseline": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
+  "downloadPatchPresent": false,
+  "status": "FAIL",
+  "recordedAt": "2026-10-30T19:47:00.370Z",
+  "exitCode": 1,
+  "resultLines": [
+    " Test Files  1 failed | 181 passed (182)",
+    "      Tests  1 failed | 3421 passed (3422)",
+    "⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯",
+    " FAIL  src/http/routes/bucket/lifecycle-disabled.test.ts > REST bucket lifecycle feature flag > keeps generic writes closed and rejects dedicated lifecycle routes when disabled"
+  ],
+  "cleanup": "PASS"
+}

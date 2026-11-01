@@ -3,7 +3,7 @@ services:
     extends:
       file: ${STORAGE_SOURCE_DIR:?set STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: tenant_db
-    image: pgvector/pgvector:pg17
+    image: pgvector/pgvector@sha256:ac08538c6f8b9904c33c8224c5e5706dbe760aca29db1d096972b4052c22a75d
     ports: !override []
     shm_size: 256mb
     mem_limit: 768m
@@ -11,32 +11,37 @@ services:
     extends:
       file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: multitenant_db
-    image: postgres:17
+    image: postgres@sha256:a426e44bac0b759c95894d68e1a0ac03ecc20b619f498a91aae373bf06d8508d
     ports: !override []
     mem_limit: 512m
   pg_bouncer:
+    image: bitnamilegacy/pgbouncer@sha256:3b03f1169a35f1d492a786f588660170c59a8e71e8e69b4c97c66278c0e08431
     extends:
       file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: pg_bouncer
     ports: !override []
     mem_limit: 128m
   multitenant_pgbouncer:
+    image: bitnamilegacy/pgbouncer@sha256:3b03f1169a35f1d492a786f588660170c59a8e71e8e69b4c97c66278c0e08431
     extends:
       file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: multitenant_pgbouncer
     ports: !override []
     mem_limit: 128m
   rustfs:
+    image: rustfs/rustfs@sha256:8cc9801755448b71a786705ce76692c77e14936cccd87cf2fc31842e58f4d1ff
     extends:
       file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: rustfs
     ports: !override []
     mem_limit: 768m
   rustfs_setup:
+    image: rustfs/rustfs@sha256:8cc9801755448b71a786705ce76692c77e14936cccd87cf2fc31842e58f4d1ff
     extends:
       file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: rustfs_setup
   imgproxy:
+    image: darthsim/imgproxy@sha256:f3130cc154e8584643581ad7ba53970ec779e7e974f98b121854bba2a46b3b76
     extends:
       file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: imgproxy
@@ -45,18 +50,21 @@ services:
       - storage-data:/workspace/storage/data
     mem_limit: 256m
   rest-catalog:
+    image: apache/iceberg-rest-fixture@sha256:f7d679d30ac9c640bdeb2c015dff533cd3c8f1c7d491ebcb5d436f9a42db1d6f
     extends:
       file: ${STORAGE_SOURCE_DIR}/.docker/docker-compose-infra.yml
       service: rest-catalog
-    container_name: storage-lab-validation-iceberg
+    container_name: !reset null
     ports: !override []
     mem_limit: 1g
   runner:
-    image: storage-lab-linux:3bbc9717
+    image: ${STORAGE_LAB_IMAGE:?use managed runner}
     working_dir: /workspace/storage
     cpus: 4
     mem_limit: 3g
     environment:
+      STORAGE_LAB_DISPOSABLE: "1"
+      STORAGE_LAB_RUN: ${STORAGE_LAB_RUN:?use managed runner}
       DATABASE_URL: postgresql://postgres:postgres@tenant_db:5432/postgres
       DATABASE_POOL_URL: postgresql://postgres:postgres@pg_bouncer:6432/postgres
       DATABASE_MULTITENANT_URL: postgresql://postgres:postgres@multitenant_db:5432/postgres

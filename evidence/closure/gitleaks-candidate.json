@@ -1,0 +1,22 @@
+{
+  "tool": "gitleaks8.30.1",
+  "scope": "Clean staged candidate export, after labelled historical path redactions; no ignored local raw data",
+  "command": [
+    "gitleaks",
+    "dir",
+    "<clean-candidate-export>",
+    "--redact=100",
+    "--report-format",
+    "json",
+    "--report-path",
+    "<ignored-local-report>",
+    "--no-banner",
+    "--no-color",
+    "--timeout",
+    "90"
+  ],
+  "exit": 0,
+  "findings": [],
+  "personalAbsolutePathFiles": [],
+  "limits": "Default rules; original already-public historical paths remain in Git history. No universal absence certification."
+}

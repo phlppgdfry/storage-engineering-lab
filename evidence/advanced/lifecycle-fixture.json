@@ -1,0 +1,14 @@
+{
+  "baseline": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
+  "status": "PASS",
+  "recordedAt": "2026-10-30T19:56:21.451Z",
+  "downloadPatchPresent": false,
+  "tests": {
+    "isolated": 1,
+    "full": 3422,
+    "files": 182
+  },
+  "fixtureCommit": "9a760254b942d109054f941b5b21c93d4bd3ffdb",
+  "interpretation": "Test-fixture-only mitigation; identical assertions. Exact Vitest module-cache/order mechanism remains unproven.",
+  "cleanup": "PASS"
+}

@@ -1,10 +1,18 @@
+import { assertDisposable, containerEnv } from '../scripts/container.mjs'
+import { assertVariant } from '../scripts/runtime.mjs'
+import { FILE_HASHES } from '../scripts/config.mjs'
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 
+const environment = assertDisposable()
+const safeEnv = containerEnv()
+for (const key of Object.keys(process.env)) delete process.env[key]
+Object.assign(process.env, safeEnv)
 const root = '/workspace/storage'
+assertVariant(root, { fixed: FILE_HASHES.fixed })
 const timed = process.argv.includes('--timed')
 const directory = timed ? '/evidence/performance-timed' : '/evidence/performance'
 mkdirSync(directory, { recursive: true })
@@ -23,6 +31,7 @@ function variant(value) {
   const result = spawnSync('git', args, { cwd: root, encoding: 'utf8' })
   assert.equal(result.status, 0, result.stderr)
   state = value
+  assertVariant(root, { [value]: FILE_HASHES[value] })
 }
 try {
   // Paired AB/BA order alternates across repetitions to reduce order bias.
@@ -51,7 +60,7 @@ try {
 const artifact = { recordedAt: new Date().toISOString(), baseline: 'b11f751abe0fdd6c7f56d3a858b5527f683b7a37',
   fixed: '3bbc971796fe9907a030c4fc70a07d440930d7b2',
   environment: { node: process.version, platform: process.platform, arch: process.arch,
-    kernel: os.release(), containerCpuLimit: 4, containerMemoryGiB: 3, etagAlgorithm: 'md5' },
+    kernel: os.release(), cpuMax: environment.cpuMax, memoryMax: environment.memoryMax, etagAlgorithm: 'md5' },
   methodology: { repeats: 5, warmupUploadsPerChild: 'at least 4; timed runs also warm for 250 ms', trialDurationMs: timed ? 2000 : null, requestLatency: 'adapter call to settled promise; no client queue time',
     percentile: 'nearest rank within a run; p99 equals the maximum for workloads below 100 requests',
     rss: 'sampled every 5 ms; not an exact peak and not per-request memory',

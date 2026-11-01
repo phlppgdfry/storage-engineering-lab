@@ -1,0 +1,31 @@
+EXCERPT: all failure names, assertion messages and summary; large resolved-buffer diffs omitted. Full original red.log retained locally.
+ RUN  v5.0.5 <checkout>
+ ❯ src/storage/backend/file.test.ts (171 tests | 10 failed | 152 skipped) 262ms
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > rejects pre-aborted mtime retrieval before filesystem work
+AssertionError: promise resolved "{ metadata: { …(8) }, …(2) }" instead of rejecting
+ ❯ src/storage/backend/file.test.ts:1901:29
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > rejects pre-aborted md5 retrieval before filesystem work
+AssertionError: promise resolved "{ metadata: { …(8) }, …(2) }" instead of rejecting
+ ❯ src/storage/backend/file.test.ts:1901:29
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending mtime statObjectFile settles
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending mtime getFileMetadata settles
+AssertionError: expected undefined to be Error: cancelled while pending // Object.is equality
+ ❯ src/storage/backend/file.test.ts:1929:60
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending md5 statObjectFile settles
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > checks cancellation after pending md5 getFileMetadata settles
+AssertionError: expected undefined to be Error: cancelled while pending // Object.is equality
+ ❯ src/storage/backend/file.test.ts:1929:60
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > cancels a native MD5 stream and preserves the abort reason as its cause
+AssertionError: promise resolved "{ metadata: { …(8) }, …(2) }" instead of rejecting
+ ❯ src/storage/backend/file.test.ts:1948:29
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > cancels an acquired body (range: undefined), with no retained abort listener
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > cancels an acquired body (range: bytes=0-262143), with no retained abort listener
+AssertionError: promise resolved "{ done: false, …(1) }" instead of rejecting
+ Test Files  1 failed (1)
+      Tests  10 failed | 9 passed | 152 skipped (171)
+   Duration  621ms (tests 58%, transform 28%, import 13%, worker 1%)
+ ❯ src/storage/backend/file.test.ts:1967:36
+ FAIL  src/storage/backend/file.test.ts > FileBackend getObject signal > retains the first timeout reason when another caller signal aborts during metadata
+AssertionError: expected undefined to be DOMException{ stack: 'TimeoutError: …' } // Object.is equality
+ ❯ src/storage/backend/file.test.ts:2016:60

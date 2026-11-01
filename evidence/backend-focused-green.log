@@ -1,10 +1,11 @@
+Path-redacted historical log: only absolute home/check-out prefixes replaced. Original bytes remain in Git at254c6fb and in ignored local preservation; see evidence/closure/historical-path-redactions.json. Test results unchanged.
 npm notice run supa-storage@1.11.2 test:unit
 npm notice run vitest run --config vitest.unit.config.ts src/storage/backend/file.test.ts src/storage/backend/s3/adapter.test.ts src/storage/uploader.test.ts
 (!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
   - ESM syntax in a file loaded as CommonJS (vitest.unit.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
 Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
 
- RUN  v5.0.5 /Users/philippegodfroy/supabase-storage
+ RUN  v5.0.5 <storage>
 
 
  Test Files  3 passed (3)

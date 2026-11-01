@@ -1,0 +1,9 @@
+{
+  "baseline": "9d15cdc93c0b1afc37708914f5e45f865b231d48",
+  "downloadPatchPresent": false,
+  "status": "FAIL",
+  "recordedAt": "2026-10-30T19:45:41.804Z",
+  "error": "red-1: exit 0. Evidence: <lab>/evidence/local/lifecycle-isolation-jHhOAf/red-1.log\n(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - ESM syntax in a file loaded as CommonJS (vitest.unit.config.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n",
+  "cleanup": "PASS",
+  "interpretation": "Proposed deterministic handler/module-class hypothesis not confirmed: unmodified isolated test passed. No source correction was applied or committed."
+}

@@ -1,0 +1,1300 @@
+{
+  "mode": "original",
+  "baseline": "211b2beba30e34f4b365b2c2637c544fc9d444b2",
+  "recordedAt": "2026-10-30T04:04:10.416Z",
+  "workerSha256": "8097289d6dde555a85696c3fc61c59b558cf0da23daee0c6101837a5852e9518",
+  "observations": [
+    {
+      "size": 16777216,
+      "signalForwarded": false,
+      "extended": true,
+      "maxRssKiB": 173184,
+      "observations": [
+        {
+          "mode": "complete",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 4.508416000000011
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 36.610250000000065
+            },
+            {
+              "event": "client-headers",
+              "ms": 38.88883300000009
+            },
+            {
+              "event": "handler-settled",
+              "ms": 90.585375
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 91.2672500000001
+            }
+          ]
+        },
+        {
+          "mode": "pre-header-md5",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            65536
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 0,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.610834000000068
+            },
+            {
+              "event": "hash-open",
+              "ms": 0.9639590000000453
+            },
+            {
+              "event": "signal-abort",
+              "ms": 2.161000000000058
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 30.28966700000001
+            },
+            {
+              "event": "handler-settled",
+              "ms": 30.89083400000004
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 0,
+              "fd": null,
+              "ms": 31.085959000000003
+            }
+          ]
+        },
+        {
+          "mode": "mid-body",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 65263,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.6675420000000258
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.489208000000076
+            },
+            {
+              "event": "signal-abort",
+              "ms": 3.1682080000000497
+            },
+            {
+              "event": "handler-settled",
+              "ms": 3.274583000000007
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 131072,
+              "fd": null,
+              "ms": 3.4043750000000728
+            }
+          ]
+        },
+        {
+          "mode": "mid-body-range",
+          "clientHeaders": true,
+          "httpStatus": 206,
+          "clientBytes": 65002,
+          "contentLength": 1048576,
+          "contentRange": "bytes 0-1048575/16777216",
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.7485419999999294
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.6354169999999613
+            },
+            {
+              "event": "signal-abort",
+              "ms": 2.050624999999968
+            },
+            {
+              "event": "handler-settled",
+              "ms": 2.0953329999999823
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 131072,
+              "fd": null,
+              "ms": 2.1657500000000027
+            }
+          ]
+        },
+        {
+          "mode": "headers-only-close",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 0,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            196608
+          ],
+          "streams": [
+            {
+              "bytesRead": 196608,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5451249999999845
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.161958000000027
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.4284999999999854
+            },
+            {
+              "event": "handler-settled",
+              "ms": 1.4686659999999847
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 196608,
+              "fd": null,
+              "ms": 1.5332499999999527
+            }
+          ]
+        },
+        {
+          "mode": "slow-consumer",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": {
+            "bytesRead": 917504,
+            "readableLength": 65536,
+            "writableLength": 65536
+          },
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5927090000000135
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.138834000000088
+            },
+            {
+              "event": "handler-settled",
+              "ms": 156.8755
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 157.12429200000008
+            }
+          ]
+        },
+        {
+          "mode": "near-completion",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16711680,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            16777216
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5670830000000251
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.3433330000000296
+            },
+            {
+              "event": "signal-abort",
+              "ms": 66.04133300000001
+            },
+            {
+              "event": "handler-settled",
+              "ms": 66.25650000000007
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 66.31195799999989
+            }
+          ]
+        },
+        {
+          "mode": "server-socket-close",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            0
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 0,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.6941669999998794
+            },
+            {
+              "event": "hash-open",
+              "ms": 2.0363749999999072
+            },
+            {
+              "event": "signal-abort",
+              "ms": 2.3609999999998763
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 34.43870900000002
+            },
+            {
+              "event": "handler-settled",
+              "ms": 35.312791999999945
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 0,
+              "fd": null,
+              "ms": 37.72179200000005
+            }
+          ]
+        },
+        {
+          "mode": "native-head-control",
+          "rejected": true,
+          "signalAborted": true,
+          "errorName": "AbortError",
+          "errorCode": 20,
+          "bytesRead": 0,
+          "closed": true,
+          "fd": null
+        }
+      ],
+      "components": [
+        "actual Fastify",
+        "actual RequestSignals plugin",
+        "actual AssetRenderer",
+        "actual FileBackend/native xattrs"
+      ],
+      "limitations": [
+        "Minimal local route bypasses authentication/database lookup/CDN/proxy",
+        "No throttling, mocks or synthetic sleeps in file read path",
+        "Bytes read are logical native stream bytes, not physical disk IO",
+        "No descriptor leak observed; pre-header MD5 work continues after disconnect"
+      ]
+    },
+    {
+      "size": 16777216,
+      "signalForwarded": false,
+      "extended": true,
+      "maxRssKiB": 160816,
+      "observations": [
+        {
+          "mode": "complete",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 3.124916999999982
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 32.80204199999997
+            },
+            {
+              "event": "client-headers",
+              "ms": 34.95679200000001
+            },
+            {
+              "event": "handler-settled",
+              "ms": 80.79012499999993
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 81.16787499999992
+            }
+          ]
+        },
+        {
+          "mode": "pre-header-md5",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            65536
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 0,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.7180829999999787
+            },
+            {
+              "event": "hash-open",
+              "ms": 1.124249999999961
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.8955419999999776
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 28.752166999999986
+            },
+            {
+              "event": "handler-settled",
+              "ms": 29.440124999999966
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 0,
+              "fd": null,
+              "ms": 29.567999999999984
+            }
+          ]
+        },
+        {
+          "mode": "mid-body",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 65263,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.6410829999999805
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.3234999999999673
+            },
+            {
+              "event": "signal-abort",
+              "ms": 2.2392919999999776
+            },
+            {
+              "event": "handler-settled",
+              "ms": 2.326332999999977
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 131072,
+              "fd": null,
+              "ms": 2.432707999999934
+            }
+          ]
+        },
+        {
+          "mode": "mid-body-range",
+          "clientHeaders": true,
+          "httpStatus": 206,
+          "clientBytes": 65210,
+          "contentLength": 1048576,
+          "contentRange": "bytes 0-1048575/16777216",
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5686660000000074
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.2396659999999429
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.635582999999997
+            },
+            {
+              "event": "handler-settled",
+              "ms": 1.6750829999999723
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 131072,
+              "fd": null,
+              "ms": 1.709333000000015
+            }
+          ]
+        },
+        {
+          "mode": "headers-only-close",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 0,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5092080000000578
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.066500000000019
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.4285409999999956
+            },
+            {
+              "event": "handler-settled",
+              "ms": 1.4687079999999924
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 131072,
+              "fd": null,
+              "ms": 1.4991660000000593
+            }
+          ]
+        },
+        {
+          "mode": "slow-consumer",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": {
+            "bytesRead": 917504,
+            "readableLength": 65536,
+            "writableLength": 65536
+          },
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5216249999999718
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.1238749999999982
+            },
+            {
+              "event": "handler-settled",
+              "ms": 149.17379199999993
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 149.29662499999995
+            }
+          ]
+        },
+        {
+          "mode": "near-completion",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16711680,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            16777216
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.754624999999919
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.5291669999999158
+            },
+            {
+              "event": "signal-abort",
+              "ms": 45.814874999999915
+            },
+            {
+              "event": "handler-settled",
+              "ms": 45.89312499999994
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 45.95987500000001
+            }
+          ]
+        },
+        {
+          "mode": "server-socket-close",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            0
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 0,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5551670000000968
+            },
+            {
+              "event": "hash-open",
+              "ms": 1.0086670000000595
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.1809170000000222
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 29.861334000000056
+            },
+            {
+              "event": "handler-settled",
+              "ms": 30.608875000000012
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 0,
+              "fd": null,
+              "ms": 30.794209000000023
+            }
+          ]
+        },
+        {
+          "mode": "native-head-control",
+          "rejected": true,
+          "signalAborted": true,
+          "errorName": "AbortError",
+          "errorCode": 20,
+          "bytesRead": 0,
+          "closed": true,
+          "fd": null
+        }
+      ],
+      "components": [
+        "actual Fastify",
+        "actual RequestSignals plugin",
+        "actual AssetRenderer",
+        "actual FileBackend/native xattrs"
+      ],
+      "limitations": [
+        "Minimal local route bypasses authentication/database lookup/CDN/proxy",
+        "No throttling, mocks or synthetic sleeps in file read path",
+        "Bytes read are logical native stream bytes, not physical disk IO",
+        "No descriptor leak observed; pre-header MD5 work continues after disconnect"
+      ]
+    },
+    {
+      "size": 16777216,
+      "signalForwarded": false,
+      "extended": true,
+      "maxRssKiB": 178160,
+      "observations": [
+        {
+          "mode": "complete",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 3.2127499999999998
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 34.292
+            },
+            {
+              "event": "client-headers",
+              "ms": 36.18041699999998
+            },
+            {
+              "event": "handler-settled",
+              "ms": 81.386167
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 81.80766699999998
+            }
+          ]
+        },
+        {
+          "mode": "pre-header-md5",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            65536
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 0,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.6959579999999619
+            },
+            {
+              "event": "hash-open",
+              "ms": 1.108082999999965
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.9623750000000086
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 29.330332999999996
+            },
+            {
+              "event": "handler-settled",
+              "ms": 29.925999999999988
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 0,
+              "fd": null,
+              "ms": 30.023915999999986
+            }
+          ]
+        },
+        {
+          "mode": "mid-body",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 65263,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            131072
+          ],
+          "streams": [
+            {
+              "bytesRead": 131072,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.6772090000000048
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.3059170000000222
+            },
+            {
+              "event": "signal-abort",
+              "ms": 2.2137089999999944
+            },
+            {
+              "event": "handler-settled",
+              "ms": 2.3112919999999804
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 131072,
+              "fd": null,
+              "ms": 2.351541999999995
+            }
+          ]
+        },
+        {
+          "mode": "mid-body-range",
+          "clientHeaders": true,
+          "httpStatus": 206,
+          "clientBytes": 65210,
+          "contentLength": 1048576,
+          "contentRange": "bytes 0-1048575/16777216",
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            196608
+          ],
+          "streams": [
+            {
+              "bytesRead": 196608,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.6130420000000072
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.4412920000000327
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.8252919999999904
+            },
+            {
+              "event": "handler-settled",
+              "ms": 1.86099999999999
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 196608,
+              "fd": null,
+              "ms": 1.893792000000019
+            }
+          ]
+        },
+        {
+          "mode": "headers-only-close",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 0,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": true,
+          "bytesAtAbort": [
+            196608
+          ],
+          "streams": [
+            {
+              "bytesRead": 196608,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.6058750000000259
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.1524160000000165
+            },
+            {
+              "event": "signal-abort",
+              "ms": 1.4489580000000046
+            },
+            {
+              "event": "handler-settled",
+              "ms": 1.486750000000029
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 196608,
+              "fd": null,
+              "ms": 1.5095830000000205
+            }
+          ]
+        },
+        {
+          "mode": "slow-consumer",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16777216,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": {
+            "bytesRead": 917504,
+            "readableLength": 65536,
+            "writableLength": 65536
+          },
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.47579200000001265
+            },
+            {
+              "event": "client-headers",
+              "ms": 0.9860830000000078
+            },
+            {
+              "event": "handler-settled",
+              "ms": 150.953667
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 151.179125
+            }
+          ]
+        },
+        {
+          "mode": "near-completion",
+          "clientHeaders": true,
+          "httpStatus": 200,
+          "clientBytes": 16711680,
+          "contentLength": 16777216,
+          "contentRange": null,
+          "abortSeen": false,
+          "headersAtAbort": null,
+          "bytesAtAbort": null,
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.5304999999999609
+            },
+            {
+              "event": "client-headers",
+              "ms": 1.1790419999999813
+            },
+            {
+              "event": "handler-settled",
+              "ms": 44.922167
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 45.04366699999997
+            }
+          ]
+        },
+        {
+          "mode": "server-socket-close",
+          "clientHeaders": false,
+          "httpStatus": null,
+          "clientBytes": 0,
+          "contentLength": null,
+          "contentRange": null,
+          "abortSeen": true,
+          "headersAtAbort": false,
+          "bytesAtAbort": [
+            0
+          ],
+          "streams": [
+            {
+              "bytesRead": 16777216,
+              "closed": true,
+              "fd": null
+            },
+            {
+              "bytesRead": 0,
+              "closed": true,
+              "fd": null
+            }
+          ],
+          "routeSettled": true,
+          "finalizations": 1,
+          "pausedObservation": null,
+          "events": [
+            {
+              "event": "handler-enter",
+              "ms": 0.48691699999994853
+            },
+            {
+              "event": "hash-open",
+              "ms": 0.8024589999999989
+            },
+            {
+              "event": "signal-abort",
+              "ms": 0.9627500000000282
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 16777216,
+              "fd": null,
+              "ms": 28.474249999999984
+            },
+            {
+              "event": "handler-settled",
+              "ms": 28.90549999999996
+            },
+            {
+              "event": "stream-close",
+              "bytesRead": 0,
+              "fd": null,
+              "ms": 29.117250000000013
+            }
+          ]
+        },
+        {
+          "mode": "native-head-control",
+          "rejected": true,
+          "signalAborted": true,
+          "errorName": "AbortError",
+          "errorCode": 20,
+          "bytesRead": 0,
+          "closed": true,
+          "fd": null
+        }
+      ],
+      "components": [
+        "actual Fastify",
+        "actual RequestSignals plugin",
+        "actual AssetRenderer",
+        "actual FileBackend/native xattrs"
+      ],
+      "limitations": [
+        "Minimal local route bypasses authentication/database lookup/CDN/proxy",
+        "No throttling, mocks or synthetic sleeps in file read path",
+        "Bytes read are logical native stream bytes, not physical disk IO",
+        "No descriptor leak observed; pre-header MD5 work continues after disconnect"
+      ]
+    }
+  ],
+  "nodeVersion": "v26.13.0",
+  "lockSha256": "66fb9927a6b7154461dce5b23d4d3bd5782410233f6021d451a77572e6917dbe",
+  "status": "PASS",
+  "adapterSha256": "b3caa1184247a76f45b7c44322580f191e12c398131ea198f215580439f5c706",
+  "cleanup": "PASS"
+}

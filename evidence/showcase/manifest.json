@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local showcase-review execution evidence; original records preserved under ignored evidence/local. Interrupted-run private paths sanitized. No publication or independent execution attestation implied.",
+  "artifacts": [
+    {
+      "path": "evidence/showcase/evaluation.json",
+      "bytes": 29383,
+      "sha256": "be305af5484c5d918a993a0c550c3fc14f84fda7dd22100c85be9509087e9917"
+    },
+    {
+      "path": "evidence/showcase/http-intervention.json",
+      "bytes": 10047,
+      "sha256": "9bac48bbd6a297cbca07b2da3e39c1e13ab8833fe7e1f84d272598cdb72fedf2"
+    },
+    {
+      "path": "evidence/showcase/http-original.json",
+      "bytes": 10391,
+      "sha256": "90fd6c8efd26016805b6b85e924667bdb662818ab50f7eaa9eefd1fdb45c3ad3"
+    },
+    {
+      "path": "evidence/showcase/interruption.json",
+      "bytes": 1018,
+      "sha256": "7e2e76d28b7e66d8df412c4d6a62458e84de0fb7536c6d75a0aa8b5e594c8e87"
+    },
+    {
+      "path": "evidence/showcase/offline-check.json",
+      "bytes": 870,
+      "sha256": "f699aa29461d40afdf943d2a1d79c40f0e5b4d9c62876c1dbf1dba0eb148ef00"
+    },
+    {
+      "path": "evidence/showcase/presentation-branch.json",
+      "bytes": 970,
+      "sha256": "a9165362564f85255ca04a98bbb8d662c572b308fb377ae2ec958b9089d69333"
+    },
+    {
+      "path": "evidence/showcase/public-demo.txt",
+      "bytes": 3249,
+      "sha256": "6d6e9e59fc890d4a93119825cac055a7e64c8ffc523db18d977d607c4b0f4732"
+    },
+    {
+      "path": "evidence/showcase/public-quickstart.json",
+      "bytes": 822,
+      "sha256": "11488423520faf8d8f047da0fa57809a3b55b4aabe9ecc06f8190fb878df9c0b"
+    },
+    {
+      "path": "evidence/showcase/publication-scan.json",
+      "bytes": 719,
+      "sha256": "24cdb7e88e4b2c0114bc4c3dbc3b779ef53923f5728a361fd182163783d7fbcf"
+    },
+    {
+      "path": "evidence/showcase/tests.log",
+      "bytes": 4393,
+      "sha256": "b690065726b44263c85c7aa39d691de1125727f270291b20b60d47bf66920e07"
+    }
+  ]
+}

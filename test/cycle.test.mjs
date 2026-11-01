@@ -1,0 +1,147 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, copyFileSync, existsSync, symlinkSync } from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import { spawnSync } from 'node:child_process'
+import { hash } from '../scripts/runtime.mjs'
+import { order, review } from '../research/cycle/policy.mjs'
+import { readMemory, appendMemory } from '../research/cycle/memory.mjs'
+import { probe } from '../research/cycle/fixture.mjs'
+
+function fixture(t) { const root = mkdtempSync(path.join(os.tmpdir(), 'cycle-test-')); t.after(() => rmSync(root, { recursive: true, force: true })); return root }
+
+test('safe mutations reproduce only their own invariant; controls pass twice', async t => {
+  const root = fixture(t)
+  for (const scenario of ['correct', 'ignore-signal', 'cleanup-leak', 'swallow-error']) {
+    for (const kind of ['abort', 'cleanup', 'error']) {
+      const result = { observations: [await probe(scenario, kind, root), await probe(scenario, kind, root)], control: await probe('correct', kind, root) }
+      const defect = scenario === 'ignore-signal' && kind === 'abort' || scenario === 'cleanup-leak' && kind === 'cleanup' || scenario === 'swallow-error' && kind === 'error'
+      assert.equal(review(result, kind), defect ? 'CONFIRMED_SYNTHETIC' : 'REFUTED_FOR_FIXTURE')
+    }
+  }
+})
+test('review rejects missing evidence, bad control and inconsistent repetitions', () => {
+  const good = { pass: true, rejected: true, bytes: 65536, stageRemains: false }
+  const failed = { pass: false, rejected: false, bytes: 131072, stageRemains: false }
+  assert.equal(review({}, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [failed, good], control: good }, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [failed, failed], control: failed }, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [{ pass: false }, { pass: false }], control: { pass: true } }, 'abort'), 'INCONCLUSIVE')
+  assert.equal(review({ observations: [failed, failed], control: good }, 'abort'), 'CONFIRMED_SYNTHETIC')
+  assert.equal(review({ observations: [failed, failed], control: good }, 'unknown'), 'INCONCLUSIVE')
+  for (const missing of ['rejected', 'bytes', 'stageRemains']) {
+    const incomplete = { ...failed }; delete incomplete[missing]
+    assert.equal(review({ observations: [incomplete, incomplete], control: good }, 'abort'), 'INCONCLUSIVE')
+  }
+  for (const bytes of [-1, 131073, NaN, Infinity, 0.5, '65536']) {
+    const invalid = { ...failed, bytes }
+    assert.equal(review({ observations: [invalid, invalid], control: good }, 'abort'), 'INCONCLUSIVE')
+  }
+  // A worker's pass boolean cannot override the actual experiment invariant.
+  const inconsistent = { ...good, pass: false }
+  assert.equal(review({ observations: [inconsistent, inconsistent], control: good }, 'abort'), 'INCONCLUSIVE')
+})
+test('feedback changes priorities only; random selection is replayable and unknown policies refuse', () => {
+  assert.deepEqual(order('fixed'), ['abort', 'cleanup', 'error'])
+  assert.equal(order('adaptive', [{ experiment: 'abort', classification: 'INCONCLUSIVE' }])[0], 'cleanup')
+  assert.deepEqual(order('random', [], 83), order('random', [], 83))
+  assert.throws(() => order('sh -c arbitrary'))
+})
+test('memory preserves previous entries, rejects missing artifacts, tampering and torn writes', t => {
+  const root = fixture(t), file = path.join(root, 'memory.jsonl'), artifact = path.join(root, 'result.json')
+  writeFileSync(artifact, 'actual evidence')
+  const data = { experiment: 'abort', scenario: 'correct', evidence: [{ path: 'result.json', sha256: hash(readFileSync(artifact)) }] }
+  const first = appendMemory(file, [], data)
+  const second = appendMemory(file, [first], data)
+  assert.equal(second.previous, first.digest)
+  assert.equal(readMemory(file, root).length, 2)
+  const original = readFileSync(file)
+  writeFileSync(artifact, 'tampered')
+  assert.throws(() => readMemory(file, root), /evidence/)
+  writeFileSync(artifact, 'actual evidence')
+  writeFileSync(file, original.toString().replace('"abort"', '"cleanup"'))
+  assert.throws(() => readMemory(file, root), /chain/)
+  writeFileSync(file, original.subarray(0, original.length - 1))
+  assert.throws(() => readMemory(file, root), /Interrupted/)
+})
+test('memory refuses dangling and existing symlinks on both read and append', t => {
+  const root = fixture(t), file = path.join(root, 'memory.jsonl'), target = path.join(root, 'unintended-target.jsonl')
+  symlinkSync(target, file)
+  assert.throws(() => readMemory(file, root))
+  assert.throws(() => appendMemory(file, [], { experiment: 'abort', scenario: 'correct', evidence: [] }))
+  assert.equal(existsSync(target), false)
+  writeFileSync(target, 'unrelated contents')
+  assert.throws(() => readMemory(file, root))
+  assert.throws(() => appendMemory(file, [], { experiment: 'abort', scenario: 'correct', evidence: [] }))
+  assert.equal(readFileSync(target, 'utf8'), 'unrelated contents')
+})
+test('unsafe catalog or path inputs cannot become executed commands', async t => {
+  const root = fixture(t)
+  await assert.rejects(probe('correct; touch marker', 'abort', root), /Unknown/)
+  const cli = spawnSync(process.execPath, ['scripts/research-cycle.mjs', '--scenario', '$(touch marker)'], { encoding: 'utf8' })
+  assert.notEqual(cli.status, 0)
+  assert.match(cli.stderr, /Unknown synthetic scenario/)
+  const unknown = spawnSync(process.execPath, ['scripts/research-cycle.mjs', '--iterations', '100'], { encoding: 'utf8' })
+  assert.notEqual(unknown.status, 0)
+})
+test('frozen corpus identity prevents unrecorded evaluation tuning', () => {
+  assert.equal(hash(readFileSync('research/cycle/corpus.json')), 'fed1527e56a70e73c80522f7688fd3e3d1c41f5ee5687dfc58c1a2e02a1eda17')
+})
+
+
+test('one-cycle CLI stops duplicates, concurrent/crashed locks and corrupt evidence before execution', t => {
+  const root = fixture(t)
+  for (const directory of ['scripts', 'research/cycle']) mkdirSync(path.join(root, directory), { recursive: true })
+  for (const file of ['scripts/research-cycle.mjs', 'scripts/config.mjs', 'scripts/runtime.mjs', 'research/cycle/fixture.mjs', 'research/cycle/policy.mjs', 'research/cycle/memory.mjs']) copyFileSync(file, path.join(root, file))
+  const git = args => { const result = spawnSync('git', args, { cwd: root, encoding: 'utf8' }); assert.equal(result.status, 0, result.stderr) }
+  git(['init', '-q']); git(['add', '.']); git(['-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', '-c', 'core.hooksPath=/dev/null', 'commit', '-qm', 'test fixture'])
+  const execute = () => spawnSync(process.execPath, ['scripts/research-cycle.mjs'], { cwd: root, encoding: 'utf8', timeout: 10000 })
+  const parent = path.join(root, 'evidence/local')
+  mkdirSync(parent, { recursive: true })
+  writeFileSync(path.join(parent, 'cycle.lock'), 'interrupted owner')
+  assert.notEqual(execute().status, 0)
+  assert.equal(existsSync(path.join(parent, 'cycle-memory.jsonl')), false)
+  rmSync(path.join(parent, 'cycle.lock'))
+  for (let i = 0; i < 3; i++) { const result = execute(); assert.equal(result.status, 0, result.stderr) }
+  const memoryFile = path.join(parent, 'cycle-memory.jsonl')
+  const before = readFileSync(memoryFile, 'utf8')
+  assert.equal(before.trim().split('\n').length, 3)
+  assert.match(execute().stderr, /No untried/)
+  assert.equal(readFileSync(memoryFile, 'utf8'), before)
+  const record = JSON.parse(before.split('\n')[0])
+  rmSync(path.join(parent, record.evidence[0].path))
+  const failure = execute()
+  assert.notEqual(failure.status, 0)
+  assert.equal(readFileSync(memoryFile, 'utf8'), before)
+  assert.equal(existsSync(path.join(parent, 'cycle.lock')), false)
+})
+
+test('evidence read refuses a final-path symlink replacement between path validation and open', t => {
+  const root = fixture(t)
+  const program = `
+    import fs from 'node:fs'; import path from 'node:path';
+    import { syncBuiltinESMExports } from 'node:module';
+    import { appendMemory, readMemory } from './research/cycle/memory.mjs';
+    import { hash } from './scripts/runtime.mjs';
+    const root = process.argv[1], evidence = path.join(root,'evidence'); fs.mkdirSync(evidence);
+    const outside = path.join(root,'outside.txt'), artifact = path.join(evidence,'result.json');
+    fs.writeFileSync(outside,'private fixture bytes'); fs.writeFileSync(artifact,'original evidence');
+    const memory = path.join(evidence,'memory.jsonl');
+    appendMemory(memory,[],{experiment:'abort',scenario:'correct',evidence:[{path:'result.json',sha256:hash('private fixture bytes')}]});
+    const original = fs.lstatSync; let swapped = false;
+    fs.lstatSync = function(file,...args) {
+      const result = original(file,...args);
+      if(file === artifact && !swapped) { swapped=true;fs.unlinkSync(artifact);fs.symlinkSync(outside,artifact) }
+      return result;
+    }; syncBuiltinESMExports();
+    let refused=false; try { readMemory(memory,evidence) } catch { refused=true }
+    console.log(JSON.stringify({refused,swapped,outside:fs.readFileSync(outside,'utf8')}));
+  `
+  const child = spawnSync(process.execPath, ['--input-type=module', '-e', program, root], { encoding: 'utf8', timeout: 5000 })
+  assert.equal(child.status, 0, child.stderr)
+  const result = JSON.parse(child.stdout)
+  assert.equal(result.swapped, true)
+  assert.equal(result.refused, true)
+  assert.equal(result.outside, 'private fixture bytes')
+})

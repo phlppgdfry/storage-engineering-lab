@@ -1,0 +1,130 @@
+{
+  "status": "PASS",
+  "baseline": "4134dbba1b94757f400d5d7c09f9382935efd726",
+  "recordedAt": "2026-10-28T21:42:48.701Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "dependencies": {
+    "modules": "<storage-checkout>/node_modules",
+    "entries": 944,
+    "versions": {
+      "vitest": "5.0.5",
+      "tsx": "4.23.15",
+      "typescript": "7.0.2",
+      "fs-xattr": "0.4.0"
+    },
+    "lockSha256": "c39f27d1ebf8af9e0f24273889c487a4532144beb8129f321b462acabeb842ab",
+    "installedMetadataSha256": "36bb6e923f6ef5e022c5975d62ebcaf580b6e9c1383599f2c990e0f01075bdd0"
+  },
+  "before": [
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "resolved",
+        "code": null,
+        "published": true
+      },
+      "active": {
+        "outcome": "resolved",
+        "code": null,
+        "sourceDestroyedOnAbort": false,
+        "finalContents": "partialremaining",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "after": [
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    },
+    {
+      "preAborted": {
+        "outcome": "rejected",
+        "code": "Aborted",
+        "published": false
+      },
+      "active": {
+        "outcome": "rejected",
+        "code": "AbortedTerminate",
+        "sourceDestroyedOnAbort": true,
+        "finalContents": "old",
+        "stagingFiles": []
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "regression before",
+      "failed": 2,
+      "passed": 3,
+      "expectedFailure": true
+    },
+    {
+      "name": "regression after",
+      "failed": 0,
+      "passed": 5
+    }
+  ],
+  "nativeDependencyMocks": false,
+  "limitations": [
+    "Adapter-level behavior; hosted impact and performance equivalence are not established.",
+    "Unit tests mock xattrs; native probes use actual xattrs."
+  ],
+  "fixedSourceSha256": "13aeee850cc7263a87b0fd2431a429e2360d7cd135b98ccf8ce5f1d422cfb710",
+  "cleanup": "own temporary worktree removed"
+}

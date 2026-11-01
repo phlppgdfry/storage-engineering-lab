@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "stages": [
+    "pinned fresh source image built with locked npm dependencies",
+    "linux runner exited successfully"
+  ],
+  "context": {
+    "name": "desktop-linux",
+    "endpoint": "unix://<local-docker-socket>"
+  },
+  "mode": "linux",
+  "project": "storage-lab-b6378222513afc1c",
+  "evidence": "<lab>/evidence/local/validate-linux-GZKQIw",
+  "image": "sha256:bbed01847acfd64956e6868f78210c53cf59ea66937a776458028aeeb0e227f0",
+  "cleanup": "own containers/network/volumes/image tag and temporary source removed; evidence retained"
+}

@@ -1,0 +1,203 @@
+diff --git a/src/storage/backend/file.test.ts b/src/storage/backend/file.test.ts
+index 8a776beb..bc08272e 100644
+--- a/src/storage/backend/file.test.ts
++++ b/src/storage/backend/file.test.ts
+@@ -1874,3 +1874,198 @@ describe('FileBackend copy source preconditions', () => {
+     })
+   })
+ })
++
++describe('FileBackend getObject signal', () => {
++  const ctx = useFileBackend()
++  const payload = 'x'.repeat(512 * 1024)
++  const download = (headers?: BrowserCacheHeaders, signal?: AbortSignal) =>
++    (ctx.backend as import('./adapter').StorageBackendAdapter).getObject(
++      'bucket',
++      'key',
++      'v1',
++      headers,
++      signal
++    )
++  const closeBody = async (response: Awaited<ReturnType<typeof download>>) => {
++    if (response.body instanceof Readable) {
++      const closed = finished(response.body, { cleanup: true }).catch(() => {})
++      response.body.destroy()
++      await closed
++    }
++  }
++
++  beforeEach(async () => {
++    await ctx.upload('bucket', 'key', 'v1', payload)
++  })
++
++  it.each(['mtime', 'md5'] as const)(
++    'rejects pre-aborted %s retrieval before filesystem work',
++    async (algorithm) => {
++      ctx.backend.etagAlgorithm = algorithm
++      const reason = new Error('caller cancelled')
++      const stat = vi.spyOn(fsp, 'stat')
++      const response = download(undefined, AbortSignal.abort(reason))
++      try {
++        await expect(response).rejects.toBe(reason)
++        expect(stat).not.toHaveBeenCalled()
++      } finally {
++        await response.then(closeBody, () => {})
++      }
++    }
++  )
++
++  it.each([
++    ['mtime', 'statObjectFile'],
++    ['md5', 'statObjectFile'],
++    ['mtime', 'getFileMetadata'],
++    ['md5', 'getFileMetadata'],
++  ] as const)('checks cancellation after pending %s %s settles', async (algorithm, step) => {
++    ctx.backend.etagAlgorithm = algorithm
++    type Steps = Record<string, (...args: unknown[]) => Promise<unknown>>
++    const backend = ctx.backend as unknown as Steps
++    const original = backend[step].bind(backend)
++    const entered = Promise.withResolvers<void>()
++    const release = Promise.withResolvers<void>()
++    const spy = vi.spyOn(backend, step).mockImplementation(async (...args) => {
++      entered.resolve()
++      await release.promise
++      return original(...args)
++    })
++    const controller = new AbortController()
++    const reason = new Error('cancelled while pending')
++    const response = download(undefined, controller.signal)
++    const observed = response.then(
++      (value) => ({ value }),
++      (error) => ({ error })
++    )
++    try {
++      await entered.promise
++      controller.abort(reason)
++      controller.abort(new Error('second cancellation'))
++      release.resolve()
++      const result = await observed
++      expect('error' in result ? result.error : undefined).toBe(reason)
++    } finally {
++      release.resolve()
++      spy.mockRestore()
++      await response.then(closeBody, () => {})
++    }
++  })
++
++  it('cancels a native MD5 stream and preserves the abort reason as its cause', async () => {
++    ctx.backend.etagAlgorithm = 'md5'
++    const controller = new AbortController()
++    const reason = new Error('stop hashing')
++    const original = fs.createReadStream.bind(fs)
++    let source: fs.ReadStream | undefined
++    let closed: Promise<unknown> | undefined
++    vi.spyOn(fs, 'createReadStream').mockImplementationOnce((file, options) => {
++      source = original(file, options)
++      closed = finished(source, { cleanup: true }).catch((error) => error)
++      source.once('open', () => controller.abort(reason))
++      return source
++    })
++    const response = download(undefined, controller.signal)
++    try {
++      await expect(response).rejects.toMatchObject({ name: 'AbortError', cause: reason })
++      await closed
++      expect(source?.bytesRead).toBeLessThan(payload.length)
++      expect(source?.closed).toBe(true)
++    } finally {
++      source?.destroy()
++      await closed
++      await response.then(closeBody, () => {})
++    }
++  })
++
++  it.each([undefined, 'bytes=0-262143'])(
++    'cancels an acquired body (range: %s), with no retained abort listener',
++    async (range) => {
++      ctx.backend.etagAlgorithm = 'mtime'
++      const controller = new AbortController()
++      const reason = new Error('stop body')
++      const response = await download({ range }, controller.signal)
++      const body = response.body as fs.ReadStream
++      const closed = finished(body, { cleanup: true }).catch((error) => error)
++      try {
++        const iterator = body[Symbol.asyncIterator]()
++        expect((await iterator.next()).done).toBe(false)
++        controller.abort(reason)
++        controller.abort()
++        await expect(iterator.next()).rejects.toMatchObject({ name: 'AbortError', cause: reason })
++        await closed
++        expect(body.closed).toBe(true)
++        expect(getEventListeners(controller.signal, 'abort')).toHaveLength(0)
++      } finally {
++        body.destroy()
++        await closed
++      }
++    }
++  )
++
++  it.each([
++    ['mtime', undefined, false],
++    ['mtime', undefined, true],
++    ['mtime', 'bytes=1-7', false],
++    ['mtime', 'bytes=1-7', true],
++    ['md5', undefined, false],
++    ['md5', undefined, true],
++    ['md5', 'bytes=1-7', false],
++    ['md5', 'bytes=1-7', true],
++  ] as const)(
++    'preserves successful %s/range=%s/signal=%s reads and late-abort cleanup',
++    async (algorithm, range, signalled) => {
++      ctx.backend.etagAlgorithm = algorithm
++      const controller = new AbortController()
++      const response = await download({ range }, signalled ? controller.signal : undefined)
++      expect(response.httpStatusCode).toBe(range ? 206 : 200)
++      expect(await text(response.body as Readable)).toBe(range ? payload.slice(1, 8) : payload)
++      expect(getEventListeners(controller.signal, 'abort')).toHaveLength(0)
++      controller.abort()
++      expect(getEventListeners(controller.signal, 'abort')).toHaveLength(0)
++    }
++  )
++
++  it('preserves ordinary read setup errors with a live signal', async () => {
++    ctx.backend.etagAlgorithm = 'md5'
++    const reason = new Error('synthetic read setup failure')
++    vi.spyOn(fs, 'createReadStream').mockImplementationOnce(() => {
++      throw reason
++    })
++    await expect(download(undefined, new AbortController().signal)).rejects.toBe(reason)
++  })
++
++  it('retains the first timeout reason when another caller signal aborts during metadata', async () => {
++    ctx.backend.etagAlgorithm = 'mtime'
++    type Steps = Record<string, (...args: unknown[]) => Promise<unknown>>
++    const backend = ctx.backend as unknown as Steps
++    const original = backend.getFileMetadata.bind(backend)
++    const entered = Promise.withResolvers<void>(),
++      release = Promise.withResolvers<void>()
++    vi.spyOn(backend, 'getFileMetadata').mockImplementation(async (...args) => {
++      entered.resolve()
++      await release.promise
++      return original(...args)
++    })
++    const caller = new AbortController(),
++      timeout = new AbortController()
++    const signal = AbortSignal.any([caller.signal, timeout.signal])
++    const reason = new DOMException('test deadline', 'TimeoutError')
++    const response = download(undefined, signal)
++    const observed = response.then(
++      (value) => ({ value }),
++      (error) => ({ error })
++    )
++    try {
++      await entered.promise
++      timeout.abort(reason)
++      caller.abort(new Error('later caller abort'))
++      release.resolve()
++      const result = await observed
++      expect('error' in result ? result.error : undefined).toBe(reason)
++    } finally {
++      release.resolve()
++      await response.then(closeBody, () => {})
++    }
++  })
++})
