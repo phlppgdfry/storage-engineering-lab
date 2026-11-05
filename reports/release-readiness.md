@@ -1,3 +1,12 @@
+# Release readiness — complete
+
+Verified **2026-11-05**: [v1.0.0](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) is published, normally merged and verified. PR#1 and release PR#2 are merged; there are no open lab issues or PRs at this inspection. The required release gates are complete, not pending.
+
+See [project closure](final-project-closure.md) for the released commit, hosted checks and residual limits. The separate Supabase upload PR remains draft/unmerged; its external review is not a standalone lab blocker. No new release, feature or dependency upgrade is required merely to finish this portfolio.
+
+<details>
+<summary>Historical investigation and release-preparation record (retained, superseded)</summary>
+
 # Final publication operation — 2026-11-01
 
 The release branch is published; exact final merge/tag/release outcomes belong to the [current closure record](final-project-closure.md). Earlier sections below are dated validation snapshots, not the current publication state. No performance, cleanup or adaptive-learning claim is strengthened.
@@ -61,3 +70,5 @@ Lab: CONDITIONAL GO for the existing presentation-only c9006dc unit, subject to 
 ### Frozen latest baseline9d15cdc9
 
 A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](advanced-engineering.md).
+
+</details>

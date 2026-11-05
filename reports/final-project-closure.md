@@ -1,3 +1,25 @@
+# Project closure — complete
+
+Verified **2026-11-05**: [Storage Engineering Lab v1.0.0](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) is publicly released. The standalone project is finished; no release blocker remains.
+
+| Item | Verified result |
+|---|---|
+| Released main / annotated tag target | `fcec4ab951c15d347c99072413a331b0f8596630` |
+| Release PR | [#2](https://github.com/phlppgdfry/storage-engineering-lab/pull/2), merged normally; PR#1 also integrated |
+| Hosted validation | [Branch](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41358959421), [PR](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41359076645), [main](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41359201374) and [tag](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41359427904): SUCCESS |
+| Lab and evidence | 45/45 tests, 211 released files, 130 retained measurement groups; fresh public tag clone passes |
+| Public archives | Tar.gz and zip match the released tree; ignored local evidence excluded; decoded gzip and personal-path scans passed |
+| Security/provenance | Credential scans passed, Apache-2.0/NOTICE preserved, path redactions labelled with original hashes retained |
+
+The [public final release report](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) records exact branch/tag identities, executed commands, CI, archive fingerprints and post-publication checks. The versioned release stays immutable; documentation maintenance on main does not change it.
+
+Residual limits remain explicit: upstream dependency advisories require disposable fixtures; two Linux root-permission skips are not passes; normal-upload performance is INCONCLUSIVE; adaptive superiority is unsupported. Upstream upload/download/lifecycle contributions remain separately scoped and are not release blockers. No production certification or Supabase endorsement is implied.
+
+**NO FURTHER ENGINEERING WORK REQUIRED FOR V1.0.0.** Future work is limited to actual maintainer feedback or new correctness/security evidence; additional experiments are optional.
+
+<details>
+<summary>Historical investigation and release-preparation record (retained, superseded)</summary>
+
 # Publication and final closure record — 2026-11-01
 
 The release branch was published at `1856d4440551d6c4d5274e1d39d69265885ef1f2`; its [hosted push checks passed](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41168483501). A subsequent four-file correction redacts one retained per-user IPC socket path, with original bytes and updated hashes preserved. No assertions or results changed. The archived validation report below captures the earlier prepublication state and is retained as dated evidence.
@@ -136,3 +158,5 @@ Branch push, PR creation, merge, tag push and release creation are distinct acti
 | P2 optional | Stable-host normal-upload equivalence study, improved planner corpus only for a demonstrated use case, additional provider/shutdown experiments |
 
 No known blocking correctness defect remains in the exercised standalone scope. Further feature development is not justified for portfolio closure. Stop development after the release gates; respond to concrete upstream feedback independently. Nothing continues automatically after this session.
+
+</details>
