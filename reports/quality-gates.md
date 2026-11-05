@@ -1,3 +1,12 @@
+# Quality gates — released v1.0.0
+
+Verified **2026-11-05**: all required release gates passed. [Branch](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41358959421), [PR](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41359076645), [main](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41359201374) and [tag](https://github.com/phlppgdfry/storage-engineering-lab/actions/runs/41359427904) hosted workflows succeeded. Each validated45 lab tests,211 released files and130 retained measurement groups.
+
+The [final release report](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) and [closure evidence](../evidence/closure/manifest.json) give exact commits, platforms, commands and limits. Native/Linux/PostgreSQL executions retain their original dates and sources; they are not rerun by fast CI. The known failed warm-up, earlier failures and two Linux permission skips remain visible. Performance neutrality and adaptive superiority are not established.
+
+<details>
+<summary>Historical investigation and release-preparation record (retained, superseded)</summary>
+
 # Final publication operation — 2026-11-01
 
 The release branch is published; exact final merge/tag/release outcomes belong to the [current closure record](final-project-closure.md). Earlier sections below are dated validation snapshots, not the current publication state. No performance, cleanup or adaptive-learning claim is strengthened.
@@ -75,3 +84,5 @@ No new Linux/PostgreSQL/real-provider matrix or normal-upload benchmark was exec
 ### Frozen latest baseline9d15cdc9
 
 A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](advanced-engineering.md).
+
+</details>

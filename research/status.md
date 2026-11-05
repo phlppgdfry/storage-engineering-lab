@@ -1,3 +1,12 @@
+# Project status — v1.0.0 complete
+
+Verified **2026-11-05**: the [public release](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) is complete. Lab PR#1 and release PR#2 are merged; no lab issues or PRs are open at this inspection. Main contains all released work; all research and presentation branches are preserved.
+
+The [closure report](../reports/final-project-closure.md) links exact identities, CI and evidence. Upload PR#1616 remains draft/unmerged with no returned reviews; GET and lifecycle corrections are separate archived contributions. Their upstream acceptance is independent of lab completion. Normal-upload performance remains INCONCLUSIVE and adaptive planner superiority is unsupported. Further engineering is optional unless real feedback or a confirmed defect warrants it.
+
+<details>
+<summary>Historical investigation and release-preparation record (retained, superseded)</summary>
+
 # Final publication operation — 2026-11-01
 
 The release branch is published; exact final merge/tag/release outcomes belong to the [current closure record](../reports/final-project-closure.md). Earlier sections below are dated validation snapshots, not the current publication state. No performance, cleanup or adaptive-learning claim is strengthened.
@@ -101,3 +110,5 @@ Het lab sluit een gereproduceerde artifact-symlinkrace met descriptor-gebaseerde
 ### Frozen latest baseline9d15cdc9
 
 A further upstream advance was checked separately. GET candidate8eceb9: lint/build/HTTPPASS; full unit first3440pass+1lifecyclefailure, bounded repeat3441pass. Untouched baseline also fails that lifecycle test. Separate unchanged-assertion real-config fixture correction9a76025 passes3422baseline tests; explicit GET+fixture overlay passes3441with lint/build and was reversed. Failures and refuted hypotheses remain retained. This is not a claim that all unmodified-baseline runs passed. [Details and exact current commits](../reports/advanced-engineering.md).
+
+</details>

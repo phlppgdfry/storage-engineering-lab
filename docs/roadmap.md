@@ -1,3 +1,12 @@
+# Maintenance after v1.0.0
+
+The standalone lab is released and complete. There is no mandatory feature backlog for v1.0.0. See [project closure](../reports/final-project-closure.md).
+
+Respond to concrete maintainer feedback or confirmed correctness/security findings. Upload, download and lifecycle contributions remain independent. H002 progressed from a hypothesis to a reproduced GET cancellation gap and a separately prepared patch; see the [advanced investigation](../reports/advanced-engineering.md). Stable-host performance work, provider experiments or a different planner evaluation are optional future research, not release acceptance requirements.
+
+<details>
+<summary>Historical investigation and release-preparation record (retained, superseded)</summary>
+
 # Roadmap
 
 The goal is a dependable local reproduction artifact with reviewable evidence. This is a priority order, not a promise that every item has passed. [Quality gates](../reports/quality-gates.md) own execution status; the [audit](../reports/audit.md) records the original findings.
@@ -16,3 +25,5 @@ The existing cancellation finding and production commit stay scoped. New code ch
 Do not build a universal S3 platform, dashboard/UI, custom network proxy, property-testing engine or adaptive research agent without a demonstrated need. [Existing tools](tooling-comparison.md) already cover much of that infrastructure. Do not publish an npm package merely to give this case study a release label.
 
 The next research question should come from a concrete invariant and a feasible oracle. H002/H003 are hypotheses, not additional findings. Maintainer activity can inform scope, but the [bounded priority study](../research/maintainer-priorities.md) is neither an official roadmap nor an acceptance forecast.
+
+</details>

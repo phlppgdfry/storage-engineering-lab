@@ -1,8 +1,8 @@
 # Changelog
 
-## 1.0.0 — portfolio edition
+## 1.0.0 — 2026-11-01
 
-This is a versioned research artifact, not a production Storage distribution, hosted service or npm package. The [official release record](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) records publication status, exact commit, release PR and hosted validation. This changelog describes the edition; release completion requires those operations to succeed.
+This is a versioned research artifact, not a production Storage distribution, hosted service or npm package. The [official release record](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0) records publication status, exact commit, release PR and hosted validation. The release is published and verified. Subsequent documentation maintenance does not move the v1.0.0 tag.
 
 ### Included
 
