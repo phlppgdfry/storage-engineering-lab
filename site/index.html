@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Storage Engineering Lab — following an upload cancellation into the filesystem</title>
+<meta name="description" content="An investigation of a cancellation gap in Supabase Storage&#x27;s file backend: native before/after reproduction, an 8-line fix proposed upstream, and the measurements that support it. Replay the recorded run.">
+<link rel="canonical" href="https://phlppgdfry.github.io/storage-engineering-lab/">
+<meta property="og:type" content="website"><meta property="og:title" content="Storage Engineering Lab — following an upload cancellation into the filesystem"><meta property="og:description" content="An investigation of a cancellation gap in Supabase Storage&#x27;s file backend: native before/after reproduction, an 8-line fix proposed upstream, and the measurements that support it. Replay the recorded run.">
+<meta property="og:url" content="https://phlppgdfry.github.io/storage-engineering-lab/"><meta property="og:image" content="https://phlppgdfry.github.io/storage-engineering-lab/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0d12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233ecf8e'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/showcase.css">
+<style>:root{--brand:#3ecf8e;--accent-ink:#03140c}
+.sl-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.sl-sm{padding:7px 12px;font-size:13px}
+.sl-term{background:#07090c;border:1px solid var(--line2);border-radius:12px;overflow:hidden}
+.sl-tb{display:flex;gap:6px;align-items:center;padding:9px 12px;background:#10151c;border-bottom:1px solid #1c242e}
+.sl-tb i{width:10px;height:10px;border-radius:50%;background:#2a3542}
+.sl-tb b{margin-left:8px;font:500 12px var(--mono);color:#7d8a96;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sl-out{margin:0;padding:14px;height:380px;overflow:auto;font:12.5px/1.6 var(--mono);color:#c9d3db;white-space:pre}
+#sl-out .add{color:#4ade80} #sl-out .del{color:#f87171} #sl-out .meta{color:#7d8a96}
+#sl-out .bad{color:#f87171} #sl-out .ok{color:#4ade80} #sl-out .cmd{color:#facc15} #sl-out .head{color:#60a5fa;font-weight:700}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <a class="brand" href="#"><i class="dot"></i><span>Storage Engineering Lab</span></a>
+  <nav><a class="" href="#demo">Try it</a><a class="" href="#how">How it works</a><a class="hide-sm" href="#run">Run it</a><a href="https://github.com/phlppgdfry/storage-engineering-lab" aria-label="GitHub repository">GitHub</a><button class="theme" type="button" aria-label="Toggle light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></nav>
+</div></div>
+<main>
+<header class="hero"><div class="wrap grid">
+  <div>
+    <div class="kicker"><span>TypeScript · Node 24 · Supabase Storage</span><span class="chip status">Released v1.0.0</span></div>
+    <h1>A cancelled upload <em>still published its bytes</em>.</h1>
+    <p class="lede"><code>FileBackend.uploadObject</code> accepted an <code>AbortSignal</code> but never passed it to the pipeline that copies the request body to disk. A cancelled call could keep reading, publish the file and report success. This lab reproduces that on real files, proposes a small fix upstream, and is explicit about what the evidence does not prove.</p>
+    <div class="ctas"><a class="btn primary" href="#demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Replay the run</a><a class="btn" href="https://github.com/phlppgdfry/storage-engineering-lab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg> Source on GitHub</a></div>
+    <div class="stack"><span class="chip">Node.js 24</span><span class="chip">TypeScript</span><span class="chip">Supabase Storage</span><span class="chip">Vitest</span><span class="chip">PostgreSQL</span><span class="chip">GitHub Actions</span><span class="chip">Apache-2.0</span></div>
+  </div>
+  <div class="hero-visual"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>src/storage/backend/file.ts · proposed fix</b></div><div class="code" style="border:0;border-radius:0"><button class="copy" type="button">Copy</button><pre><code><span class="da">+    if (signal?.aborted) {</span>
+<span class="da">+      throw ERRORS.Aborted(&#x27;Upload was aborted&#x27;)</span>
+<span class="da">+    }</span>
+     ...
+<span class="dd">-      await pipeline(body, fs.createWriteStream(stagedFile))</span>
+<span class="da">+      await pipeline(body, fs.createWriteStream(stagedFile), { signal })</span>
+     ...
+       await fsp.unlink(stagedFile).catch(() =&gt; {})
+<span class="da">+      if (err instanceof Error &amp;&amp; err.name === &#x27;AbortError&#x27;) {</span>
+<span class="da">+        throw ERRORS.AbortedTerminate(&#x27;Upload was aborted&#x27;, err)</span>
+<span class="da">+      }</span></code></pre></div></div></div>
+</div></header>
+<section id="why"><div class="wrap">
+  <p class="eyebrow">Why it exists</p><h2>An HTTP success is not proof that the right bytes are on disk.</h2>
+  <div class="problem">
+    <div class="card before"><div class="label">Without it</div><p>A client gives up on an upload, the server-side adapter keeps streaming anyway, renames the staging file into place and reports success. If an object already existed at that destination, the transfer the client had abandoned replaces it anyway.</p></div>
+    <div class="card after"><div class="label">With it</div><p>Pre-aborted calls are rejected before staging, an abort mid-transfer stops the pipeline, the old object is preserved and the staging file is removed. Five focused regression tests pin the behaviour.</p></div>
+  </div>
+</div></section>
+<section id="demo"><div class="wrap">
+  <p class="eyebrow">Try it · runs in your browser</p><h2>Replay the native reproduction</h2>
+  <p class="sub">The real terminal output of <code>scripts/demo.mjs</code> against a pinned Supabase Storage checkout, using actual files and extended attributes (<code>evidence/closure/demo-terminal.txt</code>). Step through it, or replay it all.</p>
+  <div class="demo"><div class="sl-bar"><div class="tabs" id="sl-tabs" style="margin:0"></div><button type="button" class="btn sl-sm" id="sl-play">▶ Replay all</button></div>
+<div class="sl-term"><div class="sl-tb"><i></i><i></i><i></i><b>node scripts/demo.mjs ../supabase-storage · recorded 2026-10-30</b></div><pre id="sl-out" aria-live="polite"></pre></div>
+<p class="small dim" id="sl-cap" style="margin-top:10px"></p>
+</div>
+  <p class="note">Recorded on macOS arm64 with Node 24.22.2. Full logs stay local because they include machine paths; the transcript is an excerpt of the actual output.</p>
+</div></section>
+<section id="how"><div class="wrap">
+  <p class="eyebrow">How it works</p><h2>From a symptom to an upstream pull request</h2>
+  
+  <div class="cards"><div class="card"><div class="ic">01</div><h3>Native reproduction</h3><p>Real files and xattrs on a pinned Storage checkout, before and after the patch, in a temporary worktree that is cleaned up.</p></div><div class="card"><div class="ic">02</div><h3>Red, then green</h3><p>Five regression and control cases: 2 fail and 3 pass on the original code, all 5 pass with the fix.</p></div><div class="card"><div class="ic">03</div><h3>A small, reviewable fix</h3><p>8 lines added and 1 removed in production code, proposed as <a href="https://github.com/supabase/storage/pull/1616">Supabase PR #1616</a> (draft, unmerged).</p></div><div class="card"><div class="ic">04</div><h3>Honest limits</h3><p>Normal-upload performance is inconclusive: five timed pairs were slower with the fix, but controls were unstable. No hosted-service impact is claimed.</p></div></div>
+  <h3 style="margin:34px 0 14px">The flow, step by step</h3><div class="flow" role="list"><div class="node"><div class="n">01</div><b>Symptom</b><small>signal accepted, not used</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">02</div><b>Reproduce</b><small>native files and xattrs</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">03</div><b>Red tests</b><small>2 of 5 fail on the original</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node hl"><div class="n">04</div><b>Fix</b><small>+8 / −1 lines</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">05</div><b>Verify</b><small>5 of 5 pass, upstream suites green</small></div></div>
+</div></section>
+<section id="evidence"><div class="wrap">
+  <p class="eyebrow">Evidence</p><h2>What is real, and what is not</h2>
+  
+  <div class="metrics"><div class="metric"><div class="v">45</div><div class="l">lab tests</div><div class="s">plus 130 retained measurement groups</div></div><div class="metric"><div class="v">3,304</div><div class="l">upstream Linux unit passes</div><div class="s">with 2 root-permission skips</div></div><div class="metric"><div class="v">−16.7%</div><div class="l">median paired throughput</div><div class="s">inconclusive: identical-code controls were unstable</div></div></div>
+  <div class="honest" style="margin-top:18px">
+      <div class="card real"><h3><span class="pill ok">REAL</span> Built and verified</h3><ul><li>Native before/after reproduction on real files and extended attributes</li><li>Regression tests that fail on the original code and pass with the fix</li><li>1,379 PostgreSQL tests and five HTTP checks against the patched build</li><li>Released v1.0.0 with archive verification and four successful CI runs</li></ul></div>
+      <div class="card sim"><h3><span class="pill warn">SIMULATED</span> Mocked or not built yet</h3><ul><li>Proves an adapter cancellation gap, not data loss in the hosted Supabase service</li><li>The upstream pull request is a draft without review feedback yet</li><li>Performance impact of the fix is not established either way</li></ul></div></div>
+</div></section>
+<section id="run"><div class="wrap two">
+  <div><p class="eyebrow">Run it yourself</p><h2>Run it locally</h2>
+  <p class="sub">Node 24.x and Git. The native reproduction needs a pinned Supabase Storage checkout and its xattr dependency.</p>
+  <div class="code"><button class="copy" type="button">Copy</button><pre><code>git clone --branch v1.0.0 https://github.com/phlppgdfry/storage-engineering-lab.git
+cd storage-engineering-lab
+npm run check
+npm test                  # 45 lab tests, no npm dependencies
+
+<span class="c"># native reproduction (see docs/reproduction.md for the pinned checkout)</span>
+npm run doctor -- --checkout ../supabase-storage
+node scripts/demo.mjs ../supabase-storage</code></pre></div></div>
+  <div><p class="eyebrow">Go deeper</p><h2>Read the source</h2>
+  <div class="links"><a href="https://github.com/phlppgdfry/storage-engineering-lab"><span>Repository</span><span>github</span></a><a href="https://github.com/phlppgdfry/storage-engineering-lab/blob/HEAD/reports/file-upload-cancellation.md"><span>Case study</span><span>md</span></a><a href="https://github.com/phlppgdfry/storage-engineering-lab/blob/HEAD/docs/reproduction.md"><span>Reproduction setup</span><span>docs</span></a><a href="https://github.com/phlppgdfry/storage-engineering-lab/blob/HEAD/experiments/fix.patch"><span>The proposed patch</span><span>patch</span></a><a href="https://github.com/supabase/storage/pull/1616"><span>Supabase PR #1616</span><span>github</span></a><a href="https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0"><span>Release v1.0.0</span><span>release</span></a></div></div>
+</div></section></main>
+<footer><div class="wrap">
+  <span>Storage Engineering Lab · A portfolio project by Philippe Godfroy</span>
+  <span><a href="https://www.philippegodfroy.com/work">More projects</a> · <a href="https://github.com/phlppgdfry/storage-engineering-lab">Source</a></span>
+</div></footer>
+<script src="assets/showcase.js"></script>
+
+<script src="assets/demo.js" type="module"></script>
+</body></html>

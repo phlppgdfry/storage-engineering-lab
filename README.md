@@ -1,5 +1,11 @@
 # Storage Engineering Lab
 
+<!-- showcase:start -->
+> **[▶ Replay the run](https://phlppgdfry.github.io/storage-engineering-lab/)** — step through the recorded native reproduction: the bug on real files, red tests, the 8-line fix, and green tests.
+
+[![Replay the run: storage-engineering-lab](site/demo.png)](https://phlppgdfry.github.io/storage-engineering-lab/)
+<!-- showcase:end -->
+
 **Follow an upload cancellation signal to the filesystem—and prove where it stops working.** This independent, AI-assisted investigation provides a native before/after reproduction, a small proposed Supabase Storage fix and inspectable regression evidence.
 
 **[v1.0.0 released](https://github.com/phlppgdfry/storage-engineering-lab/releases/tag/v1.0.0)** · 45 lab tests · 130 retained measurement groups
